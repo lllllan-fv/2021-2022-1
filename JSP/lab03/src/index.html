@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>天气预报</title>
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+
+    <!-- cityData -->
+    <script src="js/citydata.js"></script>
+
+    <!-- getData -->
+    <script src="js/getdata.js"></script>
+
+</head>
+
+<body>
+
+    <h4>请选择需要查询的城市或地区</h4>
+
+    &emsp;
+    <label>
+        省（直辖市）:
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <label id="province_name"></label>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="province">
+            </ul>
+        </div>
+    </label>
+    <label>
+        城市（地区）:
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <label id="city_name"></label>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="city">
+            </ul>
+        </div>
+    </label>
+
+    <h2 id="pro-city" style="color: darkcyan;"></h2>
+
+    <div id="table">
+    </div>
+
+</body>
+
+</html>
