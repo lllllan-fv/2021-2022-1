@@ -1,0 +1,235 @@
+"Fax Order No. 3":
+{
+ class: window,
+ label: "!Fax Order No.*",
+ MSW_class: "#32770"
+}
+{
+ ltree_state: open
+}
+"Fax Order No. 3"."# Tickets:":
+{
+ class: edit,
+ attached_text: "# Tickets:"
+}
+"Fax Order No. 3".Cancel:
+{
+ class: push_button,
+ label: Cancel
+}
+"Fax Order No. 3"."Clear Signature":
+{
+ class: push_button,
+ label: "Clear Signature"
+}
+"Fax Order No. 3".MSMaskWndClass:
+{
+ class: object,
+ MSW_class: MSMaskWndClass
+}
+"Fax Order No. 3".Send:
+{
+ class: push_button,
+ label: Send
+}
+"Fax Order No. 3"."Send Signature with order":
+{
+ class: check_button,
+ label: "Send Signature with order"
+}
+"Fax Order No. 3"."Ticket Price:":
+{
+ class: edit,
+ attached_text: "Ticket Price:"
+}
+"Fax Order No. 3"."Total:":
+{
+ class: edit,
+ attached_text: "Total:"
+}
+"Fax Order No. 6":
+{
+ class: window,
+ label: "Fax Order No. 6",
+ MSW_class: "#32770"
+}
+"Fax Order No. 6"."(static)":
+{
+ class: static_text,
+ MSW_id: 1041
+}
+"Fax Order No. 6".Cancel:
+{
+ class: push_button,
+ label: Cancel
+}
+"Fax Order No. 6"."Clear Signature":
+{
+ class: push_button,
+ label: "Clear Signature"
+}
+"Fax Order No. 6".MSMaskWndClass:
+{
+ class: object,
+ MSW_class: MSMaskWndClass
+}
+"Fax Order No. 6"."Send Signature with order":
+{
+ class: check_button,
+ label: "Send Signature with order"
+}
+"Flight Reservation":
+{
+ class: window,
+ MSW_class: "!Afx:.*",
+ label: "Flight Reservation"
+}
+{
+ ltree_state: open
+}
+"Flight Reservation".Analysis:
+{
+ class: menu_item,
+ label: Analysis,
+ parent: none
+}
+"Flight Reservation"."Delete Order":
+{
+ class: push_button,
+ label: "Delete Order"
+}
+"Flight Reservation".FLIGHT:
+{
+ class: object,
+ label: FLIGHT,
+ MSW_class: Button
+}
+"Flight Reservation"."Fax Order...":
+{
+ class: menu_item,
+ label: "Fax Order...",
+ parent: File
+}
+"Flight Reservation".File:
+{
+ class: menu_item,
+ label: File,
+ parent: none
+}
+"Flight Reservation".First:
+{
+ class: radio_button,
+ label: First
+}
+"Flight Reservation"."Fly From:":
+{
+ class: list,
+ attached_text: "Fly From:"
+}
+"Flight Reservation"."Fly To:":
+{
+ class: list,
+ attached_text: "Fly To:"
+}
+"Flight Reservation"."Graphs...":
+{
+ class: menu_item,
+ label: "Graphs...",
+ parent: Analysis
+}
+"Flight Reservation"."Insert Done...":
+{
+ class: object,
+ label: "Insert Done...",
+ MSW_class: AfxWnd40
+}
+"Flight Reservation"."Insert Order":
+{
+ class: push_button,
+ label: "Insert Order"
+}
+"Flight Reservation".MSMaskWndClass:
+{
+ class: object,
+ MSW_class: MSMaskWndClass
+}
+"Flight Reservation"."Name:":
+{
+ class: edit,
+ attached_text: "Name:"
+}
+"Flight Reservation"."New Order":
+{
+ class: menu_item,
+ label: "New Order",
+ parent: File
+}
+"Flight Reservation"."Open Order...":
+{
+ class: menu_item,
+ label: "Open Order...",
+ parent: File
+}
+"Flight Reservations":
+{
+ class: window,
+ label: "Flight Reservations",
+ MSW_class: "#32770"
+}
+"Flight Reservations"."¬O(Y)":
+{
+ class: push_button,
+ label: "¬O(Y)"
+}
+"Flights Table":
+{
+ class: window,
+ label: "Flights Table",
+ MSW_class: "#32770"
+}
+"Flights Table".OK:
+{
+ class: push_button,
+ label: OK
+}
+Graph:
+{
+ class: window,
+ label: Graph,
+ MSW_class: "#32770"
+}
+Graph.GS_Drawing:
+{
+ class: object,
+ MSW_class: GS_Drawing
+}
+"Open Order":
+{
+ class: window,
+ label: "Open Order",
+ MSW_class: "#32770"
+}
+{
+ ltree_state: open,
+ rtree_state: open
+}
+"Open Order"."Customer Name":
+{
+ class: check_button,
+ label: "Customer Name"
+}
+"Open Order".Edit:
+{
+ class: edit,
+ MSW_id: 1016
+}
+"Open Order".OK:
+{
+ class: push_button,
+ label: OK
+}
+"Open Order"."Order No.":
+{
+ class: check_button,
+ label: "Order No."
+}
