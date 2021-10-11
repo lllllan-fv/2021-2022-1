@@ -35,7 +35,7 @@
 %>
 
 <div class="container" style="padding-top: 5em">
-    <form class="form-horizontal" action='login_deal.jsp' method='' onsubmit="return formSubmit();">
+    <form class="form-horizontal" action='login_deal.jsp' method='POST' onsubmit="return formSubmit();">
 
         <div class="form-group">
             <label for="id" class="col-sm-2 control-label">用户名：</label>

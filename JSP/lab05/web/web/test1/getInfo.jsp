@@ -24,6 +24,10 @@
 </head>
 <body>
 <%
+
+    request.setCharacterEncoding("UTF-8");
+    response.setCharacterEncoding("UTF-8");
+
     String name = request.getParameter("inputName");
 
     String age = request.getParameter("inputAge");
