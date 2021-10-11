@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>信息统计表</title>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+
+    <!-- my js -->
+    <script type="text/javascript" src="js/form.js"></script>
+</head>
+
+<body>
+
+<br>
+<div class="container">
+
+    <form class="form-horizontal" action='getInfo.jsp' method='' onsubmit="return formSubmit();">
+        <div class="form-group">
+            <center>
+                <div class="col-sm-6">
+                    <h3>信息统计表</h3>
+                </div>
+            </center>
+        </div>
+
+        <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">姓名：</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="inputName" name="inputName" placeholder="您的姓名">
+            </div>
+            <label id="errName" class="col-sm-4 control-label" style="color: red;"></label>
+        </div>
+        <div class="form-group">
+            <label for="inputAge" class="col-sm-2 control-label">年龄：</label>
+            <div class="col-sm-4">
+                <input onkeyup="this.value=this.value.replace(/^0(0+|\d+)|[^\d]+/g,'')" class=" form-control"
+                       id="inputAge" name="inputAge" placeholder="您的年龄">
+            </div>
+            <label id="errAge" class="col-sm-4 control-label" style="color: red;"></label>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">性别：</label>
+            <div class="radio col-sm-4">
+                <label>
+                    <input type="radio" name="sexRadios" id="optionsRadios1" value="男" checked>
+                    男
+                </label>
+                <label>
+                    <input type="radio" name="sexRadios" id="optionsRadios1" value="女">
+                    女
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">爱好：</label>
+            <div class="col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input id="checkbox1" name="hobbyCheckbox" type="checkbox" value="旅游">旅游
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input id="checkbox2" name="hobbyCheckbox" type="checkbox" value="登山" checked>登山
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input id="checkbox3" name="hobbyCheckbox" type="checkbox" value="健身" checked>健身
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input id="checkbox4" name="hobbyCheckbox" type="checkbox" value="上网">上网
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input id="checkbox5" name="hobbyCheckbox" type="checkbox" value="游泳">游泳
+                    </label>
+                </div>
+                <div>
+                    <label id="errCheckbox" style="color: red;"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">学历：</label>
+            <div class=" col-sm-4">
+                <select class="form-control" name="eduSelect">
+                    <option>硕士</option>
+                    <option>本科</option>
+                    <option>高中</option>
+                    <option>初中</option>
+                    <option>小学</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">自我介绍：</label>
+            <div class="col-sm-4"><textarea class="form-control" name="selfinfo" rows="3"></textarea></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <center>
+                <button type="submit" name="submit" class="btn btn-default">提交</button>&emsp;
+                <button type="button" class="btn btn-default" onclick="reSet();">重置</button>
+            </center>
+        </div>
+    </form>
+
+</div>
+
+
+</body>
+
+</html>
