@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="search_bar_text">关键字</string>
+    <string name="search_bar_button">搜索</string>
+</resources>

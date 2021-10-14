@@ -1,10 +1,11 @@
-package cn.lllllan.android.myapplication;
+package cn.edu.hznu.myapplication;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
             "apple", "banana", "cherry", "grape", "mango", "orange", "pear", "pineapple", "strawberry", "watermelon",
     };
 
+    private Fruit[] fruits;
+    private ListView listView;
+
     private List<Fruit> fruitList = new ArrayList<>();
 
     @Override
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         initFruits();
         FruitAdapter fruitAdapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
-        ListView listView = findViewById(R.id.list_view);
+        listView = findViewById(R.id.list_view);
         listView.setAdapter(fruitAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,14 +82,51 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView textView = findViewById(R.id.)
+                EditText editText = findViewById(R.id.search_bar_content);
+                search(editText.getText().toString());
+                FruitAdapter fruitAdapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
+                listView.setAdapter(fruitAdapter);
             }
         });
     }
 
     private void initFruits() {
+        fruits = new Fruit[imagesId.length];
         for (int i = 0; i < imagesId.length; ++i) {
-            fruitList.add(new Fruit(imagesId[i], englishNames[i], chineseNames[i]));
+            fruits[i] = new Fruit(imagesId[i], englishNames[i], chineseNames[i]);
+        }
+
+        listInit();
+    }
+
+    public void listInit() {
+        for (int i = 0; i < fruits.length; ++i) {
+            fruitList.add(fruits[i]);
+        }
+
+    }
+
+    public void search(String text) {
+        fruitList.clear();
+
+        if (text.equals("")) listInit();
+        else {
+            boolean[] vis = new boolean[imagesId.length];
+
+            for (int i = 0; i < englishNames.length; ++i) {
+                if (englishNames[i].contains(text)) {
+                    vis[i] = true;
+                    fruitList.add(fruits[i]);
+                }
+            }
+
+            for (int i = 0; i < chineseNames.length; ++i) {
+                if (vis[i]) continue;
+                if (chineseNames[i].contains(text)) {
+                    fruitList.add(fruits[i]);
+                }
+            }
+
         }
     }
 }
