@@ -53,21 +53,21 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
                 Fruit fruit = fruitList.get(pos);
 
-                findViewById(R.id.fruit_image).setOnClickListener(new View.OnClickListener() {
+                view.findViewById(R.id.fruit_image).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this, "You click image of " + fruit.getEnglishName(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                findViewById(R.id.fruit_english_name).setOnClickListener(new View.OnClickListener() {
+                view.findViewById(R.id.fruit_english_name).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this, fruit.getEnglishName(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                findViewById(R.id.fruit_chinese_name).setOnClickListener(new View.OnClickListener() {
+                view.findViewById(R.id.fruit_chinese_name).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this, fruit.getChineseName(), Toast.LENGTH_SHORT).show();
