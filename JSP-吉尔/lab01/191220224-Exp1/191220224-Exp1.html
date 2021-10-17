@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>191220224-Exp1.html</title>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .bg {
+            /*字体颜色*/
+            color: red;
+            /*背景图片长度为整个浏览器100%的宽度*/
+            background-size: 100vw;
+            /*图片不重复*/
+            background-repeat: no-repeat;
+            background-image: url("img/191220224-Exp1.jpg");
+        }
+
+        .bg h1 {
+            /*取出顶部空白*/
+            margin: 0;
+            /*字体与外部的距离*/
+            padding: 20px 20px 20px 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="bg">
+        <!-- 居中显示 -->
+        <center>
+            <!-- 个人信息 -->
+            <h1>学号：191220224</h1>
+            <h1>姓名：傅吉尔</h1>
+        </center>
+    </div>
+
+    <div class="container">
+
+        <form class="form-horizontal col-sm-offset-3" onsubmit="return formSubmit();">
+            <div class="form-group">
+                <center>
+                    <div class="col-sm-6">
+                        <h3><strong>立信学生用户注册</strong></h3>
+                    </div>
+                </center>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">姓名：</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="name" value="傅吉尔">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">性别：</label>
+                <div class="radio col-sm-4">
+                    <label>
+                        <input type="radio" name="Radios" value="male">
+                        男
+                    </label>
+                    <label>
+                        <input type="radio" name="Radios" value="female" checked>
+                        女
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="birth" class="col-sm-2 control-label">生日：</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="birth" value="2000-11-13">
+                </div>
+                <label class="col-sm-3 control-label">格式：yyyy-mm-dd</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">出生地：</label>
+                <div class="col-sm-4">
+                    <select class="form-control">
+                        <option>浙江</option>
+                        <option>广东</option>
+                        <option>上海</option>
+                        <option>北京</option>
+                        <option>其他</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">学号：</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="id" value="191220224">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">电子邮箱：</label>
+                <div class="col-sm-4">
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">喜欢的音乐：</label>
+                <div class="col-sm-4">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1" checked> 古典
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2" checked> 流行
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3"> 西洋
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox4" value="option3"> 民乐
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">个人描述：</label>
+                <div class="col-sm-4"><textarea class="form-control" rows="4"></textarea></div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputFile" class="col-sm-2 control-label">你的靓照：</label>
+                <input type="file" id="inputFile" class="col-sm-4" class="file-loading">
+            </div>
+
+            <div class="form-group col-sm-6">
+                <center>
+                    <button type="submit" name="submit" class="btn btn-default">提交</button>&emsp;
+                    <button type="button" class="btn btn-default" onclick="reSet()">重置</button>
+                </center>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        function formSubmit() {
+            if (!validName() || !validBirth() || !validID() || !validEmail()) {
+                return false;
+            }
+
+            return true;
+        }
+
+        //去掉前后空格
+        function deltrim(x) {
+            while (x.length > 0 && x.charAt(0) == ' ')
+                x = x.substring(1, x.length);
+            while (x.length > 0 && x.charAt(x.length - 1) == ' ')
+                x = x.substring(0, x.length - 1);
+            return x;
+        }
+
+        //非空验证
+        function isNull(x, message) {
+            var va = deltrim(x);
+            if (va == "") {
+                alert(message + "不能为空!");
+                return true;
+            }
+            return false;
+        }
+
+        function validName() {
+            return !isNull($("#name").val(), "姓名");
+        }
+
+        function validBirth() {
+            var birth = $("#birth").val();
+
+            if (isNull(birth, "生日")) return false;
+
+            var pattern = /^(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)$/;
+            if (!birth.match(pattern)) {
+                alert("生日格式不正确！");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validID() {
+            var id = $("#id").val();
+
+            if (isNull(id, "学号")) return false;
+
+            var pattern = /^([0-9]{6}[1-9])(0[1-9]|[1-9][0-9])$/;
+            if (!id.match(pattern)) {
+                alert("学号格式不正确！");
+                return false;
+            }
+            return true;
+        }
+
+        function validEmail() {
+            var email = $("#email").val();
+
+            if (isNull(email, "电子邮箱")) return false;
+
+            var pattern = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.match(parent)) {
+                alert("电子邮箱格式不正确");
+                return false;
+            }
+            return true;
+        }
+
+        function reSet() {
+            location.reload();
+        }
+    </script>
+
+</body>
+
+</html>
