@@ -64,10 +64,10 @@
     function formSubmit() {
         if ($("#id").val() == "zhangsan" && $("#pwd").val() == "123456") {
             <%
-                 Cookie idChookie = new Cookie("id","zhangsan");
-                 Cookie pwdChookie = new Cookie("pwd","123456");
-                 response.addCookie(idChookie);
-                 response.addCookie(pwdChookie);
+                Cookie idChookie = new Cookie("id", "zhangsan");
+                Cookie pwdChookie = new Cookie("pwd", "123456");
+                response.addCookie(idChookie);
+                response.addCookie(pwdChookie);
             %>
             return true;
         }
