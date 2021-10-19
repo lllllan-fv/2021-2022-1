@@ -18,19 +18,18 @@ public class Test3 {
         int numberOfPrintableCharacters = 94;
         int numberOfCharactersPerLine = 72;
         int start = firstPrintableCharacter;
-        byte[] line = new byte[numberOfCharactersPerLine + 2];
-        // +2对应回车和换行
         while (true) {/*无限循环*/
             for (int i = start; i < start + numberOfCharactersPerLine; i++) {
-                line[i - start] = (byte) ((i - firstPrintableCharacter)
-                        % numberOfPrintableCharacters + firstPrintableCharacter);
+                out.write((
+                        (i - firstPrintableCharacter) % numberOfPrintableCharacters)
+                        + firstPrintableCharacter);
             }
-            line[72] = (byte) '\r'; //回车
-            line[73] = (byte) '\n'; //换行
-            out.write(line);
+            out.write('\r'); //回车
+            out.write('\n'); //换行
             start = ((start + 1) - firstPrintableCharacter)
                     % numberOfPrintableCharacters + firstPrintableCharacter;
         }
     }
+
 
 }
