@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: lllllan
-  Date: 2021/10/18
-  Time: 9:12
+  Date: 2021/10/25
+  Time: 8:23
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>info</title>
+    <title>count</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -26,25 +26,17 @@
 <body>
 
 <%
-    request.setCharacterEncoding("UTF-8");
-    response.setCharacterEncoding("UTF-8");
+    Integer count = (Integer) application.getAttribute("count");
 
-    String tip = request.getParameter("tip");
-    int count = (int) session.getAttribute("count");
+    if (count == null) {
+        application.setAttribute("count", 1);
+    } else if (session.isNew()) {
+        application.setAttribute("count", count + 1);
+    }
 %>
 
-<div class="container">
-    <h3>
-        所猜的数字比实际的数字<%=tip%><%=2 + 3%>，请再猜
-    </h3>
-
-    <h3>你已经猜了<%=count%>次</h3>
-
-    <h3>请再次输入你猜的数字</h3>
-
-    <h3>
-        <%@include file="form.jsp" %>
-    </h3>
+<div class="container" style="padding-top: 2em">
+    <h2>到目前为止共有<%=application.getAttribute("count") %> 用户访问过本站。</h2>
 </div>
 
 </body>
