@@ -1,5 +1,0 @@
-C:\Users\student\Desktop\test02\test02\bin\Debug\test02.exe.config
-C:\Users\student\Desktop\test02\test02\bin\Debug\test02.exe
-C:\Users\student\Desktop\test02\test02\bin\Debug\test02.pdb
-C:\Users\student\Desktop\test02\test02\obj\Debug\test02.exe
-C:\Users\student\Desktop\test02\test02\obj\Debug\test02.pdb
