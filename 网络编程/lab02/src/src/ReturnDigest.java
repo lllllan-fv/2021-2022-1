@@ -18,8 +18,10 @@ public class ReturnDigest extends Thread {
             FileInputStream in = new FileInputStream(filename);
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
             DigestInputStream din = new DigestInputStream(in, sha);
+            din.on(true);
             while (din.read() != -1) ;  //读取整个文件
             din.close();
+            sha = din.getMessageDigest();
             digest = sha.digest();
         } catch (IOException ex) {
             System.err.println(ex);
