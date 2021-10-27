@@ -15,6 +15,14 @@
 
 -------
 
+#### [Java Web 开发发展简介](https://www.jianshu.com/p/bec6736dcc3d)
+
+#### [Java Web 发展史](https://blog.csdn.net/weixin_39893958/article/details/84389384)
+
+#### [Java Web目前主流的框架以及正在兴起的框架](https://blog.csdn.net/kingscoming/article/details/78837809)
+
+#### [主流Java Web开发框架有哪些？](http://c.biancheng.net/view/8115.html)
+
 #### JavaWeb 主要框架
 
 - JSP
