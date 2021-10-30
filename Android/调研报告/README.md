@@ -30,3 +30,5 @@
 #### [几款移动跨平台App开发框架比较](https://blog.csdn.net/qq_35393693/article/details/88998748)
 
 #### [浅谈移动端开发技术](https://zhuanlan.zhihu.com/p/343324673)
+
+#### [移动开发技术简介](https://book.flutterchina.club/chapter1/mobile_development_intro.html)
