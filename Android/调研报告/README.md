@@ -3,7 +3,7 @@
 
 
 1. 主流移动应用开发技术现状及其对比分析
-通过查阅文献资料，了解目前主流移动应用开发技术有哪些，对这些技术的功能特性、特点、优势、缺点等进行对比分析。
+通过查阅文献资料，了解目前主流移动应用开发技术有哪些，对这些技术的功能**特性、特点、优势、缺点**等进行对比分析。
 
 
 
@@ -36,15 +36,15 @@
 
 -----
 
-原生开发指的是纯原生应用程序（简称App）开发，是在Android、iOS等移动平台上利用官方提供的开发语言、开发类库以及开发工具等进行App开发。
+原生开发指的是纯原生应用程序（简称App）开发，是在 Android、iOS 等移动平台上利用官方提供的开发语言、开发类库以及开发工具等进行 App 开发。
 
-比如Android App就是指使用Java或Kotlin开发语言在Eclipse或Android Studio的开发工具上直接调用Android SDK API开发的App。而iOS App就是指通过Objective-C或Swift开发语言在Xcode的开发工具上直接调用iOS SDK API开发的App。
+比如 Android App 就是指使用 Java 或 Kotlin 开发语言在 Eclipse 或 Android Studio 的开发工具上直接调用 Android SDK API 开发的 App 。而 iOS App 就是指通过 Objective-C 或 Swift 开发语言在 Xcode 的开发工具上直接调用 iOS SDK API 开发的 App。
 
-原生App开发代表着较好的用户体验和更快更高的性能，但是原生App的可移植性比较差，特别是一款原生App，Android和iOS都要各自开发，同样的逻辑、界面都要写两套。
+原生 App 开发代表着较好的用户体验和更快更高的性能，但是原生 App 的可移植性比较差，特别是一款原生 App， Android 和 iOS 都要各自开发，同样的逻辑、界面都要写两套。
 
 **主要优点：**
 
-- 可访问Android/iOS（平台） 提供的全部功能（如GPS、摄像头...）；
+- 可访问 Android/iOS（平台） 提供的全部功能（如 GPS、摄像头...）；
 - 速度快、性能高以及可实现复杂动画及绘制和整体用户体验好。
 
 **主要缺点：**
