@@ -1,0 +1,14 @@
+D:\2021-2022-1\C#\lab07\test02\test02\bin\Debug\netcoreapp3.1\test02.exe
+D:\2021-2022-1\C#\lab07\test02\test02\bin\Debug\netcoreapp3.1\test02.deps.json
+D:\2021-2022-1\C#\lab07\test02\test02\bin\Debug\netcoreapp3.1\test02.runtimeconfig.json
+D:\2021-2022-1\C#\lab07\test02\test02\bin\Debug\netcoreapp3.1\test02.runtimeconfig.dev.json
+D:\2021-2022-1\C#\lab07\test02\test02\bin\Debug\netcoreapp3.1\test02.dll
+D:\2021-2022-1\C#\lab07\test02\test02\bin\Debug\netcoreapp3.1\test02.pdb
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.csproj.AssemblyReference.cache
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.GeneratedMSBuildEditorConfig.editorconfig
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.AssemblyInfoInputs.cache
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.AssemblyInfo.cs
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.csproj.CoreCompileInputs.cache
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.dll
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.pdb
+D:\2021-2022-1\C#\lab07\test02\test02\obj\Debug\netcoreapp3.1\test02.genruntimeconfig.cache
