@@ -1,16 +1,22 @@
-#login-body, html {
+html {
     height: 100%;
     width: 100%;
 }
 
+/* #login-box 登录页面的登录框 */
 #login-box {
     margin-bottom: 105px;
-    /*padding: 1em;*/
-    top: 15%;
+    top: 20%;
     /* 边框圆角 */
     border-radius: 10px;
     /* 背景透明 */
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgb(255, 255, 255);
+}
+
+#login-box,
+#login-box a,
+#login-box input {
+    color: black;
 }
 
 #login-box input {
@@ -18,14 +24,15 @@
     background-color: rgba(255, 255, 255, 0.25);
 }
 
+.login-box-tab {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .form-control-feedback {
     position: absolute;
     padding-top: 1rem;
     left: 1rem;
-}
-
-.input-group {
-    position: relative;
 }
 
 .input-group input {

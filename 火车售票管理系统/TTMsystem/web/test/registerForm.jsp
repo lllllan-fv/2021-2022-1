@@ -2,13 +2,13 @@
   Created by IntelliJ IDEA.
   User: lllllan
   Date: 2021/11/4
-  Time: 0:37
+  Time: 19:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>index</title>
+    <title>Title</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -34,36 +34,31 @@
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
 
-    <!-- style.css -->
-    <link href="../src/style/style.css" rel="stylesheet">
-
 </head>
-<body style="background-image: url('../src/img/background.jpg'); background-repeat: no-repeat;background-size: cover ">
+<body>
 
-<jsp:include page="head.jsp"></jsp:include>
-
-<div id="login-box" class="jumbotron col-sm-3 col-sm-offset-2">
-    <div class="col-sm-5 col-sm-offset-1 text-center">
-        <a class="login-box-tab" href="#login" data-toggle="tab">用户登录</a>
+<form id="register-form" class="form-horizontal" action="#" method="post" onsubmit="">
+    <div class="form-group input-group">
+        <span class="form-control-feedback">
+            <i class="bi bi-telephone" style="font-size: 3rem; "></i>
+        </span>
+        <input type="text" class="form-control form-control-pl-30 input-lg" id="login-account"
+               placeholder="电话" autocomplete="off">
     </div>
-    <div class="col-sm-5 text-center">
-        <a class="login-box-tab" href="#register" data-toggle="tab">用户注册</a>
+    <div class="form-group input-group">
+        <span class="form-control-feedback">
+            <i class="bi bi-lock" style="font-size: 3rem; "></i>
+        </span>
+        <input type="password" class="form-control input-lg" id="login-pwd" placeholder="密码"
+               autocomplete="off">
     </div>
 
-    <div class="tab-content col-sm-10 col-sm-offset-1" style="margin-top: 2em">
-        <div class="tab-pane fade in active" id="login">
-            <jsp:include page="loginForm.jsp"></jsp:include>
+    <div class="form-group">
+        <div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
         </div>
-        <div class="tab-pane fade" id="register">
-            <jsp:include page="registerForm.jsp"></jsp:include>
-        </div>
     </div>
-
-</div>
-
-
-<jsp:include page="foot.jsp"></jsp:include>
-
+</form>
 
 </body>
 </html>
