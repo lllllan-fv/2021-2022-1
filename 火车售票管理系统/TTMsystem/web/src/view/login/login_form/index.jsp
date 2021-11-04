@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: lllllan
-  Date: 2021/11/3
-  Time: 23:16
+  Date: 2021/11/4
+  Time: 23:32
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>head</title>
+    <title>loginForm</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -22,22 +22,32 @@
             integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
             crossorigin="anonymous"></script>
 
+    <!-- bootstrap-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+
+    <!-- 4.1.1 animate.min.css -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <!-- 1.1.2 wow.min.js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
 
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top" style="padding-top: 1em">
-    <div class="container container-fluid">
-        <a class="navbar-brand" href="#">
-            <img alt="Brand" src="../src/img/logo.jpg" style="max-height: 100%">
-        </a>
-        <a class="navbar-brand navbar-right" href="#">
-            right
-        </a>
+<form action="#" method="post" onsubmit="">
+    <div class="input-group">
+        <i class="bi bi-person-circle" style="font-size: 3rem"></i>
+        <input type="text" placeholder="account"/>
     </div>
-</nav>
+    <div class="input-group">
+        <i class="bi bi-lock" style="font-size: 3rem"></i>
+        <input type="password" placeholder="Password"/>
+    </div>
+    <button class="btn_login" onClick="cambiar_login()">LOGIN</button>
+</form>
 
 </body>
 </html>

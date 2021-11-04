@@ -2,13 +2,13 @@
   Created by IntelliJ IDEA.
   User: lllllan
   Date: 2021/11/4
-  Time: 19:24
+  Time: 0:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>loginForm</title>
+    <title>foot-fixed-bottom</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -34,41 +34,28 @@
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
 
-    <link rel="stylesheet" href="../src/style/style.css">
 </head>
 <body>
 
-<form id="login-form" class="form-horizontal" action="#" method="post" onsubmit="">
-    <div class="form-group input-group">
-                    <span class="form-control-feedback">
-                        <i class="bi bi-person-circle" style="font-size: 3rem; "></i>
-                    </span>
-        <input type="text" class="form-control form-control-pl-30 input-lg" id="login-account"
-               placeholder="电话" autocomplete="off">
+<nav class="navbar navbar-default navbar-fixed-bottom" style="padding: 2em 0em 1em 0em">
+    <div class="container container-fluid">
+        <p class="text-center">
+            Copyright © 2021, All rights reserved. @lllllan. More informations
+            <a target="_blank" href="http://lllllan.cn/" title="更多信息" class="navbar-link">click here</a>
+        </p>
     </div>
-    <div class="form-group input-group">
-                    <span class="form-control-feedback">
-                        <i class="bi bi-lock" style="font-size: 3rem; "></i>
-                    </span>
-        <input type="password" class="form-control input-lg" id="login-pwd" placeholder="密码"
-               autocomplete="off">
+    <div class="container container-fluid">
+        <p class="text-center">
+            <a href="http://beian.miit.gov.cn/" target="_blank" class="navbar-link">粤ICP备2021095794号 </a>
+            &emsp;|&emsp;
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002015830"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" class="navbar-link">
+                <img src="http://lllllan.cn/personal_data/img/beian.png" style="float:left;"/>
+                浙公网安备 33011002015830号
+            </a>
+        </p>
     </div>
-    <div class="form-group">
-        <div>
-            <div class="checkbox-inline navbar-left">
-                <label> <input type="checkbox"> 记住密码 </label>
-            </div>
-            <div class="checkbox-inline navbar-right">
-                <label><a href="#">忘记密码？</a></label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
-        </div>
-    </div>
-</form>
+</nav>
 
 </body>
 </html>

@@ -2,13 +2,13 @@
   Created by IntelliJ IDEA.
   User: lllllan
   Date: 2021/11/4
-  Time: 0:43
+  Time: 23:34
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>foot-fixed-bottom</title>
+    <title>register</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -22,6 +22,9 @@
             integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
             crossorigin="anonymous"></script>
 
+    <!-- bootstrap-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+
     <!-- 4.1.1 animate.min.css -->
     <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
@@ -30,28 +33,29 @@
 
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
-</head>
-<body id="login-body">
 
-<nav class="navbar navbar-default navbar-fixed-bottom" style="padding: 2em 0em 1em 0em">
-    <div class="container container-fluid">
-        <p class="text-center">
-            Copyright © 2021, All rights reserved. @lllllan. More informations
-            <a target="_blank" href="http://lllllan.cn/" title="更多信息" class="navbar-link">click here</a>
-        </p>
+</head>
+<body>
+
+<form action="#" method="post" onsubmit="">
+    <div class="input-group">
+        <i class="bi bi-person-circle" style="font-size: 3rem"></i>
+        <input type="text" placeholder="account"/>
     </div>
-    <div class="container container-fluid">
-        <p class="text-center">
-            <a href="http://beian.miit.gov.cn/" target="_blank" class="navbar-link">粤ICP备2021095794号 </a>
-            &emsp;|&emsp;
-            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002015830"
-               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" class="navbar-link">
-                <img src="http://lllllan.cn/personal_data/img/beian.png" style="float:left;"/>
-                浙公网安备 33011002015830号
-            </a>
-        </p>
+    <div class="input-group">
+        <i class="bi bi-lock" style="font-size: 3rem"></i>
+        <input type="text" placeholder="User"/>
     </div>
-</nav>
+    <div class="input-group">
+        <i class="bi bi-lock" style="font-size: 3rem"></i>
+        <input type="password" placeholder="Password"/>
+    </div>
+    <div class="input-group">
+        <i class="bi bi-lock" style="font-size: 3rem"></i>
+        <input type="password" placeholder="Password"/>
+    </div>
+    <button class="btn_sign_up" onClick="cambiar_login()">LOGIN</button>
+</form>
 
 </body>
 </html>

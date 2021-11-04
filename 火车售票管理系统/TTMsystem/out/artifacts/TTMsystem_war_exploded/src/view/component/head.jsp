@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: lllllan
-  Date: 2021/11/4
-  Time: 0:37
+  Date: 2021/11/3
+  Time: 23:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>index</title>
+    <title>head</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -34,36 +34,19 @@
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
 
-    <!-- style.css -->
-    <link href="../src/style/style.css" rel="stylesheet">
-
 </head>
-<body style="background-image: url('../src/img/background.jpg'); background-repeat: no-repeat;background-size: cover ">
+<body>
 
-<jsp:include page="head.jsp"></jsp:include>
-
-<div id="login-box" class="jumbotron col-sm-3 col-sm-offset-2">
-    <div class="col-sm-5 col-sm-offset-1 text-center">
-        <a class="login-box-tab" href="#login" data-toggle="tab">用户登录</a>
+<nav class="navbar navbar-default navbar-fixed-top" style="padding-top: 1em">
+    <div class="container container-fluid">
+        <a class="navbar-brand" href="#">
+            <img alt="Brand" src="../../img/logo.jpg" style="max-height: 100%">
+        </a>
+        <a class="navbar-brand navbar-right" href="#">
+            right
+        </a>
     </div>
-    <div class="col-sm-5 text-center">
-        <a class="login-box-tab" href="#register" data-toggle="tab">用户注册</a>
-    </div>
-
-    <div class="tab-content col-sm-10 col-sm-offset-1" style="margin-top: 2em">
-        <div class="tab-pane fade in active" id="login">
-            <jsp:include page="loginForm.jsp"></jsp:include>
-        </div>
-        <div class="tab-pane fade" id="register">
-            <jsp:include page="registerForm.jsp"></jsp:include>
-        </div>
-    </div>
-
-</div>
-
-
-<jsp:include page="foot.jsp"></jsp:include>
-
+</nav>
 
 </body>
 </html>

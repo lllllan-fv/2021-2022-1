@@ -2,13 +2,13 @@
   Created by IntelliJ IDEA.
   User: lllllan
   Date: 2021/11/4
-  Time: 19:36
+  Time: 23:32
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>loginForm</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -36,29 +36,6 @@
 
 </head>
 <body>
-
-<form id="register-form" class="form-horizontal" action="#" method="post" onsubmit="">
-    <div class="form-group input-group">
-        <span class="form-control-feedback">
-            <i class="bi bi-telephone" style="font-size: 3rem; "></i>
-        </span>
-        <input type="text" class="form-control form-control-pl-30 input-lg" id="login-account"
-               placeholder="电话" autocomplete="off">
-    </div>
-    <div class="form-group input-group">
-        <span class="form-control-feedback">
-            <i class="bi bi-lock" style="font-size: 3rem; "></i>
-        </span>
-        <input type="password" class="form-control input-lg" id="login-pwd" placeholder="密码"
-               autocomplete="off">
-    </div>
-
-    <div class="form-group">
-        <div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
-        </div>
-    </div>
-</form>
 
 </body>
 </html>
