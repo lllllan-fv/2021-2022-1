@@ -40,7 +40,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-top: 1em">
     <div class="container container-fluid">
         <a class="navbar-brand" href="#">
-            <img alt="Brand" src="../../img/logo.jpg" style="max-height: 100%">
+            <img alt="Brand" src="../common/img/logo.jpg" style="max-height: 100%">
         </a>
         <a class="navbar-brand navbar-right" href="#">
             right

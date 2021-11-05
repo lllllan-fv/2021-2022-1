@@ -42,7 +42,8 @@
 </head>
 <body>
 
-<jsp:include page="../component/head.jsp"></jsp:include>
+<%@ include file="../common/head.jsp" %>
+<%--<jsp:include page="../common/head.jsp"></jsp:include>--%>
 
 <div class="cotn_principal">
     <div class="cont_centrar">
@@ -101,7 +102,7 @@
     </div>
 </div>
 
-<jsp:include page="../component/foot.jsp"></jsp:include>
+<jsp:include page="../common/foot.jsp"></jsp:include>
 
 </body>
 </html>
