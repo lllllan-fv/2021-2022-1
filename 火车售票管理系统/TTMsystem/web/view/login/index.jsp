@@ -70,12 +70,12 @@
             </div>
 
             <div class="cont_back_info">
-                <div class="cont_img_back_grey"><img src="background.jpg" alt=""/></div>
+                <div class="cont_img_back_grey"><img src="img/background.jpg" alt=""/></div>
             </div>
 
             <div class="cont_forms">
 
-                <div class="cont_img_back_"><img src="background.jpg" alt=""/></div>
+                <div class="cont_img_back_"><img src="img/background.jpg" alt=""/></div>
 
                 <div class="cont_form_login">
                     <a href="#" onClick="ocultar_login_sign_up()">
@@ -92,7 +92,7 @@
                         <i class="bi bi-chevron-left" style="font-size: 3rem"></i>
                     </a>
 
-                    <img src="code.png" width="100%">
+                    <img src="img/code.png" width="100%">
 
                 </div>
 
