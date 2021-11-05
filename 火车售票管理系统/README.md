@@ -170,7 +170,6 @@
 | **seat_car_keyid** |   int   |  是   |             车厢编号             |
 |      seat_id       | varchar |  否   |    座位号【1A  \| 1B \| 等】     |
 |     seat_state     | varchar |  否   | 座位状态【可售 \| 禁止 \| 已售】 |
-|     seat_price     |   int   |  否   |               价格               |
 
 #### 订单表
 
