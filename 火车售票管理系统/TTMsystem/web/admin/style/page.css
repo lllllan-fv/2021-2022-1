@@ -17,7 +17,7 @@
     line-height: 70px;
     font-size: 20px;
     font-weight: 700;
-    color: #ff7f50;
+    color: #2980b9;
     letter-spacing: 0.05em;
 }
 
@@ -30,11 +30,11 @@
 }
 
 .page .nav-left .navDiv .nav-list ul .a_active {
-    background-color: #f1f2f6;
+    background-color: #dfe6e9;
 }
 
 .page .nav-left .navDiv .nav-list ul .a_active .active {
-    color: #ff7f50 !important;
+    color: #2980b9 !important;
     font-weight: 700;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .page .nav-left .navDiv .nav-list ul .nav-show .nav-box .active-li-a {
-    color: #ff7f50 !important;
+    color: #2980b9 !important;
     font-weight: 700;
 }
 
