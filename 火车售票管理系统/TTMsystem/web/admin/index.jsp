@@ -42,6 +42,15 @@
 
 <div class="page" id="app">
     <jsp:include page="nav-left/index.jsp"></jsp:include>
+
+    <div class="nav-right">
+        <div class="nav-top">
+            上方导航
+        </div>
+        <div class="content-page">
+            <iframe name="iframe" width="100%" height="100%" frameborder="0" src="html/home.html"></iframe>
+        </div>
+    </div>
 </div>
 
 

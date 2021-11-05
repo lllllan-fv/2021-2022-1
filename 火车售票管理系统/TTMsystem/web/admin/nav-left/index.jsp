@@ -13,13 +13,18 @@
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 3.4.1 Bootstrap.min.css -->
+    <%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"--%>
+    <%--          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">--%>
+    <%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"--%>
+    <%--            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"--%>
+    <%--            crossorigin="anonymous"></script>--%>
 
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    <!-- 4.6.1 Bootstrap.min.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
             crossorigin="anonymous"></script>
 
     <!-- bootstrap-icons -->
@@ -47,7 +52,9 @@
                     <a href="html/home.html" class="li-a active" target="iframe">
                         <i class='bi bi-house'></i>
                         主页
-                        <span class="badge badge-pill badge-primary float-right">3</span>
+                        <span class="badge badge-pill badge-primary" style="float: right;">
+                            3
+                        </span>
                     </a>
                 </li>
                 <li class="nav-tab nav-ul">
@@ -57,46 +64,52 @@
                         <i class='bi bi-chevron-right' style="float: right;"></i>
                     </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">当前能耗</a>
+                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                            当前能耗
+                        </a>
                     </div>
                 </li>
                 <li class="nav-tab nav-ul">
                     <a href="javascript:void[0]" class="li-a">
-                        <i class='bx bx-cog'></i>
+                        <i class='bi bi-nut'></i>
                         维修保养
-                        <i class='bi bi-chevron-right' style="float: right;"></i></a>
+                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">养护计划</a>
+                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                            养护计划
+                        </a>
                     </div>
                 </li>
                 <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a"><i class='bx bx-buildings'></i> 巡检管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i></a>
+                    <a href="javascript:void[0]" class="li-a">
+                        <i class='bi bi-building'></i>
+                        巡检管理
+                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">巡检计划</a>
+                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                            巡检计划
+                        </a>
                     </div>
                 </li>
                 <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a"><i class='bx bx-edit'></i> 工单管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i></a>
+                    <a href="javascript:void[0]" class="li-a">
+                        <i class='bi bi-pencil-square'></i>
+                        工单管理
+                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">维修计划</a>
+                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                            维修计划
+                        </a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 </div>
-<div class="nav-right">
-    <div class="nav-top">
-        上方导航
-    </div>
-    <div class="content-page">
-        <iframe name="iframe" width="100%" height="100%" frameborder="0" src="html/home.html"></iframe>
-    </div>
-</div>
 
-<%--<script type="text/javascript" src="js/jquery.min.js"></script>--%>
 <script type="text/javascript">
     $(function () {
         // let navflag = false;
@@ -131,5 +144,6 @@
         })
     })
 </script>
+
 </body>
 </html>
