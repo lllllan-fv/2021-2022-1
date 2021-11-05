@@ -42,7 +42,7 @@
 </head>
 <body>
 
-<%@ include file="../common/head.jsp" %>
+<%@ include file="../component/head.jsp" %>
 <%--<jsp:include page="../common/head.jsp"></jsp:include>--%>
 
 <div class="cotn_principal">
@@ -102,7 +102,7 @@
     </div>
 </div>
 
-<jsp:include page="../common/foot.jsp"></jsp:include>
+<jsp:include page="../component/foot.jsp"></jsp:include>
 
 </body>
 </html>
