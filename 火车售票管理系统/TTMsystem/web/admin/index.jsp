@@ -41,7 +41,9 @@
 
 
 <div class="page" id="app">
-    <jsp:include page="nav-left/index.jsp"></jsp:include>
+    <div class="nav-left">
+        <jsp:include page="nav-left/index.jsp"></jsp:include>
+    </div>
 
     <div class="nav-right">
         <div class="nav-top">

@@ -14,17 +14,10 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <!-- 3.4.1 Bootstrap.min.css -->
-    <%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"--%>
-    <%--          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">--%>
-    <%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"--%>
-    <%--            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"--%>
-    <%--            crossorigin="anonymous"></script>--%>
-
-    <!-- 4.6.1 Bootstrap.min.css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
             crossorigin="anonymous"></script>
 
     <!-- bootstrap-icons -->
@@ -42,71 +35,69 @@
 </head>
 <body>
 
-<div class="nav-left">
-    <div class="LogoName"> WDTLoong Cloud</div>
-    <div class="navDiv">
-        <div class="navName">导航</div>
-        <div class="nav-list">
-            <ul>
-                <li class="nav-tab a_active waves-effect">
-                    <a href="html/home.html" class="li-a active" target="iframe">
-                        <i class='bi bi-house'></i>
-                        主页
-                        <span class="badge badge-pill badge-primary" style="float: right;">
+<div class="LogoName">后台管理</div>
+<div class="navDiv">
+    <div class="navName">导航</div>
+    <div class="nav-list">
+        <ul>
+            <li class="nav-tab a_active waves-effect">
+                <a href="html/home.html" class="li-a active" target="iframe">
+                    <i class='bi bi-house'></i>
+                    主页
+                    <span class="badge badge-pill badge-primary" style="float: right;">
                             3
                         </span>
+                </a>
+            </li>
+            <li class="nav-tab nav-ul">
+                <a href="javascript:void[0]" class="li-a">
+                    <i class='bi bi-layers'></i>
+                    设备管理
+                    <i class='bi bi-chevron-right' style="float: right;"></i>
+                </a>
+                <div class="nav-box">
+                    <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        当前能耗
                     </a>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-layers'></i>
-                        设备管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                </div>
+            </li>
+            <li class="nav-tab nav-ul">
+                <a href="javascript:void[0]" class="li-a">
+                    <i class='bi bi-nut'></i>
+                    维修保养
+                    <i class='bi bi-chevron-right' style="float: right;"></i>
+                </a>
+                <div class="nav-box">
+                    <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        养护计划
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
-                            当前能耗
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-nut'></i>
-                        维修保养
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                </div>
+            </li>
+            <li class="nav-tab nav-ul">
+                <a href="javascript:void[0]" class="li-a">
+                    <i class='bi bi-building'></i>
+                    巡检管理
+                    <i class='bi bi-chevron-right' style="float: right;"></i>
+                </a>
+                <div class="nav-box">
+                    <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        巡检计划
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
-                            养护计划
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-building'></i>
-                        巡检管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                </div>
+            </li>
+            <li class="nav-tab nav-ul">
+                <a href="javascript:void[0]" class="li-a">
+                    <i class='bi bi-pencil-square'></i>
+                    工单管理
+                    <i class='bi bi-chevron-right' style="float: right;"></i>
+                </a>
+                <div class="nav-box">
+                    <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        维修计划
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
-                            巡检计划
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-pencil-square'></i>
-                        工单管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
-                    </a>
-                    <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
-                            维修计划
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 
