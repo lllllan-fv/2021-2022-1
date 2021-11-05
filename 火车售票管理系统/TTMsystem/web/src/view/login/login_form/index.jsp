@@ -40,13 +40,13 @@
 <form action="#" method="post" onsubmit="">
     <div class="input-group">
         <i class="bi bi-person-circle" style="font-size: 3rem"></i>
-        <input type="text" placeholder="account"/>
+        <input type="text" placeholder="手机号"/>
     </div>
     <div class="input-group">
         <i class="bi bi-lock" style="font-size: 3rem"></i>
-        <input type="password" placeholder="Password"/>
+        <input type="password" placeholder="密  码"/>
     </div>
-    <button class="btn_login" onClick="cambiar_login()">LOGIN</button>
+    <button class="btn_login" onClick="cambiar_login()">登录</button>
 </form>
 
 </body>

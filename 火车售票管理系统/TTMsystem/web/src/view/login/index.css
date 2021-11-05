@@ -64,7 +64,7 @@ html {
 
 .cont_forms_active_login {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    height: 440px;
+    height: 420px;
     top: 170px;
     left: 0px;
     -webkit-transition: all 0.5s;
@@ -76,7 +76,7 @@ html {
 
 .cont_forms_active_sign_up {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    height: 440px;
+    height: 420px;
     top: 170px;
     left: 320px;
     -webkit-transition: all 0.5s;

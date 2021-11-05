@@ -52,17 +52,17 @@
 
                 <div class="col_md_login">
                     <div class="cont_ba_opcitiy">
-                        <h2>LOGIN</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                        <button class="btn_login" onClick="cambiar_login()">LOGIN</button>
+                        <h2>手机登录</h2>
+                        <p>阿巴阿巴</p>
+                        <button class="btn_login" onClick="cambiar_login()">手机登录</button>
                     </div>
                 </div>
 
                 <div class="col_md_sign_up">
                     <div class="cont_ba_opcitiy">
-                        <h2>SIGN UP</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                        <button class="btn_sign_up" onClick="cambiar_sign_up()">SIGN UP</button>
+                        <h2>扫码登录</h2>
+                        <p>阿巴阿巴</p>
+                        <button class="btn_sign_up" onClick="cambiar_sign_up()">扫码登录</button>
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
                     <a href="#" onClick="ocultar_login_sign_up()">
                         <i class="bi bi-chevron-left" style="font-size: 3rem"></i>
                     </a>
-                    <h2>LOGIN</h2>
+                    <h2>登录</h2>
 
                     <jsp:include page="login_form/index.jsp"></jsp:include>
 
@@ -90,9 +90,8 @@
                     <a href="#" onClick="ocultar_login_sign_up()">
                         <i class="bi bi-chevron-left" style="font-size: 3rem"></i>
                     </a>
-                    <h2>SIGN UP</h2>
 
-                    <jsp:include page="register_form/index.jsp"></jsp:include>
+                    <img src="code.png" width="100%">
 
                 </div>
 

@@ -40,7 +40,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom" style="padding: 2em 0em 1em 0em">
     <div class="container container-fluid">
         <p class="text-center">
-            Copyright © 2021, All rights reserved. @lllllan. More informations
+            版权所有 © 2021 &emsp; lllllan. 更多信息详见
             <a target="_blank" href="http://lllllan.cn/" title="更多信息" class="navbar-link">click here</a>
         </p>
     </div>
