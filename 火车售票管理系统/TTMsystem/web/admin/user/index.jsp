@@ -99,9 +99,43 @@
                             key: 'action',
                             width: 150,
                             align: 'center',
-                            render: function (row, column, index) {
-                                return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
+                            //https://blog.csdn.net/qq_37818095/article/details/87716885
+                            render: function (h, params) {
+                                return h('div', [
+                                    h('i-button', {
+                                        props: {
+                                            type: "text",
+                                            size: "small"
+                                        },
+                                        on: {
+                                            click: () => {
+                                                if (params.row.$isEdit) {
+                                                    this.handleSave(params.row);
+                                                } else {
+                                                    this.handleEdit(params.row);
+                                                }
+                                            }
+                                        }
+                                    }, '编辑'), h('i-button', {
+                                        props: {
+                                            type: "text",
+                                            size: "small"
+                                        },
+                                        on: {
+                                            click: () => {
+                                                if (params.row.$isEdit) {
+                                                    this.handleSave(params.row);
+                                                } else {
+                                                    this.handleEdit(params.row);
+                                                }
+                                            }
+                                        }
+                                    }, '删除')
+                                ]);
                             }
+                            // render: function (row, column, index) {
+                            <%--return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;--%>
+                            // }
                         }
                     ],
                     data1: [
