@@ -43,133 +43,185 @@
 </head>
 <body>
 
-<div id="vue">
+<div id="userTableVue">
     <%--  stripe 斑马纹  --%>
     <%--  highlight-row，可以选中某一行 --%>
     <%--  type: 'selection'，即可自动开启多选功能 --%>
     <%--  sortable: true，即可对该列数据进行排序 --%>
     <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
-    <i-table highlight-row stripe :columns="columns1" :data="data1"
-             @on-current-change="todo" @on-select-all="selectAll"></i-table>
+
+    <Card>
+        <i-table stripe :loading="loading" :columns="userTableColumns" :data="data1"
+                 @on-row-click="tableClick"
+                 @on-select-all="selectAll" :height="tableHeight" ref="table">
+
+            <template slot-scope="{ row }" slot="name">
+                <div>
+                    <Icon type="md-person"></Icon>
+                    <strong>{{ row.name }}</strong>
+                </div>
+            </template>
+
+            <template slot-scope="{ row }" slot="state">
+                <div>
+                    <Badge :status="getState(row.state)" :text="row.state"/>
+
+                    <%--  <strong>{{ row.state }}</strong>--%>
+                </div>
+            </template>
+
+            <template slot-scope="{ row, index }" slot="action">
+                <i-button type="primary" size="small" style="margin-right: 5px" @click="value1 = true">View
+                </i-button>
+                <i-button type="error" size="small" @click="remove(index)">Delete</i-button>
+                <Drawer title="Basic Drawer" :closable="false" v-model="value1">
+                    <p>Some contents...</p>
+                </Drawer>
+            </template>
+
+        </i-table>
+
+        <Page simple :total="dataCount" :page-size="pageSize" show-total
+              @on-change="changepage"
+              style="float: right; margin-top: 10px">
+        </Page>
+
+
+        Change Loading Status
+        <i-switch v-model="loading" style="margin-top: 10px"></i-switch>
+    </Card>
+
 </div>
 
 <script>
+    let testData = [
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 2,
+            tel: '19106850001',
+            name: '张三',
+            age: 19,
+            type: 'VIP用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 3,
+            tel: '19106850002',
+            name: '赵四',
+            age: 20,
+            type: '管理员',
+            state: '关闭',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 4,
+            tel: '19106850004',
+            name: '王五',
+            age: 21,
+            type: '普通用户',
+            state: '冻结',
+            create_time: '2021-11-7',
+        },
+    ];
+
     var vm = new Vue({
-            el: "#vue",
+            el: "#userTableVue",
             data: function () {
                 return {
-                    columns1: [
+                    tableHeight: null,
+                    ajaxHistoryData: [],
+                    dataCount: 3, pageSize: 10,
+                    value1: false, loading: false,
+                    userTableColumns: [
                         {
                             type: 'selection',
                             width: 60,
                             align: 'center'
-                        },
-                        {
+                        }, {
+                            title: '手机号',
+                            key: 'tel',
+                        }, {
                             title: '姓名',
-                            key: 'name'
-                        },
-                        {
+                            slot: 'name',
+                            sortable: true
+                        }, {
                             title: '年龄',
                             key: 'age',
                             sortable: true
-                        },
-                        {
-                            title: '地址',
-                            key: 'address',
-                            filters: [
-                                {
-                                    label: '北京',
-                                    value: '北京'
-                                },
-                                {
-                                    label: '上海',
-                                    value: '上海'
-                                },
-                                {
-                                    label: '深圳',
-                                    value: '深圳'
-                                }
-                            ],
-                            filterMethod: function (value, row) {
-                                return row.address.indexOf(value) > -1;
-                            }
-                        },
-                        {
-                            title: '操作',
-                            key: 'action',
+                        }, {
+                            title: '用户类型',
+                            key: 'type',
+                            sortable: true
+                        }, {
+                            title: '用户状态',
+                            slot: 'state',
+                            sortable: true
+                        }, {
+                            title: '创建时间',
+                            key: 'create_time',
+                            sortable: true
+                        }, {
+                            title: 'Action',
+                            slot: 'action',
                             width: 150,
-                            align: 'center',
-                            //https://blog.csdn.net/qq_37818095/article/details/87716885
-                            render: function (h, params) {
-                                return h('div', [
-                                    h('i-button', {
-                                        props: {
-                                            type: "text",
-                                            size: "small"
-                                        },
-                                        on: {
-                                            click: () => {
-                                                if (params.row.$isEdit) {
-                                                    this.handleSave(params.row);
-                                                } else {
-                                                    this.handleEdit(params.row);
-                                                }
-                                            }
-                                        }
-                                    }, '编辑'), h('i-button', {
-                                        props: {
-                                            type: "text",
-                                            size: "small"
-                                        },
-                                        on: {
-                                            click: () => {
-                                                if (params.row.$isEdit) {
-                                                    this.handleSave(params.row);
-                                                } else {
-                                                    this.handleEdit(params.row);
-                                                }
-                                            }
-                                        }
-                                    }, '删除')
-                                ]);
-                            }
-                            // render: function (row, column, index) {
-                            <%--return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;--%>
-                            // }
-                        }
+                            align: 'center'
+                        },
                     ],
-                    data1: [
-                        {
-                            name: '王小明',
-                            age: 18,
-                            address: '北京市朝阳区芍药居'
-                        },
-                        {
-                            name: '张小刚',
-                            age: 25,
-                            address: '北京市海淀区西二旗'
-                        },
-                        {
-                            name: '李小红',
-                            age: 30,
-                            address: '上海市浦东新区世纪大道'
-                        },
-                        {
-                            name: '周小伟',
-                            age: 26,
-                            address: '深圳市南山区深南大道'
-                        }
-                    ]
+                    data1: []
                 }
             },
+            computed: {},
             methods: {
+                getState(state) {
+                    if (state === '正常') return 'success';
+                    else if (state === '冻结') return 'warning';
+                    return 'error';
+                },
+                getAge(birth) {
+                    let birthdays = new Date(birth.replace(/-/g, "/"));
+                    let d = new Date();
+                    let age = d.getFullYear() - birthdays.getFullYear() -
+                        (d.getMonth() < birthdays.getMonth() ||
+                        (d.getMonth() == birthdays.getMonth() &&
+                            d.getDate() < birthdays.getDate()) ? 1 : 0);
+                    return age;
+                },
+                handleListApproveHistory() {
+                    // 保存取到的所有数据
+                    this.ajaxHistoryData = testData
+                    this.dataCount = testData.length;
+                    // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+                    if (testData.length < this.pageSize) {
+                        this.data1 = this.ajaxHistoryData;
+                    } else {
+                        this.data1 = this.ajaxHistoryData.slice(0, this.pageSize);
+                    }
+                },
                 selectAll: function (link) {
                     console.log(link);
+                }, tableClick: function (data, index) {
+                    this.value1 = true;
+                }, remove(index) {
+                    this.data1.splice(index, 1);
+                }, changepage(index) {
+                    var _start = (index - 1) * this.pageSize;
+                    var _end = index * this.pageSize;
+                    this.data1 = this.ajaxHistoryData.slice(_start, _end);
                 },
-                todo: function (currentRow, oldCurrentRow) {
-                    console.log(oldCurrentRow);
-                },
-            }
+            },
+            created() {
+                this.handleListApproveHistory();
+                this.tableHeight = (this.pageSize + 1) * 48 - 6;
+            },
         })
     ;
 </script>
