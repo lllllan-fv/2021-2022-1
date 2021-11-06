@@ -116,7 +116,8 @@
 .page .content-page {
     flex: 1;
     position: absolute;
-    top: 60px;
+    top: 0;
+    /*top: 60px;*/
     left: 240px;
     right: 0;
     bottom: 0;

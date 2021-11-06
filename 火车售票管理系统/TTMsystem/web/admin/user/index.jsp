@@ -44,13 +44,23 @@
 <body>
 
 <div id="userTableVue">
-    <%--  stripe 斑马纹  --%>
-    <%--  highlight-row，可以选中某一行 --%>
-    <%--  type: 'selection'，即可自动开启多选功能 --%>
-    <%--  sortable: true，即可对该列数据进行排序 --%>
-    <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
 
     <Card>
+        <div>
+            <h1>user admin</h1>
+            <br>
+            <p>ababa</p>
+        </div>
+    </Card>
+
+    <Card style="padding-bottom: 30px">
+
+        <%--  stripe 斑马纹  --%>
+        <%--  highlight-row，可以选中某一行 --%>
+        <%--  type: 'selection'，即可自动开启多选功能 --%>
+        <%--  sortable: true，即可对该列数据进行排序 --%>
+        <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
+
         <i-table stripe :loading="loading" :columns="userTableColumns" :data="data1"
                  @on-row-click="tableClick"
                  @on-select-all="selectAll" :height="tableHeight" ref="table">
@@ -86,9 +96,8 @@
               style="float: right; margin-top: 10px">
         </Page>
 
-
-        Change Loading Status
-        <i-switch v-model="loading" style="margin-top: 10px"></i-switch>
+        <%--        Change Loading Status--%>
+        <%--        <i-switch v-model="loading" style="margin-top: 10px"></i-switch>--%>
     </Card>
 
 

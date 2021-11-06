@@ -46,15 +46,16 @@
 <body>
 
 
-<div class="page" id="app">
+<div class="page" id="admin">
     <div class="nav-left" style="background-color: #191a23">
         <jsp:include page="nav-left/index.jsp"></jsp:include>
     </div>
 
     <div class="nav-right">
-        <div class="nav-top">
-            上方导航
-        </div>
+        <%--        <div class="nav-top">--%>
+        <%--            上方导航--%>
+        <%--        </div>--%>
+
         <div class="content-page">
             <iframe name="iframe" width="100%" height="100%" frameborder="0" src="user/"></iframe>
         </div>
@@ -63,6 +64,11 @@
 
 </div>
 
+<script>
+    var vm = new Vue({
+        el: '#admin'
+    });
+</script>
 
 </body>
 </html>
