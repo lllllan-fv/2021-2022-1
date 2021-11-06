@@ -93,6 +93,15 @@
                             filterMethod: function (value, row) {
                                 return row.address.indexOf(value) > -1;
                             }
+                        },
+                        {
+                            title: '操作',
+                            key: 'action',
+                            width: 150,
+                            align: 'center',
+                            render: function (row, column, index) {
+                                return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
+                            }
                         }
                     ],
                     data1: [
