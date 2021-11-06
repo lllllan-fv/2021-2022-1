@@ -91,10 +91,74 @@
         <i-switch v-model="loading" style="margin-top: 10px"></i-switch>
     </Card>
 
+
 </div>
 
 <script>
     let testData = [
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
+        {
+            keyid: 1,
+            tel: '19106850000',
+            name: '王小明',
+            age: 18,
+            type: '普通用户',
+            state: '正常',
+            create_time: '2021-11-7',
+        },
         {
             keyid: 1,
             tel: '19106850000',
@@ -149,26 +213,32 @@
                         }, {
                             title: '手机号',
                             key: 'tel',
+                            align: 'center'
                         }, {
                             title: '姓名',
                             slot: 'name',
-                            sortable: true
+                            sortable: true,
+                            align: 'center'
                         }, {
                             title: '年龄',
                             key: 'age',
-                            sortable: true
+                            sortable: true,
+                            align: 'center'
                         }, {
                             title: '用户类型',
                             key: 'type',
-                            sortable: true
+                            sortable: true,
+                            align: 'center'
                         }, {
                             title: '用户状态',
                             slot: 'state',
-                            sortable: true
+                            sortable: true,
+                            align: 'center'
                         }, {
                             title: '创建时间',
                             key: 'create_time',
-                            sortable: true
+                            sortable: true,
+                            align: 'center'
                         }, {
                             title: 'Action',
                             slot: 'action',

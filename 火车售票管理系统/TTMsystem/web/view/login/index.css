@@ -16,9 +16,9 @@ html {
     height: 100%;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfd8dc+0,607d8b+100,b0bec5+100 */
     background: #aac4bc; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #2980b9 0%, #ffffff 100%, #6dd5fa 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #2980b9 0%, #ffffff 100%, #6dd5fa 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #2980b9 0%, #ffffff 100%, #6dd5fa 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: #FFFFFF; /* FF3.6-15 */
+    background: #FFFFFF; /* Chrome10-25,Safari5.1-6 */
+    background: #FFFFFF; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cfd8dc', endColorstr='#b0bec5', GradientType=1); /* IE6-9 fallback on horizontal gradient */
 
 }

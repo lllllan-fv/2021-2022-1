@@ -8,7 +8,7 @@
     top: 0;
     height: 100%;
     width: 240px;
-    background-color: #FFFFFF;
+    background-color: #000000;
     box-shadow: 10px 0px 17px rgba(72, 72, 72, 0.1);
 }
 
@@ -17,7 +17,7 @@
     line-height: 70px;
     font-size: 20px;
     font-weight: 700;
-    color: #2980b9;
+    color: #FFFFFF;
     letter-spacing: 0.05em;
 }
 
@@ -25,16 +25,16 @@
     padding: 12px 20px !important;
     letter-spacing: 0.05em;
     font-size: 11px;
-    color: #5a5454;
+    color: #FFFFFF;
     font-weight: 700;
 }
 
 .page .nav-left .navDiv .nav-list ul .a_active {
-    background-color: #dfe6e9;
+    background-color: #000000;
 }
 
 .page .nav-left .navDiv .nav-list ul .a_active .active {
-    color: #2980b9 !important;
+    color: #FFFFFF !important;
     font-weight: 700;
 }
 
@@ -48,7 +48,7 @@
     display: block;
     padding: 0.65rem 1.5rem;
     font-size: 14px;
-    color: #5a5454;
+    color: #FFFFFF;
 }
 
 .page .nav-left .navDiv .nav-list ul .nav-tab .li-a .bx {
@@ -74,13 +74,14 @@
     display: block;
     padding: 0.65rem 1.5rem;
     font-size: 13px;
-    color: #5a5454;
+    color: #FFFFFF;
     transition: all 0.3s;
     margin-left: 0px;
 }
 
 .page .nav-left .navDiv .nav-list ul .nav-show .nav-box .active-li-a {
-    color: #2980b9 !important;
+    background-color: #2d8cf0;
+    color: #FFFFFF !important;
     font-weight: 700;
 }
 

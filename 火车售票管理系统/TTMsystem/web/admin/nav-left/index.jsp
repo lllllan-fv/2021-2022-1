@@ -71,6 +71,9 @@
                     <a href="html/device/device.html" class="li-a-a" target="iframe">
                         养护计划
                     </a>
+                    <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        养护计划
+                    </a>
                 </div>
             </li>
             <li class="nav-tab nav-ul">

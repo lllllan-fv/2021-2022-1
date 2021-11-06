@@ -47,7 +47,7 @@
 
 
 <div class="page" id="app">
-    <div class="nav-left">
+    <div class="nav-left" style="background-color: #191a23">
         <jsp:include page="nav-left/index.jsp"></jsp:include>
     </div>
 
@@ -59,6 +59,8 @@
             <iframe name="iframe" width="100%" height="100%" frameborder="0" src="user/"></iframe>
         </div>
     </div>
+
+
 </div>
 
 
