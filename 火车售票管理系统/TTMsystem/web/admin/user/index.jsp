@@ -32,13 +32,105 @@
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
 
+    <!-- 0.21.1 axios.js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
     <!-- iview.css -->
-    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
     <!-- iview.min.js -->
-    <script src="//unpkg.com/iview/dist/iview.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
 
 </head>
 <body>
+
+<div id="vue">
+    <%--  stripe 斑马纹  --%>
+    <%--  highlight-row，可以选中某一行 --%>
+    <%--  type: 'selection'，即可自动开启多选功能 --%>
+    <%--  sortable: true，即可对该列数据进行排序 --%>
+    <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
+    <i-table highlight-row stripe :columns="columns1" :data="data1"
+             @on-current-change="todo" @on-select-all="selectAll"></i-table>
+</div>
+
+<script>
+    var vm = new Vue({
+            el: "#vue",
+            data: function () {
+                return {
+                    columns1: [
+                        {
+                            type: 'selection',
+                            width: 60,
+                            align: 'center'
+                        },
+                        {
+                            title: '姓名',
+                            key: 'name'
+                        },
+                        {
+                            title: '年龄',
+                            key: 'age',
+                            sortable: true
+                        },
+                        {
+                            title: '地址',
+                            key: 'address',
+                            filters: [
+                                {
+                                    label: '北京',
+                                    value: '北京'
+                                },
+                                {
+                                    label: '上海',
+                                    value: '上海'
+                                },
+                                {
+                                    label: '深圳',
+                                    value: '深圳'
+                                }
+                            ],
+                            filterMethod: function (value, row) {
+                                return row.address.indexOf(value) > -1;
+                            }
+                        }
+                    ],
+                    data1: [
+                        {
+                            name: '王小明',
+                            age: 18,
+                            address: '北京市朝阳区芍药居'
+                        },
+                        {
+                            name: '张小刚',
+                            age: 25,
+                            address: '北京市海淀区西二旗'
+                        },
+                        {
+                            name: '李小红',
+                            age: 30,
+                            address: '上海市浦东新区世纪大道'
+                        },
+                        {
+                            name: '周小伟',
+                            age: 26,
+                            address: '深圳市南山区深南大道'
+                        }
+                    ]
+                }
+            },
+            methods: {
+                selectAll: function (link) {
+                    console.log(link);
+                },
+                todo: function (currentRow, oldCurrentRow) {
+                    console.log(oldCurrentRow);
+                },
+            }
+        })
+    ;
+</script>
+
 
 </body>
 </html>

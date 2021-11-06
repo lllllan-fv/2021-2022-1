@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: lllllan
-  Date: 2021/11/5
-  Time: 12:40
+  Date: 2021/11/6
+  Time: 10:53
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true" %>
 <html>
 <head>
-    <title>admin</title>
+    <title>error</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -40,27 +40,10 @@
     <!-- iview.min.js -->
     <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
 
-    <link rel="stylesheet" href="style/page.css">
-
 </head>
 <body>
 
-
-<div class="page" id="app">
-    <div class="nav-left">
-        <jsp:include page="nav-left/index.jsp"></jsp:include>
-    </div>
-
-    <div class="nav-right">
-        <div class="nav-top">
-            上方导航
-        </div>
-        <div class="content-page">
-            <iframe name="iframe" width="100%" height="100%" frameborder="0" src="html/home.html"></iframe>
-        </div>
-    </div>
-</div>
-
+<h1>哈哈，出错了</h1>
 
 </body>
 </html>
