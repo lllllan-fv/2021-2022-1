@@ -43,9 +43,9 @@
 </head>
 <body>
 
-<div id="userTableVue" style="background-color: #eee; height: 100%">
+<div id="userTableVue">
 
-    <Card :bordered="false">
+    <Card :bordered="false" style="background-color: #eee">
         <div>
             <h1>user admin</h1>
             <br>
@@ -67,9 +67,8 @@
         </form>
 
         <br>
-        <i-button :size="buttonSize" type="primary">
-            <Icon type="ios-arrow-back"/>
-            Backward
+        <i-button :size="buttonSize" type="primary" @click="value1 = true">
+            添加用户
         </i-button>
         <%--  stripe 斑马纹  --%>
         <%--  highlight-row，可以选中某一行 --%>
@@ -79,7 +78,8 @@
 
         <i-table stripe :loading="loading" :columns="userTableColumns" :data="data1"
                  @on-row-click="tableClick"
-                 @on-select-all="selectAll" :height="tableHeight" ref="table">
+                 @on-select-all="selectAll" :height="tableHeight" ref="table"
+                 style="margin-top: 10px">
 
             <template slot-scope="{ row }" slot="name">
                 <div>
