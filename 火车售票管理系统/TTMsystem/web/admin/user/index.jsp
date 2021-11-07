@@ -50,38 +50,39 @@
 
 <div id="userTableVue">
 
-    <Card :bordered="false" style="background-color: #eee">
+    <Card style="background-color: #eee">
         <div>
-            <h1>user admin</h1>
+            <h1>用户管理界面</h1>
             <br>
-            <p>ababa</p>
+            <p>这里是用户管理界面</p>
         </div>
     </Card>
 
     <Card style="margin: 20px; border-radius: 10px">
-        <form class="form-inline" onsubmit="return false">
-            <div class="form-group" style="margin-left: 20px">
-                <label for="exampleInputName2">Name</label>
-                <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-            </div>
-            <div class="form-group" style="margin-left: 20px">
-                <label for="exampleInputEmail2">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-            </div>
-            <button type="submit" class="btn btn-default" style="float: right">Send invitation</button>
-        </form>
 
-        <br>
+        <div style="margin-left: 20px; ">
+            <lable>用户名：&emsp;</lable>
+            <i-input style="width: 300px" v-model="tableSearchInfo.userName"></i-input>
+            <lable style="margin-left: 30px">手机号：&emsp;</lable>
+            <i-input style="width: 300px" v-model="tableSearchInfo.userTel"></i-input>
+            <div style="float: right">
+                <i-button type="primary" icon="ios-search" @click="tableSearch">查询</i-button>
+                <i-button type="default" icon="md-refresh" @click="tableSearchUnset">重置</i-button>
+            </div>
+        </div>
+
+        <br> <br>
         <i-button :size="buttonSize" type="primary" @click="value1 = true">
             添加用户
         </i-button>
+        <i-button shape="circle" icon="ios-refresh"></i-button>
         <%--  stripe 斑马纹  --%>
         <%--  highlight-row，可以选中某一行 --%>
         <%--  type: 'selection'，即可自动开启多选功能 --%>
         <%--  sortable: true，即可对该列数据进行排序 --%>
         <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
 
-        <i-table stripe :loading="loading" :columns="userTableColumns" :data="data1"
+        <i-table stripe :loading="loading" :columns="userTableColumns" :data="tableData"
                  @on-row-click="tableClick"
                  @on-select-all="selectAll" :height="tableHeight" ref="table"
                  style="margin-top: 10px">
@@ -95,7 +96,7 @@
 
             <template slot-scope="{ row }" slot="state">
                 <div>
-                    <Badge :status="getState(row.state)" :text="row.state"/>
+                    <Badge :status="getUserState(row.state)" :text="row.state"/>
                 </div>
             </template>
 
@@ -103,8 +104,7 @@
                 <i-button type="primary" size="small" style="margin-right: 5px" @click="value1 = true">View
                 </i-button>
                 <i-button type="error" size="small" @click="remove(index)">Delete</i-button>
-                <Drawer title="Basic Drawer" :closable="false"
-                        v-model="value1">
+                <Drawer title="Basic Drawer" :closable="false" v-model="value1">
                     <p>Some contents...</p>
                 </Drawer>
             </template>
@@ -130,243 +130,293 @@
 </div>
 
 <script>
-    let testData = [
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 1,
-            tel: '19106850000',
-            name: '王小明',
-            age: 18,
-            type: '普通用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 2,
-            tel: '19106850001',
-            name: '张三',
-            age: 19,
-            type: 'VIP用户',
-            state: '正常',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 3,
-            tel: '19106850002',
-            name: '赵四',
-            age: 20,
-            type: '管理员',
-            state: '关闭',
-            create_time: '2021-11-7',
-        },
-        {
-            keyid: 4,
-            tel: '19106850004',
-            name: '王五',
-            age: 21,
-            type: '普通用户',
-            state: '冻结',
-            create_time: '2021-11-7',
-        },
-    ];
-
     var vm = new Vue({
-            el: "#userTableVue",
-            data: function () {
-                return {
-                    buttonSize: 'large',
-                    formInline: {
-                        user: '',
-                        password: ''
-                    },
-                    tableHeight: null,
-                    ajaxHistoryData: [],
-                    dataCount: 3, pageSize: 10,
-                    value1: false, loading: false,
-                    userTableColumns: [
-                        {
-                            type: 'selection',
-                            width: 60,
-                            align: 'center'
-                        }, {
-                            title: '手机号',
-                            key: 'tel',
-                            align: 'center'
-                        }, {
-                            title: '姓名',
-                            slot: 'name',
-                            sortable: true,
-                            align: 'center'
-                        }, {
-                            title: '年龄',
-                            key: 'age',
-                            sortable: true,
-                            align: 'center'
-                        }, {
-                            title: '用户类型',
-                            key: 'type',
-                            align: 'center',
-                            filters: [
-                                {
-                                    label: '普通用户',
-                                    value: '普通用户'
-                                },
-                                {
-                                    label: 'VIP用户',
-                                    value: 'VIP用户'
-                                },
-                                {
-                                    label: '管理员',
-                                    value: '管理员'
-                                }
-                            ],
-                            filterMethod(value, row) {
-                                return row.type.indexOf(value) > -1;
-                            }
-                        }, {
-                            title: '用户状态',
-                            slot: 'state',
-                            align: 'center',
-                            filters: [
-                                {
-                                    label: '正常',
-                                    value: '正常'
-                                },
-                                {
-                                    label: '冻结',
-                                    value: '冻结'
-                                },
-                                {
-                                    label: '关闭',
-                                    value: '关闭'
-                                }
-                            ],
-                            filterMethod(value, row) {
-                                return row.state.indexOf(value) > -1;
-                            }
-                        }, {
-                            title: '创建时间',
-                            key: 'create_time',
-                            sortable: true,
-                            align: 'center'
-                        }, {
-                            title: 'Action',
-                            slot: 'action',
-                            width: 150,
-                            align: 'center'
-                        },
-                    ],
-                    data1: []
-                }
+        el: "#userTableVue",
+        data: {
+            // 源数据
+            sourceData: [
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 1,
+                    tel: '19106850000',
+                    name: '王小明',
+                    age: 18,
+                    type: '普通用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 2,
+                    tel: '19106850001',
+                    name: '张三',
+                    age: 19,
+                    type: 'VIP用户',
+                    state: '正常',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 3,
+                    tel: '19106850002',
+                    name: '赵四',
+                    age: 20,
+                    type: '管理员',
+                    state: '关闭',
+                    create_time: '2021-11-7',
+                },
+                {
+                    keyid: 4,
+                    tel: '19106850004',
+                    name: '王五',
+                    age: 21,
+                    type: '普通用户',
+                    state: '冻结',
+                    create_time: '2021-11-7',
+                },
+            ],
+            // 中间数据
+            tmpData: [],
+            tableData: [],
+            // 关联搜索框[用户名、手机号]
+            tableSearchInfo: {
+                userName: '',
+                userTel: '',
             },
-            computed: {},
-            methods: {
-                getState(state) {
-                    if (state === '正常') return 'success';
-                    else if (state === '冻结') return 'warning';
-                    return 'error';
-                },
-                getAge(birth) {
-                    let birthdays = new Date(birth.replace(/-/g, "/"));
-                    let d = new Date();
-                    let age = d.getFullYear() - birthdays.getFullYear() -
-                        (d.getMonth() < birthdays.getMonth() ||
-                        (d.getMonth() == birthdays.getMonth() &&
-                            d.getDate() < birthdays.getDate()) ? 1 : 0);
-                    return age;
-                },
-                handleListApproveHistory() {
-                    // 保存取到的所有数据
-                    this.ajaxHistoryData = testData;
-                    this.dataCount = testData.length;
-                    // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
-                    if (testData.length < this.pageSize) {
-                        this.data1 = this.ajaxHistoryData;
-                    } else {
-                        this.data1 = this.ajaxHistoryData.slice(0, this.pageSize);
+            buttonSize: 'large',
+            formInline: {
+                user: '',
+                password: ''
+            },
+            ruleInline: {
+                user: [
+                    {required: true, message: 'Please fill in the user name', trigger: 'blur'}
+                ],
+                password: [
+                    {required: true, message: 'Please fill in the password.', trigger: 'blur'},
+                    {
+                        type: 'string',
+                        min: 6,
+                        message: 'The password length cannot be less than 6 bits',
+                        trigger: 'blur'
                     }
-                },
-                selectAll: function (link) {
-                    console.log(link);
-                }, tableClick: function (data, index) {
-                    this.value1 = true;
-                }, remove(index) {
-                    this.data1.splice(index, 1);
-                }, changePage(index) {
-                    let _start = (index - 1) * this.pageSize;
-                    let _end = index * this.pageSize;
-                    this.data1 = this.ajaxHistoryData.slice(_start, _end);
-                    this.tableHeight = this.data1.length * 48 + 42;
-                },
+                ]
             },
-            created() {
-                this.handleListApproveHistory();
-                this.tableHeight = this.data1.length * 48 + 42;
+            tableHeight: null,
+            dataCount: 3, pageSize: 10,
+            value1: false, loading: false,
+            userTableColumns: [
+                {
+                    type: 'selection',
+                    width: 60,
+                    align: 'center'
+                }, {
+                    title: '姓名',
+                    slot: 'name',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    title: '手机号',
+                    key: 'tel',
+                    align: 'center'
+                }, {
+                    title: '年龄',
+                    key: 'age',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    title: '用户类型',
+                    key: 'type',
+                    align: 'center',
+                    filters: [
+                        {
+                            label: '普通用户',
+                            value: '普通用户'
+                        },
+                        {
+                            label: 'VIP用户',
+                            value: 'VIP用户'
+                        },
+                        {
+                            label: '管理员',
+                            value: '管理员'
+                        }
+                    ],
+                    filterMethod(value, row) {
+                        return row.type.indexOf(value) > -1;
+                    }
+                }, {
+                    title: '用户状态',
+                    slot: 'state',
+                    align: 'center',
+                    filters: [
+                        {
+                            label: '正常',
+                            value: '正常'
+                        },
+                        {
+                            label: '冻结',
+                            value: '冻结'
+                        },
+                        {
+                            label: '关闭',
+                            value: '关闭'
+                        }
+                    ],
+                    filterMethod(value, row) {
+                        return row.state.indexOf(value) > -1;
+                    }
+                }, {
+                    title: '创建时间',
+                    key: 'create_time',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    title: 'Action',
+                    slot: 'action',
+                    width: 150,
+                    align: 'center'
+                },
+            ],
+        },
+        computed: {},
+        methods: {
+            tableInit() {
+                this.loading = true;
+                this.dataCount = this.tmpData.length;
+                // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+                if (this.sourceData.length < this.pageSize) {
+                    this.tableData = this.tmpData;
+                } else {
+                    this.tableData = this.tmpData.slice(0, this.pageSize);
+                }
+                this.loading = false;
             },
-        })
-    ;
+            // 表格搜索
+            tableSearch() {
+                let name = this.tableSearchInfo.userName;
+                let tel = this.tableSearchInfo.userTel;
+                let arr = [];
+
+                this.loading = true;
+                this.tmpData = [];
+                this.sourceData.forEach(function (item, index, array) {
+                    let nameFlag = (name == "" || item.name.indexOf(name) != -1);
+                    let telFlag = (tel == "" || item.tel.indexOf(tel) != -1);
+                    if (nameFlag && telFlag) {
+                        arr.push(item);
+                    }
+                });
+                this.tmpData = arr;
+                console.log(arr);
+                console.log(this.tmpData);
+                this.tableInit();
+                this.loading = false;
+            },
+            // 搜索重置
+            tableSearchUnset() {
+                this.tableSearchInfo.userName = this.tableSearchInfo.userTel = '';
+                this.tmpData = this.sourceData;
+                this.tableInit();
+            },
+            getUserState(state) {
+                if (state === '正常') return 'success';
+                else if (state === '冻结') return 'warning';
+                return 'error';
+            },
+            getAge(birth) {
+                let birthdays = new Date(birth.replace(/-/g, "/"));
+                let d = new Date();
+                let age = d.getFullYear() - birthdays.getFullYear() -
+                    (d.getMonth() < birthdays.getMonth() ||
+                    (d.getMonth() == birthdays.getMonth() &&
+                        d.getDate() < birthdays.getDate()) ? 1 : 0);
+                return age;
+            },
+            selectAll: function (link) {
+                console.log(link);
+            },
+            tableClick: function (data, index) {
+                this.value1 = true;
+            },
+            remove(index) {
+                this.tableData.splice(index, 1);
+            },
+            changePage: function (index) {
+                this.currentPage = index;
+                let _start = (index - 1) * this.pageSize;
+                let _end = index * this.pageSize;
+                this.tableData = this.tmpData.slice(_start, _end);
+                this.tableHeight = this.tableData.length * 48 + 42;
+            },
+        },
+        created() {
+            // 保存取到的所有数据
+            this.tmpData = this.sourceData;
+            this.tableInit();
+            this.tableHeight = this.tableData.length * 48 + 42;
+        },
+    });
 </script>
 
 

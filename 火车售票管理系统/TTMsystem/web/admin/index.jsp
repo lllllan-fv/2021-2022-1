@@ -40,7 +40,9 @@
     <!-- iview.min.js -->
     <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
 
+    <!-- -->
     <link rel="stylesheet" href="style/page.css">
+
 
 </head>
 <body>
@@ -63,7 +65,7 @@
 </div>
 
 <script>
-    var vm = new Vue({
+    var adminVue = new Vue({
         el: '#admin'
     });
 </script>
