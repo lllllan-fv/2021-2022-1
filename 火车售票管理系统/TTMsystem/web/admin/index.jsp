@@ -60,8 +60,6 @@
             <iframe name="iframe" width="100%" height="100%" frameborder="0" src="user/"></iframe>
         </div>
     </div>
-
-
 </div>
 
 <script>

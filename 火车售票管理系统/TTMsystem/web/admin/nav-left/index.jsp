@@ -47,7 +47,7 @@
         <div class="nav-list">
             <ul>
                 <li class="nav-tab a_active waves-effect">
-                    <a href="html/home.html" class="li-a active" target="iframe">
+                    <a href="html/1.html" class="li-a active" target="iframe">
                         <i class='bi bi-house'></i>
                         主页
                         <span class="badge badge-pill badge-primary" style="float: right;">
@@ -62,7 +62,7 @@
                         <i class='bi bi-chevron-right' style="float: right;"></i>
                     </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        <a href="html/device/2.html" class="li-a-a" target="iframe">
                             当前能耗
                         </a>
                     </div>
@@ -74,10 +74,10 @@
                         <i class='bi bi-chevron-right' style="float: right;"></i>
                     </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        <a href="html/device/3.html" class="li-a-a" target="iframe">
                             养护计划
                         </a>
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        <a href="html/device/4.html" class="li-a-a" target="iframe">
                             养护计划
                         </a>
                     </div>
@@ -89,7 +89,7 @@
                         <i class='bi bi-chevron-right' style="float: right;"></i>
                     </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        <a href="html/device/5.html" class="li-a-a" target="iframe">
                             巡检计划
                         </a>
                     </div>
@@ -101,7 +101,7 @@
                         <i class='bi bi-chevron-right' style="float: right;"></i>
                     </a>
                     <div class="nav-box">
-                        <a href="html/device/device.html" class="li-a-a" target="iframe">
+                        <a href="html/device/6.html" class="li-a-a" target="iframe">
                             维修计划
                         </a>
                     </div>
@@ -113,36 +113,68 @@
 
 <script type="text/javascript">
     $(function () {
+        // 一二级菜单的序号
+        let nav_ul_index = sessionStorage.getItem("nav_ul_index");
+        let nav_li_index = sessionStorage.getItem("nav_li_index");
+
+        // 如果刷新前有过点击，恢复先前页面
+        if (nav_ul_index != null) {
+            loadLi(nav_ul_index);
+            if (nav_li_index != null) {
+                loadA(nav_ul_index, nav_li_index);
+            }
+        }
+
         // let navflag = false;
         $('.nav-tab').click(function () {
-            $(this).siblings().each(function () {
-                $(this).removeClass('a_active');
-                // $(this).removeClass('a_active');
-                $(this).find('.nav-box').css('height', '0')
-                //关闭右侧箭头
-                if ($(this).attr('class').indexOf('nav-ul') != -1) {
-                    $(this).find('.bi-chevron-right').css('transform', 'rotateZ(0deg)')
-                    $(this).find('.bi-chevron-right').css('transition', 'all .5s')
-                    $(this).removeClass('nav-show')
-                    // $(this).find('div').removeClass('nav-box')
-                }
-            })
-            //当前选中
-            $(this).addClass('a_active')
-            $(this).find('.li-a').addClass('active')
-            // 打开右侧箭头
-            $(this).find('.bi-chevron-right').css('transform', 'rotateZ(90deg)')
-            $(this).find('.bi-chevron-right').css('transition', 'all .5s')
-            $(this).addClass('nav-show')
-            // $(this).find('div').addClass('nav-box')
+            loadLi($(this).index());
+            // 将点击的一级菜单序号记入session
+            sessionStorage.setItem("nav_ul_index", $(this).index());
         })
+
         /* 二级菜单a点击事件 */
         $(".li-a-a").click(function () {
-            $(".li-a-a").each(function () {
-                $(this).removeClass('active-li-a');
-            })
-            $(this).addClass('active-li-a');
+            var index1 = $(this).parent().parent().index();
+            var index2 = $(this).index();
+            loadA(index1, index2);
+            // 将点击的二级菜单序号记入session
+            sessionStorage.setItem("nav_li_index", index2);
         })
+
+        // 根据点击事件，为所有一级标题更新状态
+        function loadLi(index) {
+            $.each($(".nav-tab"), function (i, item) {
+                if (i == index) {
+                    //当前选中
+                    $(item).addClass('a_active')
+                    $(item).find('.li-a').addClass('active')
+                    // 打开右侧箭头
+                    $(item).find('.bi-chevron-right').css('transform', 'rotateZ(90deg)')
+                    $(item).find('.bi-chevron-right').css('transition', 'all .5s')
+                    $(item).addClass('nav-show')
+                    $(item).find('div').addClass('nav-box')
+                } else {
+                    $(item).removeClass('a_active');
+                    $(item).find('.nav-box').css('height', '0')
+                    //关闭右侧箭头
+                    if ($(item).attr('class').indexOf('nav-ul') != -1) {
+                        $(item).find('.bi-chevron-right').css('transform', 'rotateZ(0deg)')
+                        $(item).find('.bi-chevron-right').css('transition', 'all .5s')
+                        $(item).removeClass('nav-show')
+                    }
+                }
+            })
+        }
+
+        // 更新 iframe 内容
+        function loadA(index1, index2) {
+            $('.li-a-a').removeClass('active-li-a');
+            $('.nav-tab').eq(index1).find('div a').eq(index2).addClass('active-li-a');
+
+            var target = $('.nav-tab').eq(index1).find('div a').eq(index2).attr('href');
+            $('iframe').attr('src', target);
+        }
+
     })
 
     var vm = new Vue({
