@@ -32,6 +32,11 @@
     <!-- 2.6.9 vue.min.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
 
+    <!-- iview.css -->
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <!-- iview.min.js -->
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+
 </head>
 <body>
 

@@ -40,6 +40,11 @@
     <!-- iview.min.js -->
     <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
 
+    <style>
+        .ivu-drawer-mask {
+            background-color: rgba(55, 55, 55, 0.1);
+        }
+    </style>
 </head>
 <body>
 
@@ -98,7 +103,8 @@
                 <i-button type="primary" size="small" style="margin-right: 5px" @click="value1 = true">View
                 </i-button>
                 <i-button type="error" size="small" @click="remove(index)">Delete</i-button>
-                <Drawer title="Basic Drawer" :closable="false" v-model="value1">
+                <Drawer title="Basic Drawer" :closable="false"
+                        v-model="value1">
                     <p>Some contents...</p>
                 </Drawer>
             </template>
