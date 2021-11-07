@@ -261,8 +261,24 @@
                         }, {
                             title: '用户类型',
                             key: 'type',
-                            sortable: true,
-                            align: 'center'
+                            align: 'center',
+                            filters: [
+                                {
+                                    label: '普通用户',
+                                    value: '普通用户'
+                                },
+                                {
+                                    label: 'VIP用户',
+                                    value: 'VIP用户'
+                                },
+                                {
+                                    label: '管理员',
+                                    value: '管理员'
+                                }
+                            ],
+                            filterMethod(value, row) {
+                                return row.type.indexOf(value) > -1;
+                            }
                         }, {
                             title: '用户状态',
                             slot: 'state',
@@ -274,7 +290,7 @@
                                 },
                                 {
                                     label: '冻结',
-                                    value: '冻结 '
+                                    value: '冻结'
                                 },
                                 {
                                     label: '关闭',
