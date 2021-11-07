@@ -266,8 +266,24 @@
                         }, {
                             title: '用户状态',
                             slot: 'state',
-                            sortable: true,
-                            align: 'center'
+                            align: 'center',
+                            filters: [
+                                {
+                                    label: '正常',
+                                    value: '正常'
+                                },
+                                {
+                                    label: '冻结',
+                                    value: '冻结 '
+                                },
+                                {
+                                    label: '关闭',
+                                    value: '关闭'
+                                }
+                            ],
+                            filterMethod(value, row) {
+                                return row.state.indexOf(value) > -1;
+                            }
                         }, {
                             title: '创建时间',
                             key: 'create_time',
