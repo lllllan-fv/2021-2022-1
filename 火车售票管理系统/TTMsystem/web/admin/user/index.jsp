@@ -43,9 +43,9 @@
 </head>
 <body>
 
-<div id="userTableVue">
+<div id="userTableVue" style="background-color: #eee; height: 100%">
 
-    <Card>
+    <Card :bordered="false">
         <div>
             <h1>user admin</h1>
             <br>
@@ -53,8 +53,24 @@
         </div>
     </Card>
 
-    <Card style="padding-bottom: 30px">
+    <Card style="margin: 20px; border-radius: 10px">
+        <form class="form-inline" onsubmit="return false">
+            <div class="form-group" style="margin-left: 20px">
+                <label for="exampleInputName2">Name</label>
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+            </div>
+            <div class="form-group" style="margin-left: 20px">
+                <label for="exampleInputEmail2">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+            </div>
+            <button type="submit" class="btn btn-default" style="float: right">Send invitation</button>
+        </form>
 
+        <br>
+        <i-button :size="buttonSize" type="primary">
+            <Icon type="ios-arrow-back"/>
+            Backward
+        </i-button>
         <%--  stripe 斑马纹  --%>
         <%--  highlight-row，可以选中某一行 --%>
         <%--  type: 'selection'，即可自动开启多选功能 --%>
@@ -75,8 +91,6 @@
             <template slot-scope="{ row }" slot="state">
                 <div>
                     <Badge :status="getState(row.state)" :text="row.state"/>
-
-                    <%--  <strong>{{ row.state }}</strong>--%>
                 </div>
             </template>
 
@@ -91,10 +105,16 @@
 
         </i-table>
 
-        <Page simple :total="dataCount" :page-size="pageSize" show-total
-              @on-change="changepage"
-              style="float: right; margin-top: 10px">
-        </Page>
+        <div style="margin: 10px;overflow: hidden">
+            <div style="float: right;">
+                <Page simple :total="dataCount" :page-size="pageSize" @on-change="changePage"></Page>
+            </div>
+        </div>
+
+        <%--        <Page simple :total="dataCount" :page-size="pageSize" show-total--%>
+        <%--              @on-change="changepage"--%>
+        <%--              style="float: right; margin-top: 10px">--%>
+        <%--        </Page>--%>
 
         <%--        Change Loading Status--%>
         <%--        <i-switch v-model="loading" style="margin-top: 10px"></i-switch>--%>
@@ -210,6 +230,11 @@
             el: "#userTableVue",
             data: function () {
                 return {
+                    buttonSize: 'large',
+                    formInline: {
+                        user: '',
+                        password: ''
+                    },
                     tableHeight: null,
                     ajaxHistoryData: [],
                     dataCount: 3, pageSize: 10,
@@ -276,7 +301,7 @@
                 },
                 handleListApproveHistory() {
                     // 保存取到的所有数据
-                    this.ajaxHistoryData = testData
+                    this.ajaxHistoryData = testData;
                     this.dataCount = testData.length;
                     // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
                     if (testData.length < this.pageSize) {
@@ -291,15 +316,16 @@
                     this.value1 = true;
                 }, remove(index) {
                     this.data1.splice(index, 1);
-                }, changepage(index) {
-                    var _start = (index - 1) * this.pageSize;
-                    var _end = index * this.pageSize;
+                }, changePage(index) {
+                    let _start = (index - 1) * this.pageSize;
+                    let _end = index * this.pageSize;
                     this.data1 = this.ajaxHistoryData.slice(_start, _end);
+                    this.tableHeight = this.data1.length * 48 + 42;
                 },
             },
             created() {
                 this.handleListApproveHistory();
-                this.tableHeight = (this.pageSize + 1) * 48 - 6;
+                this.tableHeight = this.data1.length * 48 + 42;
             },
         })
     ;
