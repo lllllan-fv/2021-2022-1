@@ -73,6 +73,9 @@
             <i-button :size="buttonSize" type="primary" @click="value1 = true">
                 添加用户
             </i-button>
+            <div style="float: right">
+                <%--                <i-button :size="buttonSize" icon="md-refresh" type="default" shape="circle"></i-button>--%>
+            </div>
         </div>
 
         <%--  stripe 斑马纹  --%>
@@ -82,7 +85,7 @@
         <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
 
         <i-table stripe :loading="loading" :columns="userTableColumns" :data="tableData"
-                 @on-row-click="tableClick"
+                 @on-row-click="tableRowClick"
                  @on-select-all="selectAll" :height="tableHeight" ref="table"
                  style="margin-top: 20px">
 
@@ -103,7 +106,8 @@
             <template slot-scope="{ row, index }" slot="action">
                 <i-button type="primary" size="small" style="margin-right: 5px" @click="value1 = true">View
                 </i-button>
-                <i-button type="error" size="small" @click="remove(index)">Delete</i-button>
+                <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
+                <i-button type="error" size="small" @click.native.stop="removeRow(index)">Delete</i-button>
                 <Drawer title="Basic Drawer" :closable="false" v-model="value1">
                     <p>Some contents...</p>
                 </Drawer>
@@ -341,18 +345,23 @@
         },
         computed: {},
         methods: {
+            setTableHeight() {
+                this.tableHeight = this.tableData.length * 48 + 42;
+            },
+            // 根据数据显示表格
             tableInit() {
                 this.loading = true;
                 this.dataCount = this.tmpData.length;
                 // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
-                if (this.sourceData.length < this.pageSize) {
+                if (this.tmpData.length < this.pageSize) {
                     this.tableData = this.tmpData;
                 } else {
                     this.tableData = this.tmpData.slice(0, this.pageSize);
                 }
+                this.setTableHeight();
                 this.loading = false;
             },
-            // 表格搜索
+            // 表格内容搜索
             tableSearch() {
                 let name = this.tableSearchInfo.userName;
                 let tel = this.tableSearchInfo.userTel;
@@ -379,42 +388,46 @@
                 this.tmpData = this.sourceData;
                 this.tableInit();
             },
+            // 根据用户状态返回 Badge 类型
             getUserState(state) {
                 if (state === '正常') return 'success';
                 else if (state === '冻结') return 'warning';
                 return 'error';
             },
-            getAge(birth) {
-                let birthdays = new Date(birth.replace(/-/g, "/"));
-                let d = new Date();
-                let age = d.getFullYear() - birthdays.getFullYear() -
-                    (d.getMonth() < birthdays.getMonth() ||
-                    (d.getMonth() == birthdays.getMonth() &&
-                        d.getDate() < birthdays.getDate()) ? 1 : 0);
-                return age;
-            },
+            // 表格全选
             selectAll: function (link) {
                 console.log(link);
             },
-            tableClick: function (data, index) {
+            // 表格当前行点击
+            tableRowClick: function (data, index) {
                 this.value1 = true;
             },
-            remove(index) {
-                this.tableData.splice(index, 1);
+            // 表格删除其中一行
+            removeRow(index) {
+                let removeItem = this.tableData[index];
+                // this.tableData.splice(index, 1);
+                let removeIndex = -1;
+                this.tmpData.forEach(function (item, idx, array) {
+                    if (item == removeItem) {
+                        removeIndex = idx;
+                    }
+                });
+                if (removeIndex != -1) this.tmpData.splice(removeIndex, 1);
+                this.tableInit();
             },
+            // 页面变换
             changePage: function (index) {
                 this.currentPage = index;
                 let _start = (index - 1) * this.pageSize;
                 let _end = index * this.pageSize;
                 this.tableData = this.tmpData.slice(_start, _end);
-                this.tableHeight = this.tableData.length * 48 + 42;
+                this.setTableHeight();
             },
         },
         created() {
-            // 保存取到的所有数据
+            // 初始化表格
             this.tmpData = this.sourceData;
             this.tableInit();
-            this.tableHeight = this.tableData.length * 48 + 42;
         },
     });
 </script>
