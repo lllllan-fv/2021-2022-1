@@ -357,7 +357,11 @@
         methods: {
             // 根据显示数据行数修改表格高度
             setTableHeight() {
-                this.tableHeight = this.tableData.length * 48 + 42;
+                if (this.tableData.length == 0) {
+                    this.tableHeight = 90;
+                } else {
+                    this.tableHeight = this.tableData.length * 48 + 42;
+                }
             },
             // 根据数据显示表格
             tableInit() {
