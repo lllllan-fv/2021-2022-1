@@ -70,11 +70,12 @@
                 <i-button type="default" icon="md-refresh" @click="tableSearchUnset">重置</i-button>
             </div>
             <br> <br>
-            <i-button :size="buttonSize" type="primary" @click="value1 = true">
+            <i-button :size="buttonSize" type="primary" @click="addUser">
                 添加用户
             </i-button>
             <div style="float: right">
-                <%--                <i-button :size="buttonSize" icon="md-refresh" type="default" shape="circle"></i-button>--%>
+                <%--                <i-button :size="buttonSize" icon="md-refresh" type="default" shape="circle"--%>
+                <%--                          @clicl="tableRefresh"></i-button>--%>
             </div>
         </div>
 
@@ -85,7 +86,7 @@
         <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
 
         <i-table stripe :loading="loading" :columns="userTableColumns" :data="tableData"
-                 @on-row-click="tableRowClick"
+                 @on-row-click="tableRowShow"
                  @on-select-all="selectAll" :height="tableHeight" ref="table"
                  style="margin-top: 20px">
 
@@ -104,12 +105,15 @@
             </template>
 
             <template slot-scope="{ row, index }" slot="action">
-                <i-button type="primary" size="small" style="margin-right: 5px" @click="value1 = true">View
+                <i-button type="primary" size="small" style="margin-right: 5px" @click="tableRowEdit">编辑
                 </i-button>
                 <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
-                <i-button type="error" size="small" @click.native.stop="removeRow(index)">Delete</i-button>
-                <Drawer title="Basic Drawer" :closable="false" v-model="value1">
+                <i-button type="error" size="small" @click.native.stop="removeRow(index)">删除</i-button>
+                <Drawer title="Basic Drawer" :closable="false" :mask-closable="maskCloseable" v-model="drawerVisible">
                     <p>Some contents...</p>
+                    <input :disabled="!drawerEditable">
+                    <br>
+                    <i-button type="primary" @click="drawerClose">close</i-button>
                 </Drawer>
             </template>
 
@@ -241,7 +245,9 @@
             ],
             // 中间数据
             tmpData: [],
+            // 表格显示数据
             tableData: [],
+            currentRowData: {},
             // 关联搜索框[用户名、手机号]
             tableSearchInfo: {
                 userName: '',
@@ -267,8 +273,12 @@
                 ]
             },
             tableHeight: null,
-            dataCount: 3, pageSize: 10,
-            value1: false, loading: false,
+            dataCount: 3,
+            pageSize: 10,
+            drawerVisible: false,
+            drawerEditable: false,
+            loading: false,
+            maskCloseable: true,
             userTableColumns: [
                 {
                     type: 'selection',
@@ -345,6 +355,7 @@
         },
         computed: {},
         methods: {
+            // 根据显示数据行数修改表格高度
             setTableHeight() {
                 this.tableHeight = this.tableData.length * 48 + 42;
             },
@@ -394,18 +405,18 @@
                 else if (state === '冻结') return 'warning';
                 return 'error';
             },
+            // 表格刷新
+            tableRefresh() {
+            },
             // 表格全选
             selectAll: function (link) {
                 console.log(link);
             },
-            // 表格当前行点击
-            tableRowClick: function (data, index) {
-                this.value1 = true;
-            },
             // 表格删除其中一行
             removeRow(index) {
                 let removeItem = this.tableData[index];
-                // this.tableData.splice(index, 1);
+
+                // 从中间数据中删除该数据
                 let removeIndex = -1;
                 this.tmpData.forEach(function (item, idx, array) {
                     if (item == removeItem) {
@@ -413,6 +424,16 @@
                     }
                 });
                 if (removeIndex != -1) this.tmpData.splice(removeIndex, 1);
+
+                // 从源数据中删除该行
+                removeIndex = -1;
+                this.sourceData.forEach(function (item, idx, array) {
+                    if (item == removeItem) {
+                        removeIndex = idx;
+                    }
+                });
+                if (removeIndex != -1) this.sourceData.splice(removeIndex, 1);
+
                 this.tableInit();
             },
             // 页面变换
@@ -422,6 +443,30 @@
                 let _end = index * this.pageSize;
                 this.tableData = this.tmpData.slice(_start, _end);
                 this.setTableHeight();
+            },
+            // 表格当前行点击
+            tableRowShow: function (data, index) {
+                console.log('show');
+                this.drawerVisible = true;
+            },
+            // 编辑按钮点击事件
+            tableRowEdit() {
+                console.log('edit');
+                this.drawerEditable = true;
+                this.drawerEditable = true;
+                this.maskCloseable = false;
+            },
+            // 添加用户点击事件
+            addUser() {
+                this.drawerVisible = true;
+                this.drawerEditable = true;
+                this.maskCloseable = false;
+            },
+            // 抽屉中关闭按钮点击事件
+            drawerClose() {
+                this.maskCloseable = true;
+                this.drawerVisible = false;
+                this.drawerEditable = false;
             },
         },
         created() {
