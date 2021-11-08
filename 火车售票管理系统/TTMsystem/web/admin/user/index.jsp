@@ -69,13 +69,12 @@
                 <i-button type="primary" icon="ios-search" @click="tableSearch">查询</i-button>
                 <i-button type="default" icon="md-refresh" @click="tableSearchUnset">重置</i-button>
             </div>
+            <br> <br>
+            <i-button :size="buttonSize" type="primary" @click="value1 = true">
+                添加用户
+            </i-button>
         </div>
 
-        <br> <br>
-        <i-button :size="buttonSize" type="primary" @click="value1 = true">
-            添加用户
-        </i-button>
-        <i-button shape="circle" icon="ios-refresh"></i-button>
         <%--  stripe 斑马纹  --%>
         <%--  highlight-row，可以选中某一行 --%>
         <%--  type: 'selection'，即可自动开启多选功能 --%>
@@ -85,12 +84,13 @@
         <i-table stripe :loading="loading" :columns="userTableColumns" :data="tableData"
                  @on-row-click="tableClick"
                  @on-select-all="selectAll" :height="tableHeight" ref="table"
-                 style="margin-top: 10px">
+                 style="margin-top: 20px">
 
-            <template slot-scope="{ row }" slot="name">
+            <template slot-scope="{ row }" slot="type">
                 <div>
-                    <Icon type="md-person"></Icon>
-                    <strong>{{ row.name }}</strong>
+                    <Icon v-if="row.type == '管理员'" type="md-contact"></Icon>
+                    <span v-if="row.type == '普通用户'">{{ row.type }}</span>
+                    <strong v-else>{{ row.type}}</strong>
                 </div>
             </template>
 
@@ -272,7 +272,7 @@
                     align: 'center'
                 }, {
                     title: '姓名',
-                    slot: 'name',
+                    key: 'name',
                     sortable: true,
                     align: 'center'
                 }, {
@@ -286,7 +286,7 @@
                     align: 'center'
                 }, {
                     title: '用户类型',
-                    key: 'type',
+                    slot: 'type',
                     align: 'center',
                     filters: [
                         {
