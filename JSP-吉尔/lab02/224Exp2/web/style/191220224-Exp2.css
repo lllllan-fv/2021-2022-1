@@ -10,7 +10,7 @@ body {
 #header {
     height: 28px;
     width: 800px;
-    background-image: url(191220xxx-bg.jpg);
+    background-image: url(../img/191220224-bg.jpg);
     background-repeat: repeat; /*不需要重复时用no-repeat*/
     margin: 0px 0px 3px 0px;
 }

@@ -18,9 +18,9 @@
 <div id="navigator">
     <ul id="navigator">
         <li><a href="#">首页</a></li>
-        <li><a href="../实验1/191220xxx-Exp1.html">实验一</a></li>
-        <li><a href="http://localhost:8080/xxxExp2/191220xxx-Exp2.jsp">实验二</a></li>
-        <li><a href="http://localhost:8080/xxxExp3/191220xxx-Exp3.jsp">实验三</a></li>
+        <li><a href="#">实验一</a></li>
+        <li><a href="#">实验二</a></li>
+        <li><a href="#">实验三</a></li>
         <li><a href="#">论坛</a></li>
         <li><a href="#">帮助</a></li>
     </ul>

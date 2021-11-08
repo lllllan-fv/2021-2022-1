@@ -65,11 +65,11 @@
         </form>
 
         <h3>模拟购物车</h3>
-        <form action="" method="post">
+        <form action="view/191220224-shop.jsp" method="post">
             <table id="formlayout">
                 <tr>
                     <td style="text-align:right;">会员卡号：</td>
-                    <td><input type="text" name="cardno" value="12345678"></td>
+                    <td><input type="text" name="cardno" value="2019220224"></td>
                 </tr>
                 <tr>
                     <td></td>
