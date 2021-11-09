@@ -109,11 +109,11 @@
                 </i-button>
                 <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
                 <i-button type="error" size="small" @click.native.stop="removeRow(index)">删除</i-button>
-                <Drawer title="Basic Drawer" :closable="false" :mask-closable="maskCloseable" v-model="drawerVisible">
-                    <p>Some contents...</p>
-                    <input :disabled="!drawerEditable">
-                    <br>
-                    <i-button type="primary" @click="drawerClose">close</i-button>
+                <Drawer title="用户信息" :width="35" :closable="false" :mask-closable="userInfoDrawer.maskCloseable"
+                        v-model="userInfoDrawer.drawerVisible">
+
+                    <jsp:include page="user_info_drawer.jsp"></jsp:include>
+
                 </Drawer>
             </template>
 
@@ -144,7 +144,7 @@
             // 源数据
             sourceData: [
                 {
-                    keyid: 1,
+                    id: 1,
                     tel: '19106850000',
                     name: '王小明',
                     age: 18,
@@ -153,7 +153,7 @@
                     create_time: '2021-11-7',
                 },
                 {
-                    keyid: 1,
+                    id: 1,
                     tel: '19106850000',
                     name: '王小明',
                     age: 18,
@@ -162,61 +162,7 @@
                     create_time: '2021-11-7',
                 },
                 {
-                    keyid: 1,
-                    tel: '19106850000',
-                    name: '王小明',
-                    age: 18,
-                    type: '普通用户',
-                    state: '正常',
-                    create_time: '2021-11-7',
-                },
-                {
-                    keyid: 1,
-                    tel: '19106850000',
-                    name: '王小明',
-                    age: 18,
-                    type: '普通用户',
-                    state: '正常',
-                    create_time: '2021-11-7',
-                },
-                {
-                    keyid: 1,
-                    tel: '19106850000',
-                    name: '王小明',
-                    age: 18,
-                    type: '普通用户',
-                    state: '正常',
-                    create_time: '2021-11-7',
-                },
-                {
-                    keyid: 1,
-                    tel: '19106850000',
-                    name: '王小明',
-                    age: 18,
-                    type: '普通用户',
-                    state: '正常',
-                    create_time: '2021-11-7',
-                },
-                {
-                    keyid: 1,
-                    tel: '19106850000',
-                    name: '王小明',
-                    age: 18,
-                    type: '普通用户',
-                    state: '正常',
-                    create_time: '2021-11-7',
-                },
-                {
-                    keyid: 1,
-                    tel: '19106850000',
-                    name: '王小明',
-                    age: 18,
-                    type: '普通用户',
-                    state: '正常',
-                    create_time: '2021-11-7',
-                },
-                {
-                    keyid: 2,
+                    id: 2,
                     tel: '19106850001',
                     name: '张三',
                     age: 19,
@@ -225,21 +171,21 @@
                     create_time: '2021-11-7',
                 },
                 {
-                    keyid: 3,
+                    id: 3,
                     tel: '19106850002',
                     name: '赵四',
                     age: 20,
                     type: '管理员',
-                    state: '关闭',
+                    state: '冻结',
                     create_time: '2021-11-7',
                 },
                 {
-                    keyid: 4,
+                    id: 4,
                     tel: '19106850004',
                     name: '王五',
                     age: 21,
                     type: '普通用户',
-                    state: '冻结',
+                    state: '注销',
                     create_time: '2021-11-7',
                 },
             ],
@@ -247,7 +193,17 @@
             tmpData: [],
             // 表格显示数据
             tableData: [],
+            // 当前行数据
             currentRowData: {},
+            // 空数据
+            emptyData: {
+                id: '',
+                tel: '',
+                name: '',
+                type: '',
+                state: '',
+                create_time: '',
+            },
             // 关联搜索框[用户名、手机号]
             tableSearchInfo: {
                 userName: '',
@@ -258,27 +214,19 @@
                 user: '',
                 password: ''
             },
-            ruleInline: {
-                user: [
-                    {required: true, message: 'Please fill in the user name', trigger: 'blur'}
-                ],
-                password: [
-                    {required: true, message: 'Please fill in the password.', trigger: 'blur'},
-                    {
-                        type: 'string',
-                        min: 6,
-                        message: 'The password length cannot be less than 6 bits',
-                        trigger: 'blur'
-                    }
-                ]
-            },
             tableHeight: null,
             dataCount: 3,
             pageSize: 10,
-            drawerVisible: false,
-            drawerEditable: false,
+            userInfoDrawer: {
+                maskCloseable: true,
+                drawerVisible: false,
+                drawerEditable: false,
+            },
+            addUserDrawer: {
+                maskCloseable: false,
+                drawerVisible: false,
+            },
             loading: false,
-            maskCloseable: true,
             userTableColumns: [
                 {
                     type: 'selection',
@@ -294,11 +242,6 @@
                     key: 'tel',
                     align: 'center'
                 }, {
-                    title: '年龄',
-                    key: 'age',
-                    sortable: true,
-                    align: 'center'
-                }, {
                     title: '用户类型',
                     slot: 'type',
                     align: 'center',
@@ -306,12 +249,10 @@
                         {
                             label: '普通用户',
                             value: '普通用户'
-                        },
-                        {
+                        }, {
                             label: 'VIP用户',
                             value: 'VIP用户'
-                        },
-                        {
+                        }, {
                             label: '管理员',
                             value: '管理员'
                         }
@@ -327,14 +268,12 @@
                         {
                             label: '正常',
                             value: '正常'
-                        },
-                        {
+                        }, {
                             label: '冻结',
                             value: '冻结'
-                        },
-                        {
-                            label: '关闭',
-                            value: '关闭'
+                        }, {
+                            label: '注销',
+                            value: '注销'
                         }
                     ],
                     filterMethod(value, row) {
@@ -450,27 +389,26 @@
             },
             // 表格当前行点击
             tableRowShow: function (data, index) {
-                console.log('show');
-                this.drawerVisible = true;
+                console.log("row");
+                this.currentRowData = this.tableData[index];
+                this.userInfoDrawer.drawerVisible = true;
+                console.log(this.currentRowData);
             },
             // 编辑按钮点击事件
             tableRowEdit() {
-                console.log('edit');
-                this.drawerEditable = true;
-                this.drawerEditable = true;
-                this.maskCloseable = false;
+                console.log("btn");
+                this.userInfoDrawer.maskCloseable = false;
+                this.userInfoDrawer.drawerVisible = true;
+                this.userInfoDrawer.drawerEditable = true;
             },
             // 添加用户点击事件
             addUser() {
-                this.drawerVisible = true;
-                this.drawerEditable = true;
-                this.maskCloseable = false;
             },
             // 抽屉中关闭按钮点击事件
             drawerClose() {
-                this.maskCloseable = true;
-                this.drawerVisible = false;
-                this.drawerEditable = false;
+                this.userInfoDrawer.maskCloseable = true;
+                this.userInfoDrawer.drawerVisible = false;
+                this.userInfoDrawer.drawerEditable = false;
             },
         },
         created() {
