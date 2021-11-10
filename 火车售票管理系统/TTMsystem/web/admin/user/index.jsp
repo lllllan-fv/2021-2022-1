@@ -50,90 +50,19 @@
 
 <div id="userTableVue">
 
-    <Card style="background-color: #eee">
-        <div>
-            <h1>用户管理界面?</h1>
-            <br>
-            <p>这里是用户管理界面</p>
-        </div>
-    </Card>
+    <%--  页面标题  --%>
+    <jsp:include page="user_title.jsp"></jsp:include>
 
-    <Card style="margin: 20px; border-radius: 10px">
+    <%--  显示数据的表格  --%>
+    <jsp:include page="user_table.jsp"></jsp:include>
 
-        <div style="margin-left: 20px; ">
-            <lable>用户名：&emsp;</lable>
-            <i-input style="width: 300px" v-model="tableSearchInfo.userName"></i-input>
-            <lable style="margin-left: 30px">手机号：&emsp;</lable>
-            <i-input style="width: 300px" v-model="tableSearchInfo.userTel"></i-input>
-            <div style="float: right">
-                <i-button type="primary" icon="ios-search" @click="tableSearch">查询</i-button>
-                <i-button type="default" icon="md-refresh" @click="tableSearchUnset">重置</i-button>
-            </div>
-            <br> <br>
-            <i-button :size="buttonSize" type="primary" @click="addUser">
-                添加用户
-            </i-button>
-            <div style="float: right">
-                <%--                <i-button :size="buttonSize" icon="md-refresh" type="default" shape="circle"--%>
-                <%--                          @clicl="tableRefresh"></i-button>--%>
-            </div>
-        </div>
+    <jsp:include page="user_info_drawer.jsp"></jsp:include>
 
-        <%--  stripe 斑马纹  --%>
-        <%--  highlight-row，可以选中某一行 --%>
-        <%--  type: 'selection'，即可自动开启多选功能 --%>
-        <%--  sortable: true，即可对该列数据进行排序 --%>
-        <%--  设置 filters，可进行筛选，filters 接收一个数组 --%>
-
-        <i-table stripe :loading="loading" :columns="userTableColumns" :data="tableData"
-                 @on-row-click="tableRowShow"
-                 @on-select-all="selectAll" :height="tableHeight" ref="table"
-                 style="margin-top: 20px">
-
-            <template slot-scope="{ row }" slot="type">
-                <div>
-                    <Icon v-if="row.type == '管理员'" type="md-contact"></Icon>
-                    <span v-if="row.type == '普通用户'">{{ row.type }}</span>
-                    <strong v-else>{{ row.type}}</strong>
-                </div>
-            </template>
-
-            <template slot-scope="{ row }" slot="state">
-                <div>
-                    <Badge :status="getUserState(row.state)" :text="row.state"/>
-                </div>
-            </template>
-
-            <template slot-scope="{ row, index }" slot="action">
-                <i-button type="primary" size="small" style="margin-right: 5px" @click="tableRowEdit">编辑
-                </i-button>
-                <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
-                <i-button type="error" size="small" @click.native.stop="removeRow(index)">删除</i-button>
-            </template>
-
-        </i-table>
-
-        <Drawer title="添加用户" :width="35" :closable="false" :mask-closable="userInfoDrawer.maskCloseable"
-                v-model="userInfoDrawer.drawerVisible">
-            <jsp:include page="user_info_drawer.jsp"></jsp:include>
-        </Drawer>
-
-        <Drawer title="用户信息" :width="35" :closable="false" :mask-closable="addUserDrawer.maskCloseable"
-                v-model="addUserDrawer.drawerVisible">
-            <jsp:include page="add_user_drawer.jsp"></jsp:include>
-        </Drawer>
-
-        <div style="margin: 10px;overflow: hidden">
-            <div style="float: right;">
-                <Page simple :total="dataCount" :page-size="pageSize" @on-change="changePage"></Page>
-            </div>
-        </div>
-
-    </Card>
-
+    <jsp:include page="user_add_drawer.jsp"></jsp:include>
 
 </div>
 
+<%-- vue --%>
 <script>
     var vm = new Vue({
         el: "#userTableVue",
@@ -219,10 +148,13 @@
                 drawerVisible: false,
                 drawerEditable: false,
                 stateSelect: '',
+                typeSelect: '',
             },
             addUserDrawer: {
                 maskCloseable: false,
                 drawerVisible: false,
+                typeSelect: '普通用户',
+                stateSelect: '正常',
             },
             loading: false,
             userTableColumns: [
@@ -391,6 +323,7 @@
                 // 加载抽屉中的用户信息
                 loadInfo(this.currentRowData);
                 this.userInfoDrawer.stateSelect = this.currentRowData.state;
+                this.userInfoDrawer.typeSelect = this.currentRowData.type;
             },
             // 编辑按钮点击事件
             tableRowEdit() {
@@ -413,6 +346,9 @@
             // 添加用户点击事件
             addUser() {
                 this.addUserDrawer.drawerVisible = true;
+                this.addUserDrawer.stateSelect = '正常';
+                this.addUserDrawer.typeSelect = '普通用户';
+                loadInfo(null);
             },
             addUserSubmit() {
                 this.drawerClose();
@@ -427,6 +363,16 @@
     });
 </script>
 
+<script>
+    // 根据当前点击的行，加载抽屉中的用户信息
+    function loadInfo(user) {
+        $("input[name='user_name']").val(user == null ? "" : user.name);
+        $("input[name='user_tel']").val(user == null ? "" : user.tel);
+        $("input[name='user_type']").val(user == null ? "" : user.type);
+        $("input[name='user_email']").val(user == null ? "" : "12580@qq.com");
+        $("textarea").val(user == null ? "" : "这个人很懒，什么都没留下。");
+    }
+</script>
 
 </body>
 </html>
