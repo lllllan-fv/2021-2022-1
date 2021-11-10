@@ -113,9 +113,14 @@
 
         </i-table>
 
-        <Drawer title="用户信息" :width="35" :closable="false" :mask-closable="userInfoDrawer.maskCloseable"
+        <Drawer title="添加用户" :width="35" :closable="false" :mask-closable="userInfoDrawer.maskCloseable"
                 v-model="userInfoDrawer.drawerVisible">
             <jsp:include page="user_info_drawer.jsp"></jsp:include>
+        </Drawer>
+
+        <Drawer title="用户信息" :width="35" :closable="false" :mask-closable="addUserDrawer.maskCloseable"
+                v-model="addUserDrawer.drawerVisible">
+            <jsp:include page="add_user_drawer.jsp"></jsp:include>
         </Drawer>
 
         <div style="margin: 10px;overflow: hidden">
@@ -124,13 +129,6 @@
             </div>
         </div>
 
-        <%--        <Page simple :total="dataCount" :page-size="pageSize" show-total--%>
-        <%--              @on-change="changepage"--%>
-        <%--              style="float: right; margin-top: 10px">--%>
-        <%--        </Page>--%>
-
-        <%--        Change Loading Status--%>
-        <%--        <i-switch v-model="loading" style="margin-top: 10px"></i-switch>--%>
     </Card>
 
 
@@ -216,11 +214,11 @@
             tableHeight: null,
             dataCount: 3,
             pageSize: 10,
-            userInfoSelect: '',
             userInfoDrawer: {
                 maskCloseable: true,
                 drawerVisible: false,
                 drawerEditable: false,
+                stateSelect: '',
             },
             addUserDrawer: {
                 maskCloseable: false,
@@ -390,7 +388,9 @@
                 console.log("row");
                 this.currentRowData = this.tableData[index];
                 this.userInfoDrawer.drawerVisible = true;
+                // 加载抽屉中的用户信息
                 loadInfo(this.currentRowData);
+                this.userInfoDrawer.stateSelect = this.currentRowData.state;
             },
             // 编辑按钮点击事件
             tableRowEdit() {
@@ -399,15 +399,25 @@
                 this.userInfoDrawer.drawerVisible = true;
                 this.userInfoDrawer.drawerEditable = true;
             },
-            // 添加用户点击事件
-            addUser() {
-            },
             // 抽屉中关闭按钮点击事件
             drawerClose() {
                 this.userInfoDrawer.maskCloseable = true;
                 this.userInfoDrawer.drawerVisible = false;
                 this.userInfoDrawer.drawerEditable = false;
+                this.addUserDrawer.drawerVisible = false;
             },
+            // 编辑用户信息的提交按钮点击
+            editUserInfoSubmit() {
+                this.drawerClose();
+            },
+            // 添加用户点击事件
+            addUser() {
+                this.addUserDrawer.drawerVisible = true;
+            },
+            addUserSubmit() {
+                this.drawerClose();
+            },
+
         },
         created() {
             // 初始化表格
