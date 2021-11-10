@@ -52,7 +52,7 @@
 
     <Card style="background-color: #eee">
         <div>
-            <h1>用户管理界面</h1>
+            <h1>用户管理界面?</h1>
             <br>
             <p>这里是用户管理界面</p>
         </div>
@@ -109,15 +109,14 @@
                 </i-button>
                 <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
                 <i-button type="error" size="small" @click.native.stop="removeRow(index)">删除</i-button>
-                <Drawer title="用户信息" :width="35" :closable="false" :mask-closable="userInfoDrawer.maskCloseable"
-                        v-model="userInfoDrawer.drawerVisible">
-
-                    <jsp:include page="user_info_drawer.jsp"></jsp:include>
-
-                </Drawer>
             </template>
 
         </i-table>
+
+        <Drawer title="用户信息" :width="35" :closable="false" :mask-closable="userInfoDrawer.maskCloseable"
+                v-model="userInfoDrawer.drawerVisible">
+            <jsp:include page="user_info_drawer.jsp"></jsp:include>
+        </Drawer>
 
         <div style="margin: 10px;overflow: hidden">
             <div style="float: right;">
@@ -217,6 +216,7 @@
             tableHeight: null,
             dataCount: 3,
             pageSize: 10,
+            userInfoSelect: '',
             userInfoDrawer: {
                 maskCloseable: true,
                 drawerVisible: false,
@@ -331,8 +331,6 @@
                     }
                 });
                 this.tmpData = arr;
-                console.log(arr);
-                console.log(this.tmpData);
                 this.tableInit();
                 this.loading = false;
             },
@@ -392,7 +390,7 @@
                 console.log("row");
                 this.currentRowData = this.tableData[index];
                 this.userInfoDrawer.drawerVisible = true;
-                console.log(this.currentRowData);
+                loadInfo(this.currentRowData);
             },
             // 编辑按钮点击事件
             tableRowEdit() {

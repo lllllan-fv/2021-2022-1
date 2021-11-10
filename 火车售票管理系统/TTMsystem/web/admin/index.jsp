@@ -50,7 +50,7 @@
 
 <div class="page" id="admin">
     <div class="nav-left" style="background-color: #191a23">
-        <jsp:include page="nav-left/index.jsp"></jsp:include>
+        <jsp:include page="nav_left/index.jsp"></jsp:include>
     </div>
 
     <div class="nav-right">
