@@ -121,15 +121,6 @@
             tableData: [],
             // 当前行数据
             currentRowData: {},
-            // 空数据
-            emptyData: {
-                id: '',
-                tel: '',
-                name: '',
-                type: '',
-                state: '',
-                create_time: '',
-            },
             // 关联搜索框[用户名、手机号]
             tableSearchInfo: {
                 userName: '',
