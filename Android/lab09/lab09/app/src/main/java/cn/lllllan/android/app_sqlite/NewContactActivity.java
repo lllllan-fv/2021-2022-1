@@ -1,5 +1,7 @@
 package cn.lllllan.android.app_sqlite;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,8 @@ public class NewContactActivity extends AppCompatActivity {
     private EditText telEdit;
     private Button addButton;
 
+    private MyDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +26,8 @@ public class NewContactActivity extends AppCompatActivity {
         nameEdit = (EditText) findViewById(R.id.new_contact_edittext_name);
         telEdit = (EditText) findViewById(R.id.new_contact_edittext_tel);
         addButton = (Button) findViewById(R.id.new_contact_button_add);
+
+        dbHelper = new MyDatabaseHelper(NewContactActivity.this, "contactStore.db", null, 1);
 
         // 按钮点击事件，添加联系人到数据库
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +41,15 @@ public class NewContactActivity extends AppCompatActivity {
                 } else {
                     // 写入数据库
 
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+
+                    values.put("name", name);
+                    values.put("mobile", tel);
+                    db.insert("contact", null, values);
+                    values.clear();
+
+                    finish();
                 }
             }
         });

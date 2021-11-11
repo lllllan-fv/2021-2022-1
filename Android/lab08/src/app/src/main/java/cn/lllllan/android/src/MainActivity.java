@@ -81,12 +81,9 @@ public class MainActivity extends AppCompatActivity {
                             loadContent.append(line);
                         }
 
-                        if (content.equals(loadContent.toString())) {
-                            Toast.makeText(MainActivity.this, "Data have been loaded.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            editContent.setText(loadContent);
-                        }
-
+                        editContent.setText(loadContent);
+                        Toast.makeText(MainActivity.this, "Data have been loaded.", Toast.LENGTH_SHORT).show();
+                        
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {

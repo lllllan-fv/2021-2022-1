@@ -1,14 +1,16 @@
 package cn.lllllan.android.app_sqlite;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Contact> contacts;
     private ContactAdapter contactAdapter;
 
+    private MyDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,23 +35,25 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.main_listview);
         listView.setAdapter(contactAdapter);
 
+        dbHelper = new MyDatabaseHelper(this, "contactStore.db", null, 1);
+        loadContacts();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Contact contact = contacts.get(i);
 
-                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
-
-                CheckBox checkBox = (CheckBox) view.findViewById(R.id.contact_checkbox);
-                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                        contact.setCheck(isChecked);
-                        Toast.makeText(MainActivity.this, "check", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contact.getTel()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadContacts();
     }
 
     @Override
@@ -61,9 +67,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_item_add:
                 // 跳转到添加联系人页面。
-                addContact();
-//                Intent intent = new Intent(MainActivity.this, NewContactActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, NewContactActivity.class);
+                startActivity(intent);
                 break;
             case R.id.menu_item_del:
                 delContact();
@@ -72,25 +77,37 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addContact() {
-        Contact contact = new Contact(false, "张三", "10086");
+    public void loadContacts() {
+        contacts.clear();
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("contact", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
+                @SuppressLint("Range") String tel = cursor.getString(cursor.getColumnIndex("mobile"));
+
+                contacts.add(new Contact(false, name, tel));
+            } while (cursor.moveToNext());
+        }
+
+        contactAdapter.notifyDataSetChanged();
+    }
+
+    public void addContact(String name, String tel) {
+        Contact contact = new Contact(false, name, tel);
         contacts.add(contact);
         contactAdapter.notifyDataSetChanged();
     }
 
     public void delContact() {
-        List<Contact> tmp = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         for (Contact contact : contacts) {
-            if (contact.isCheck()) tmp.add(contact);
+            if (contact.isCheck()) {
+                db.delete("contact", "name=? and mobile=?", new String[]{contact.getName(), contact.getTel()});
+            }
         }
 
-        String info = String.valueOf(tmp.size());
-        Toast.makeText(MainActivity.this, info, Toast.LENGTH_SHORT).show();
-
-        for (Contact contact : tmp) {
-            contacts.remove(contact);
-        }
-        tmp.clear();
-        contactAdapter.notifyDataSetChanged();
+        loadContacts();
     }
 }

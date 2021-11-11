@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,14 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         viewHolder.checkBox.setChecked(contact.isCheck());
         viewHolder.nameText.setText(contact.getName());
         viewHolder.telText.setText(contact.getTel());
+
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.contact_checkbox);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                contact.setCheck(isChecked);
+            }
+        });
 
         return view;
     }
