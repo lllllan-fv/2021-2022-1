@@ -58,7 +58,7 @@
 
     <div style="margin: 10px;overflow: hidden">
         <div style="float: right;">
-            <Page simple :total="dataCount" :page-size="pageSize" @on-change="changePage"></Page>
+            <Page simple :total="tmpData.length" :page-size="pageSize" @on-change="changePage"></Page>
         </div>
     </div>
 

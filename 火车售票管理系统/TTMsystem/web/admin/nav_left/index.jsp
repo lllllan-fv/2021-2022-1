@@ -46,7 +46,7 @@
     <div class="nav-list">
         <ul>
             <li class="nav-tab a_active waves-effect">
-                <a href="user/" class="li-a active" target="iframe">
+                <a href="error/" class="li-a active" target="iframe">
                     <i class='bi bi-house'></i>
                     主页
                     <span class="badge badge-pill badge-primary" style="float: right;">
@@ -70,7 +70,7 @@
                     <a href="station/" class="li-a-a" target="iframe">
                         车站管理
                     </a>
-                    <a href="error/" class="li-a-a" target="iframe">
+                    <a href="train/" class="li-a-a" target="iframe">
                         火车管理
                     </a>
                     <a href="error/" class="li-a-a" target="iframe">

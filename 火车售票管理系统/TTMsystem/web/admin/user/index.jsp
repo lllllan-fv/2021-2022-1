@@ -132,7 +132,6 @@
                 password: ''
             },
             tableHeight: null,
-            dataCount: 3,
             pageSize: 10,
             userInfoDrawer: {
                 maskCloseable: true,
@@ -231,7 +230,6 @@
             // 根据数据显示表格
             tableInit() {
                 this.loading = true;
-                this.dataCount = this.tmpData.length;
                 // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
                 if (this.tmpData.length < this.pageSize) {
                     this.tableData = this.tmpData;
