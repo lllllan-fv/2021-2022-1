@@ -49,6 +49,10 @@
 
     <jsp:include page="station_card.jsp"></jsp:include>
 
+    <jsp:include page="station_page.jsp"></jsp:include>
+
+    <jsp:include page="station_modal.jsp"></jsp:include>
+
 </div>
 
 <script>

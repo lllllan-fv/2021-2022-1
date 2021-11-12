@@ -66,33 +66,3 @@
         </Panel>
     </Collapse>
 </Card>
-
-<div style="margin: 40px; overflow: hidden">
-    <div style="float: right;">
-        <Page simple :total="dataCount" :page-size="pageSize" @on-change="changePage"></Page>
-    </div>
-</div>
-
-<Modal
-        v-model="addProvinceModal"
-        title="注册省份"
-        @on-ok=""
-        @on-cancel="">
-    <p>Content of dialog</p>
-</Modal>
-
-<Modal
-        v-model="addCityModal"
-        title="注册城市"
-        @on-ok=""
-        @on-cancel="">
-    <p>Content of dialog</p>
-</Modal>
-
-<Modal
-        v-model="addStationModal"
-        title="注册火车站"
-        @on-ok=""
-        @on-cancel="">
-    <p>Content of dialog</p>
-</Modal>
