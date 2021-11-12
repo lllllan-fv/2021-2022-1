@@ -22,10 +22,6 @@
         <i-button :size="buttonSize" type="primary" @click="addUser">
             添加用户
         </i-button>
-        <div style="float: right">
-            <%--                <i-button :size="buttonSize" icon="md-refresh" type="default" shape="circle"--%>
-            <%--                          @clicl="tableRefresh"></i-button>--%>
-        </div>
     </div>
 
     <i-table stripe :loading="loading" :columns="userTableColumns" :data="tableData"
@@ -47,9 +43,13 @@
             </div>
         </template>
 
+        <template slot-scope="{ row, index }" slot="order">
+            <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
+            <i-button type="success" size="small" @click.native.stop="linkToOrder(index)">查看</i-button>
+        </template>
+
         <template slot-scope="{ row, index }" slot="action">
-            <i-button type="primary" size="small" style="margin-right: 5px" @click="tableRowEdit">编辑
-            </i-button>
+            <i-button type="primary" size="small" style="margin-right: 5px" @click="tableRowEdit">编辑</i-button>
             <%-- 当前行点击事件和单元格按钮的点击事件冲突 @clicl.native.stop 即可阻止 --%>
             <i-button type="error" size="small" @click.native.stop="removeRow(index)">删除</i-button>
         </template>

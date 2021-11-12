@@ -43,7 +43,6 @@
     <!-- -->
     <link rel="stylesheet" href="style/page.css">
 
-
 </head>
 <body>
 
@@ -54,9 +53,6 @@
     </div>
 
     <div class="nav-right">
-        <%--        <div class="nav-top">--%>
-        <%--            上方导航--%>
-        <%--        </div>--%>
 
         <div class="content-page">
             <iframe name="iframe" width="100%" height="100%" frameborder="0" src="user/"></iframe>

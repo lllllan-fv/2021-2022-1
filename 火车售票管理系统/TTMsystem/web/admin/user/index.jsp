@@ -64,7 +64,7 @@
 
 <%-- vue --%>
 <script>
-    var vm = new Vue({
+    var userVue = new Vue({
         el: "#userTableVue",
         data: {
             // 源数据
@@ -206,7 +206,12 @@
                     sortable: true,
                     align: 'center'
                 }, {
-                    title: 'Action',
+                    title: '订单信息',
+                    slot: 'order',
+                    width: 150,
+                    align: 'center'
+                }, {
+                    title: '操作',
                     slot: 'action',
                     width: 150,
                     align: 'center'
@@ -298,6 +303,19 @@
 
                 this.tableInit();
             },
+            // 链接跳转查看用户订单信息
+            linkToOrder(index) {
+                sessionStorage.setItem("nav_ul_index", 3);
+                sessionStorage.setItem("nav_li_index", 0);
+                //要发送的参数
+                let params = {
+                    "nav_ul_index": 3,
+                    "nav_li_index": 0
+                };
+                window["filter"] = params;
+                window.open("http://ticket.lllllan.cn/admin/");
+
+            },
             // 页面变换
             changePage: function (index) {
                 this.currentPage = index;
@@ -341,6 +359,7 @@
                 this.addUserDrawer.typeSelect = '普通用户';
                 loadInfo(null);
             },
+            // 添加用户提交按钮点击
             addUserSubmit() {
                 this.drawerClose();
             },

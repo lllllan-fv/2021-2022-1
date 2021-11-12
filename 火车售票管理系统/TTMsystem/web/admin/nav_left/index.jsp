@@ -40,74 +40,66 @@
 </head>
 <body>
 
-<div id="nav-left">
-    <div class="LogoName">后台管理</div>
-    <div class="navDiv">
-        <div class="navName">导航</div>
-        <div class="nav-list">
-            <ul>
-                <li class="nav-tab a_active waves-effect">
-                    <a href="user/" class="li-a active" target="iframe">
-                        <i class='bi bi-house'></i>
-                        主页
-                        <span class="badge badge-pill badge-primary" style="float: right;">
+<div class="LogoName">后台管理</div>
+<div class="navDiv">
+    <div class="navName">导航</div>
+    <div class="nav-list">
+        <ul>
+            <li class="nav-tab a_active waves-effect">
+                <a href="user/" class="li-a active" target="iframe">
+                    <i class='bi bi-house'></i>
+                    主页
+                    <span class="badge badge-pill badge-primary" style="float: right;">
                             3
                         </span>
+                </a>
+            </li>
+            <li class="nav-tab a_active waves-effect">
+                <a href="user/" class="li-a active" target="iframe">
+                    <i class='bi bi-people'></i> 用户管理
+                </a>
+            </li>
+            <li class="nav-tab nav-ul">
+                <a href="javascript:void[0]" class="li-a">
+                    <%--                    <i class='bi bi-nut'></i>--%>
+                    <i class="ivu-icon ivu-icon-ios-train-outline"></i>
+                    火车管理
+                    <i class='bi bi-chevron-right' style="float: right;"></i>
+                </a>
+                <div class="nav-box">
+                    <a href="html/device/3.html" class="li-a-a" target="iframe">
+                        车站信息
                     </a>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-layers'></i>
-                        设备管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    <a href="html/device/4.html" class="li-a-a" target="iframe">
+                        火车信息
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/2.html" class="li-a-a" target="iframe">
-                            当前能耗
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-nut'></i>
-                        维修保养
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    <a href="html/device/4.html" class="li-a-a" target="iframe">
+                        添加火车
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/3.html" class="li-a-a" target="iframe">
-                            养护计划
-                        </a>
-                        <a href="html/device/4.html" class="li-a-a" target="iframe">
-                            养护计划
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-building'></i>
-                        巡检管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    <a href="html/device/4.html" class="li-a-a" target="iframe">
+                        运行信息
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/5.html" class="li-a-a" target="iframe">
-                            巡检计划
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-tab nav-ul">
-                    <a href="javascript:void[0]" class="li-a">
-                        <i class='bi bi-pencil-square'></i>
-                        工单管理
-                        <i class='bi bi-chevron-right' style="float: right;"></i>
+                    <a href="html/device/4.html" class="li-a-a" target="iframe">
+                        历史运行
                     </a>
-                    <div class="nav-box">
-                        <a href="html/device/6.html" class="li-a-a" target="iframe">
-                            维修计划
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+            <li class="nav-tab nav-ul">
+                <a href="javascript:void[0]" class="li-a">
+                    <i class='bi bi-building'></i>
+                    订单管理
+                    <i class='bi bi-chevron-right' style="float: right;"></i>
+                </a>
+                <div class="nav-box">
+                    <a href="html/device/5.html" class="li-a-a" target="iframe">
+                        订单信息
+                    </a>
+                    <a href="html/device/5.html" class="li-a-a" target="iframe">
+                        退票审核
+                    </a>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -116,6 +108,8 @@
         // 一二级菜单的序号
         let nav_ul_index = sessionStorage.getItem("nav_ul_index");
         let nav_li_index = sessionStorage.getItem("nav_li_index");
+
+        console.log(window);
 
         // 如果刷新前有过点击，恢复先前页面
         if (nav_ul_index != null) {
@@ -127,6 +121,7 @@
 
         // let navflag = false;
         $('.nav-tab').click(function () {
+            console.log($(this).index());
             loadLi($(this).index());
             // 将点击的一级菜单序号记入session
             sessionStorage.setItem("nav_ul_index", $(this).index());
@@ -175,12 +170,6 @@
             $('iframe').attr('src', target);
         }
 
-    })
-
-    var vm = new Vue({
-        el: "#nav-left",
-        data: function () {
-        }
     })
 </script>
 
