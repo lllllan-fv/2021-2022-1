@@ -57,6 +57,7 @@
         data: {
             dataCount: 2,
             pageSize: 6,
+            addProvinceModal: false,
             addCityModal: false,
             addStationModal: false,
             provinceData: {

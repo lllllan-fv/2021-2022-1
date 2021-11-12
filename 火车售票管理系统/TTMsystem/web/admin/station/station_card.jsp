@@ -7,6 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<div style="margin: 40px 0 0 40px">
+    <i-button size="large" type="primary" @click="addProvinceModal = true">
+        注册省份
+    </i-button>
+</div>
 
 <Card v-for="province in provinceData.tableData" style="margin: 40px 40px 0 40px">
     <h2 slot="title">
@@ -67,6 +72,14 @@
         <Page simple :total="dataCount" :page-size="pageSize" @on-change="changePage"></Page>
     </div>
 </div>
+
+<Modal
+        v-model="addProvinceModal"
+        title="注册省份"
+        @on-ok=""
+        @on-cancel="">
+    <p>Content of dialog</p>
+</Modal>
 
 <Modal
         v-model="addCityModal"
