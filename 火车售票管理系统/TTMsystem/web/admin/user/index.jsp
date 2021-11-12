@@ -48,7 +48,7 @@
 </head>
 <body>
 
-<div id="userTableVue">
+<div id="userVue">
 
     <%--  页面标题  --%>
     <jsp:include page="user_title.jsp"></jsp:include>
@@ -65,7 +65,7 @@
 <%-- vue --%>
 <script>
     var userVue = new Vue({
-        el: "#userTableVue",
+        el: "#userVue",
         data: {
             // 源数据
             sourceData: [
@@ -313,7 +313,6 @@
             },
             // 页面变换
             changePage: function (index) {
-                this.currentPage = index;
                 let _start = (index - 1) * this.pageSize;
                 let _end = index * this.pageSize;
                 this.tableData = this.tmpData.slice(_start, _end);

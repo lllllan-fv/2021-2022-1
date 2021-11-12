@@ -67,19 +67,19 @@
                     <i class='bi bi-chevron-right' style="float: right;"></i>
                 </a>
                 <div class="nav-box">
-                    <a href="html/device/3.html" class="li-a-a" target="iframe">
-                        车站信息
+                    <a href="station/" class="li-a-a" target="iframe">
+                        车站管理
                     </a>
-                    <a href="html/device/4.html" class="li-a-a" target="iframe">
-                        火车信息
+                    <a href="error/" class="li-a-a" target="iframe">
+                        火车管理
                     </a>
-                    <a href="html/device/4.html" class="li-a-a" target="iframe">
+                    <a href="error/" class="li-a-a" target="iframe">
                         添加火车
                     </a>
-                    <a href="html/device/4.html" class="li-a-a" target="iframe">
-                        运行信息
+                    <a href="error/" class="li-a-a" target="iframe">
+                        运行管理
                     </a>
-                    <a href="html/device/4.html" class="li-a-a" target="iframe">
+                    <a href="error/" class="li-a-a" target="iframe">
                         历史运行
                     </a>
                 </div>
@@ -91,10 +91,10 @@
                     <i class='bi bi-chevron-right' style="float: right;"></i>
                 </a>
                 <div class="nav-box">
-                    <a href="html/device/5.html" class="li-a-a" target="iframe">
+                    <a href="error/" class="li-a-a" target="iframe">
                         订单信息
                     </a>
-                    <a href="html/device/5.html" class="li-a-a" target="iframe">
+                    <a href="error/" class="li-a-a" target="iframe">
                         退票审核
                     </a>
                 </div>
@@ -157,11 +157,13 @@
                     }
                 }
             })
+
         }
 
         // 更新 iframe 内容
         function loadA(index1, index2) {
             $('.li-a-a').removeClass('active-li-a');
+
             $('.nav-tab').eq(index1).find('div a').eq(index2).addClass('active-li-a');
 
             var target = $('.nav-tab').eq(index1).find('div a').eq(index2).attr('href');
