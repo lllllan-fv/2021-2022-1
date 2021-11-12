@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div style="margin: 40px 0 0 40px">
+<div style="margin: 20px 0 -20px 40px">
     <i-button size="large" type="primary" @click="addProvinceModal = true">
         注册省份
     </i-button>

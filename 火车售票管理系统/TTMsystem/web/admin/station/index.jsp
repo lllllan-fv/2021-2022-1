@@ -47,6 +47,10 @@
 
     <jsp:include page="station_title.jsp"></jsp:include>
 
+    <jsp:include page="station_count.jsp"></jsp:include>
+
+    <Divider plain orientation="left">各省市火车站信息</Divider>
+
     <jsp:include page="station_card.jsp"></jsp:include>
 
     <jsp:include page="station_page.jsp"></jsp:include>
@@ -60,7 +64,7 @@
         el: "#stationVue",
         data: {
             dataCount: 2,
-            pageSize: 6,
+            pageSize: 5,
             addProvinceModal: false,
             addCityModal: false,
             addStationModal: false,
