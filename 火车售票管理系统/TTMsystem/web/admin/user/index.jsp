@@ -307,14 +307,9 @@
             linkToOrder(index) {
                 sessionStorage.setItem("nav_ul_index", 3);
                 sessionStorage.setItem("nav_li_index", 0);
-                //要发送的参数
-                let params = {
-                    "nav_ul_index": 3,
-                    "nav_li_index": 0
-                };
-                window["filter"] = params;
-                window.open("http://ticket.lllllan.cn/admin/");
 
+                // 从iframe刷新整体页面
+                window.parent.location.href = "http://ticket.lllllan.cn/admin/";
             },
             // 页面变换
             changePage: function (index) {

@@ -109,8 +109,6 @@
         let nav_ul_index = sessionStorage.getItem("nav_ul_index");
         let nav_li_index = sessionStorage.getItem("nav_li_index");
 
-        console.log(window);
-
         // 如果刷新前有过点击，恢复先前页面
         if (nav_ul_index != null) {
             loadLi(nav_ul_index);
