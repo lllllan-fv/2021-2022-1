@@ -73,7 +73,7 @@
                     <a href="train/" class="li-a-a" target="iframe">
                         火车管理
                     </a>
-                    <a href="error/" class="li-a-a" target="iframe">
+                    <a href="train_add/" class="li-a-a" target="iframe">
                         添加火车
                     </a>
                     <a href="error/" class="li-a-a" target="iframe">
