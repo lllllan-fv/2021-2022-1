@@ -7,8 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<i-table stripe
-         :height="runningData.tableHeight"
+<p>运行时刻表</p>
+
+<i-table :height="runningData.tableHeight"
          :columns="runningTableColumns"
          :data="runningData.tableData"
          style="margin-top: 20px">
