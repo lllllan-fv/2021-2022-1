@@ -142,8 +142,11 @@
                     title: '简介',
                     slot: 's_about',
                     align: 'center',
-
-                },
+                }, {
+                    title: '操作',
+                    slot: 'action',
+                    align: 'center'
+                }
             ],
         },
         methods: {
@@ -152,6 +155,14 @@
                 let _start = (index - 1) * this.pageSize;
                 let _end = index * this.pageSize;
                 this.provinceData.tableData = this.provinceData.tmpData.slice(_start, _end);
+            },
+            showErrorMsg() {
+                this.$Notice.error({
+                    title: '很抱歉地通知您',
+                    render: h => {
+                        return h('span', '该功能暂未开通')
+                    }
+                });
             },
         },
         computed: {},

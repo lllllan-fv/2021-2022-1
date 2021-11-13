@@ -59,6 +59,12 @@
                         </div>
                     </template>
 
+                    <template slot-scope="{ row }" slot="action">
+                        <i-button size="large" @click="showErrorMsg">
+                            编辑
+                        </i-button>
+                    </template>
+
                     <p slot="s_about">暂无介绍</p>
 
                 </i-table>
