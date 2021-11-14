@@ -248,6 +248,10 @@
                     title: '运行状态',
                     key: 'running_state',
                     align: 'center',
+                }, {
+                    title: '更多信息',
+                    slot: 'about',
+                    align: 'center',
                 }
             ],
         },
@@ -266,11 +270,21 @@
                 this.runningData.tableData = this.runningData.tmpData.slice(_start, _end);
                 this.runningData.tableHeight = Math.max(this.runningData.tableData.length * 48 + 42, 90);
             },
+            // 下方展示该火车的详细信息
             showInfo(index) {
-                // 下方展示该火车的详细信息
                 this.currentData = this.trainData.tableData[index];
                 this.runningData.tmpData = this.currentData.running;
                 this.changePage1(1);
+            },
+            // 按钮跳转查看运行的详细信息
+            linkToRunning() {
+                sessionStorage.setItem("nav_ul_index", 2);
+                sessionStorage.setItem("nav_li_index", 3);
+
+                // 可以通过 jsp 传参，让那个页面查看具体信息
+
+                // 从iframe刷新整体页面
+                window.parent.location.href = "http://ticket.lllllan.cn/admin/";
             },
         },
         created() {

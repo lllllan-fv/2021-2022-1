@@ -14,5 +14,8 @@
          :data="runningData.tableData"
          style="margin-top: 20px">
 
+    <template slot-scope="{ row, index }" slot="about">
+        <i-button @click="linkToRunning">查看</i-button>
+    </template>
 
 </i-table>
