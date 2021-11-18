@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.edu.hznu.app_lab10">
-
-    <queries>
-        <package android:name="cn.lllllan.android.app_lab09" />
-    </queries>
+    package="cn.lllllan.android.app_lab09">
 
     <application
         android:allowBackup="true"
@@ -12,15 +8,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App_lab10">
-        <activity
-            android:name=".ContactsList"
+        android:theme="@style/Theme.App_lab09">
+
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="cn.lllllan.android.app_lab09.provider"
+            android:enabled="true"
             android:exported="true" />
+
         <activity
-            android:name=".QueryContactActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddContactActivity"
+            android:name=".NewContactActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
