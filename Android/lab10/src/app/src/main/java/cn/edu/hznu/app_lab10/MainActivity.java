@@ -1,8 +1,6 @@
 package cn.edu.hznu.app_lab10;
 
-import android.annotation.SuppressLint;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,20 +19,18 @@ public class MainActivity extends AppCompatActivity {
         queryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("content://cn.lllllan.android.app_lab09.provider/contact");
-                Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-
-                if (cursor != null) {
-                    while (cursor.moveToNext()) {
-                        @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
-                        @SuppressLint("Range") String mobile = cursor.getString(cursor.getColumnIndex("mobile"));
-                    }
-                    cursor.close();
-                }
+                Intent intent = new Intent(MainActivity.this, QueryContactActivity.class);
+                startActivity(intent);
             }
         });
 
         Button addBtn = (Button) findViewById(R.id.main_button_add);
-
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

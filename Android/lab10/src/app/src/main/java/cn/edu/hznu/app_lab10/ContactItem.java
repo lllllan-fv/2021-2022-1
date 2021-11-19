@@ -1,6 +1,8 @@
 package cn.edu.hznu.app_lab10;
 
-public class ContactItem {
+import java.io.Serializable;
+
+public class ContactItem implements Serializable {
     private String name;
     private String mobile;
 

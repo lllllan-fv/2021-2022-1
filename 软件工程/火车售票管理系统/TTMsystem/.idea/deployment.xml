@@ -5,7 +5,7 @@
       <paths name="tengx">
         <serverdata>
           <mappings>
-            <mapping deploy="/TTMsystem" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/webapps/ticket" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

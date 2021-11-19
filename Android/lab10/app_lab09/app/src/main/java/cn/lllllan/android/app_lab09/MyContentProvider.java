@@ -6,11 +6,13 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 public class MyContentProvider extends ContentProvider {
 
     public static final int CONTACT_DIR = 0;
-    public static final int CONTACT_ITEM = 1;
+    public static final int CONTACT_MOBILE = 1;
+    public static final int CONTACT_NAME = 2;
 
     public static final String AUTHORITY = "cn.lllllan.android.app_lab09.provider";
 
@@ -22,7 +24,8 @@ public class MyContentProvider extends ContentProvider {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
         uriMatcher.addURI(AUTHORITY, "contact", CONTACT_DIR);
-        uriMatcher.addURI(AUTHORITY, "contact/#", CONTACT_ITEM);
+        uriMatcher.addURI(AUTHORITY, "contact/mobile/*", CONTACT_MOBILE);
+        uriMatcher.addURI(AUTHORITY, "contact/name/*", CONTACT_NAME);
     }
 
     @Override
@@ -36,8 +39,10 @@ public class MyContentProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case CONTACT_DIR:
                 return "vnd.android.cursor.dir/vnd.cn.lllllan.android.app_lab09.provider.contact";
-            case CONTACT_ITEM:
-                return "vnd.android.cursor.item/vnd.cn.lllllan.android.app_lab09.provider.contact";
+            case CONTACT_MOBILE:
+                return "vnd.android.cursor.mobile/vnd.cn.lllllan.android.app_lab09.provider.contact";
+            case CONTACT_NAME:
+                return "vnd.android.cursor.name/vnd.cn.lllllan.android.app_lab09.provider.contact";
         }
         return null;
     }
@@ -51,9 +56,15 @@ public class MyContentProvider extends ContentProvider {
             case CONTACT_DIR:
                 cursor = db.query("contact", projection, selection, selectionArgs, null, null, sortOrder);
                 break;
-            case CONTACT_ITEM:
-                String contactName = uri.getPathSegments().get(1);
-                cursor = db.query("contact", projection, "name=?", new String[]{contactName}, null, null, sortOrder);
+            case CONTACT_MOBILE:
+                String contactMobile = "%" + uri.getPathSegments().get(2) + "%";
+                Log.d("QueryMobile", contactMobile);
+                cursor = db.query("contact", projection, "mobile like ?", new String[]{contactMobile}, null, null, sortOrder);
+                break;
+            case CONTACT_NAME:
+                String contactName = "%" + uri.getPathSegments().get(2) + "%";
+                Log.d("QueryName", contactName);
+                cursor = db.query("contact", projection, "name like ?", new String[]{contactName}, null, null, sortOrder);
                 break;
         }
 
@@ -67,7 +78,17 @@ public class MyContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        return null;
+        SQLiteDatabase db = myDatabaseHelper.getWritableDatabase();
+        Uri uriReturn = null;
+
+        switch (uriMatcher.match(uri)) {
+            case CONTACT_DIR:
+                long contact = db.insert("contact", null, values);
+                uriReturn = Uri.parse("content://" + AUTHORITY + "/contact/" + contact);
+                break;
+        }
+
+        return uriReturn;
     }
 
     @Override

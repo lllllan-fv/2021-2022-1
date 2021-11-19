@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="0de89426-e2c9-47cf-b2f3-9587ed4d5ad2" name="tengx" url="http://1.116.114.142:8080">
-        <fileTransfer host="1.116.114.142" port="22" rootFolder="/opt/tomcat/webapps/demo" accessType="SFTP">
+        <fileTransfer host="1.116.114.142" port="22" rootFolder="/opt/tomcat" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
