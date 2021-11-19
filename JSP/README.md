@@ -1,4 +1,4 @@
-# 仓库管理系统
+# 仓库管理系统 inventory management system
 
 
 
@@ -82,4 +82,3 @@
         <td></td>
     </tr> 
 </table>
-
