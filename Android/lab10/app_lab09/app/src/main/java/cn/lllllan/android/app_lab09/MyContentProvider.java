@@ -6,13 +6,10 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
 
 public class MyContentProvider extends ContentProvider {
 
     public static final int CONTACT_DIR = 0;
-    public static final int CONTACT_MOBILE = 1;
-    public static final int CONTACT_NAME = 2;
 
     public static final String AUTHORITY = "cn.lllllan.android.app_lab09.provider";
 
@@ -22,10 +19,7 @@ public class MyContentProvider extends ContentProvider {
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-
         uriMatcher.addURI(AUTHORITY, "contact", CONTACT_DIR);
-        uriMatcher.addURI(AUTHORITY, "contact/mobile/*", CONTACT_MOBILE);
-        uriMatcher.addURI(AUTHORITY, "contact/name/*", CONTACT_NAME);
     }
 
     @Override
@@ -39,10 +33,6 @@ public class MyContentProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case CONTACT_DIR:
                 return "vnd.android.cursor.dir/vnd.cn.lllllan.android.app_lab09.provider.contact";
-            case CONTACT_MOBILE:
-                return "vnd.android.cursor.mobile/vnd.cn.lllllan.android.app_lab09.provider.contact";
-            case CONTACT_NAME:
-                return "vnd.android.cursor.name/vnd.cn.lllllan.android.app_lab09.provider.contact";
         }
         return null;
     }
@@ -56,24 +46,9 @@ public class MyContentProvider extends ContentProvider {
             case CONTACT_DIR:
                 cursor = db.query("contact", projection, selection, selectionArgs, null, null, sortOrder);
                 break;
-            case CONTACT_MOBILE:
-                String contactMobile = "%" + uri.getPathSegments().get(2) + "%";
-                Log.d("QueryMobile", contactMobile);
-                cursor = db.query("contact", projection, "mobile like ?", new String[]{contactMobile}, null, null, sortOrder);
-                break;
-            case CONTACT_NAME:
-                String contactName = "%" + uri.getPathSegments().get(2) + "%";
-                Log.d("QueryName", contactName);
-                cursor = db.query("contact", projection, "name like ?", new String[]{contactName}, null, null, sortOrder);
-                break;
         }
 
         return cursor;
-    }
-
-    @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
     }
 
     @Override
@@ -89,6 +64,11 @@ public class MyContentProvider extends ContentProvider {
         }
 
         return uriReturn;
+    }
+
+    @Override
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        return 0;
     }
 
     @Override
