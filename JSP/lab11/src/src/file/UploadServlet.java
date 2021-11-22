@@ -6,7 +6,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -97,8 +96,10 @@ public class UploadServlet extends HttpServlet {
 
         request.setAttribute("result", message); // 将提示信息保存在request对象中
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("result.jsp"); // 设置相应返回地址
-        requestDispatcher.forward(request, response);
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("result.jsp"); // 设置相应返回地址
+//        requestDispatcher.forward(request, response);
+
+        response.sendRedirect("result.jsp");
     }
 
     public void init() throws ServletException {

@@ -23,10 +23,10 @@ public class DBConnection {
             InputStream is = this.getClass().getClassLoader().getResourceAsStream("db.properties");
             prop.load(is);
 
-//            this.setDriver(prop.getProperty("driver"));
-//            this.setUrl(prop.getProperty("url"));
-//            this.setUsername(prop.getProperty("username"));
-//            this.setPassword(prop.getProperty("password"));
+            this.setDriver(prop.getProperty("driver"));
+            this.setUrl(prop.getProperty("url"));
+            this.setUsername(prop.getProperty("username"));
+            this.setPassword(prop.getProperty("password"));
 
             if (is != null) is.close();
         } catch (Exception e) {
@@ -131,4 +131,3 @@ public class DBConnection {
     }
 
 }
-

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>index</title>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -43,10 +43,17 @@
 <body>
 
 <h3>上传文件</h3>
-<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+<form action="UploadServlet" method="post" enctype="multipart/form-data">
     <input type="file" name="file" size="50"/> <br/> <br/>
     <input type="submit" value="上传"/>
+    <button type="button" onclick="reset()">重置</button>
 </form>
+
+<script>
+    function reset() {
+        $("input[name=file]").val();
+    }
+</script>
 
 </body>
 </html>
