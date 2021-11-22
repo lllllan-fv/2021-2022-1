@@ -1,0 +1,15 @@
+cn/edu/hznu/app_lab10/QueryContactActivity.java
+ cn.edu.hznu.app_lab10.QueryContactActivity
+cn/edu/hznu/app_lab10/AddContactActivity.java
+ cn.edu.hznu.app_lab10.AddContactActivity
+cn/edu/hznu/app_lab10/ContactItem.java
+ cn.edu.hznu.app_lab10.ContactItem
+cn/edu/hznu/app_lab10/ContactAdapter.java
+ cn.edu.hznu.app_lab10.ContactAdapter
+ cn.edu.hznu.app_lab10.ContactAdapter$ViewHolder
+cn/edu/hznu/app_lab10/MainActivity.java
+ cn.edu.hznu.app_lab10.MainActivity
+cn/edu/hznu/app_lab10/ContactsList.java
+ cn.edu.hznu.app_lab10.ContactsList
+cn/edu/hznu/app_lab10/BuildConfig.java
+ cn.edu.hznu.app_lab10.BuildConfig
