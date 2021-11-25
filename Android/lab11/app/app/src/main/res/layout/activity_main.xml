@@ -59,4 +59,9 @@
 
     </LinearLayout>
 
+    <VideoView
+        android:id="@+id/main_video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp" />
+
 </LinearLayout>
