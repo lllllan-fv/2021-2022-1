@@ -1,4 +1,0 @@
-cn/lllllan/android/app_play/BuildConfig.java
- cn.lllllan.android.app_play.BuildConfig
-cn/lllllan/android/app_play/MainActivity.java
- cn.lllllan.android.app_play.MainActivity
