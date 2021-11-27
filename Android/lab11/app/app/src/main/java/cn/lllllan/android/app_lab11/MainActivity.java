@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ListView listView;
     private MusicAdapter musicAdapter;
     private ArrayList<MusicItem> list = new ArrayList<>();
-    ;
 
     private int current = 0;
     private VideoView videoView;
@@ -59,11 +59,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listView = (ListView) findViewById(R.id.main_list_view);
         listView.setAdapter(musicAdapter);
 
+        TextView show = (TextView) findViewById(R.id.main_text_view_music_data);
+        show.setText(list.get(0).getTitle());
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 current = i;
                 videoView.setVideoPath(list.get(current).getPath());
+                show.setText(list.get(i).getTitle());
                 videoPlay();
             }
         });

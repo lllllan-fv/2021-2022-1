@@ -19,42 +19,42 @@
 
         <TextView
             android:id="@+id/main_text_view_music_data"
-            android:layout_width="100dp"
+            android:layout_width="140dp"
             android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/main_button_pause"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="暂停"
+            android:text="||"
             android:textSize="10dp" />
 
         <Button
             android:id="@+id/main_button_play"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="播放"
+            android:text="▶"
             android:textSize="10dp" />
 
         <Button
             android:id="@+id/main_button_prev"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="上首"
+            android:text="|◀"
             android:textSize="10dp" />
 
         <Button
             android:id="@+id/main_button_stop"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="停止"
+            android:text="🛑"
             android:textSize="10dp" />
 
         <Button
             android:id="@+id/main_button_next"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="下首"
+            android:text="▶I"
             android:textSize="10dp" />
 
     </LinearLayout>
