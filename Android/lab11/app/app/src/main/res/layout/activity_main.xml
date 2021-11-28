@@ -54,7 +54,7 @@
             android:id="@+id/main_button_next"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="▶I"
+            android:text="▶|"
             android:textSize="10dp" />
 
     </LinearLayout>

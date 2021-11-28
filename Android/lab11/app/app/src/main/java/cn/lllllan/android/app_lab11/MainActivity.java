@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
         }
+        ((TextView) findViewById(R.id.main_text_view_music_data)).setText(list.get(current).getTitle());
     }
 
     @Override
