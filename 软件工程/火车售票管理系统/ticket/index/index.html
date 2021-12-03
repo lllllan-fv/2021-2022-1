@@ -5,14 +5,16 @@
             height: 450px">
 
     <div style="background:#ffffff;
+                    margin-top: -20px;
                     margin-left: 10%;
-                    padding: 20px;
+                    padding: 10px;
                     width: 25%;
                     border-radius: 10px;">
 
         <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="&emsp;&emsp;单程&emsp;&emsp;" name="first">
 
+                <br>
                 <el-form ref="form" :model="form" label-width="80px">
                     <el-form-item label="出发地">
                         <el-col span="20">
@@ -44,16 +46,17 @@
 
             </el-tab-pane>
 
-            <el-tab-pane label="往返&emsp;&emsp;" name="second">
+            <el-tab-pane label="&emsp;往返&emsp;" name="second">
                 往返
             </el-tab-pane>
 
-            <el-tab-pane label="接续换乘&emsp;&emsp;" name="third">接续换成</el-tab-pane>
+            <el-tab-pane label="&emsp;接续换乘&emsp;&emsp;" name="third">
+                接续换成
+            </el-tab-pane>
 
-            <el-tab-pane label="退改签" name="fourth">退改签</el-tab-pane>
+            <el-tab-pane label="&emsp;退改签" name="fourth">退改签</el-tab-pane>
 
         </el-tabs>
-
 
     </div>
 </div>
