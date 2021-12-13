@@ -142,3 +142,48 @@ else:
     print("{} 到 {} 区间中最小的素数是 {}".format(a, b, i))
 ```
 
+
+
+#### 5.  冒泡排序
+
+- 类型：函数
+- 考点：自定义函数、函数返回值
+
+题目：
+
+> 输入一个序列，要求将序列使用冒泡排序的方法从小到大排序，并输出交换次数（相等的值不必交换）
+
+input:
+
+> 2 3 4 5 1
+
+output:
+
+> 冒泡排序交换了 4 次
+> 排序后结果是： [1, 2, 3, 4, 5]
+
+```python
+def bubbleSort(arr):
+    cnt = 0
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                cnt += 1
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return cnt
+```
+
+> (题目提供)
+>
+> ```
+> def main():
+>     line = input()
+>     arr = [int(n) for n in line.split()]
+>     print("冒泡排序交换了 {} 次".format(bubbleSort(arr)))
+>     print("排序后结果是：", arr)
+> 
+> 
+> main()
+> ```
+
