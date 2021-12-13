@@ -1,4 +1,10 @@
-a = float(input())
-print("保留一位小数: %.1f" % a)
-print("保留两位小数: %.2f" % a)
-print("保留三位小数: %.3f" % a)
+sum = 0
+cnt = 0
+
+for a in input().split():
+    cnt += 1
+    sum += float(a)
+
+sum /= cnt
+
+print("%.2f" % sum)
