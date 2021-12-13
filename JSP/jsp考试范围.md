@@ -1,0 +1,45 @@
+- jsp和servlet是javaee开发框架中的内容
+- tomcat
+    - 可以修改端口号（在哪里
+    - 目录webapps，简单部署直接将文件拖入
+    - 默认端口8080，web应用默认端口80
+- html
+    - 表单以及基本元素的定义和使用
+- js
+    - dom模型
+    - 必须嵌在html页面中才可执行
+    - ajax，异步发送请求，局部内容的更新，响应速度的提升
+- jsp
+    - `200 成功` 每个属性值以及对应的含义
+    - jsp执行过程
+    - jsp 实质上就是一个servlet
+    - js可以嵌入java脚本
+
+- jsp指令-作用、属性
+    - include
+    - taglib
+- jsp动作
+- 内置对象
+    - request
+    - cookie - 客户端的文本文件，存储名值对
+    - session - 会话
+    - application
+    - response （请求转发和页面重定向的区别）
+
+- servlet
+    - 定义、继承
+    - 基本的配置方式（注解、xml文件）
+    - 生命周期方法
+    - 内置对象的获取
+- javabean
+    - 定义规则
+    - jsp:useBean
+- MVC设计模式 model、view、control
+- el 表达式
+- jstl 自定义标签库
+- 常用组件
+    - 文件下载
+    - 发送邮件
+- 数据库访问 JDBC
+    - java databases connectivity
+    - 核心代码
