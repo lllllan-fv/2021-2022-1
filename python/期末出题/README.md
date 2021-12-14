@@ -189,4 +189,36 @@ def bubbleSort(arr):
 
 
 
-#### 6. 
+#### 6. set()
+
+- 类型：集合
+- 考点：set()、字符串大小写、字符串截取
+
+题目：
+
+> 输入一句话，要求按顺序输出句子中（首字母大写、其余字母小写）的单词，每个一遍。
+>
+> 输入保证只含有大小写的英文字母，并且一定有符合要求的单词。
+
+input:
+
+> James invited Paul Anthony and Wade to dinner but only Wade was available
+
+output:
+
+> James
+> Paul
+> Anthony
+> Wade
+
+```python
+name = set()
+
+for item in input().split():
+    if item[0].isupper() and item[1:len(item)].islower():
+        if item in name:
+            continue
+        name.add(item)
+        print(item)
+```
+
