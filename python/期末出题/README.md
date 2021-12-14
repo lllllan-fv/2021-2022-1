@@ -151,7 +151,7 @@ else:
 
 题目：
 
-> 输入一个序列，要求将序列使用冒泡排序的方法从小到大排序，并输出交换次数（相等的值不必交换）
+> 输入一个序列，要求将序列使用冒泡排序的方法从小到大排序，并输出交换次数。主函数已给出，要求完成冒泡排序函数部分。
 
 input:
 
@@ -176,14 +176,17 @@ def bubbleSort(arr):
 
 > (题目提供)
 >
-> ```
+> ```python
 > def main():
->     line = input()
->     arr = [int(n) for n in line.split()]
->     print("冒泡排序交换了 {} 次".format(bubbleSort(arr)))
->     print("排序后结果是：", arr)
+>        line = input()
+>        arr = [int(n) for n in line.split()]
+>        print("冒泡排序交换了 {} 次".format(bubbleSort(arr)))
+>        print("排序后结果是：", arr)
 > 
 > 
 > main()
 > ```
 
+
+
+#### 6. 
