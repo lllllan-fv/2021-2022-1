@@ -31,10 +31,6 @@ CREATE TABLE users (
 ) ENGINE = InnoDB CHARSET = utf8;
 ```
 
-```sql
-INSERT INTO users VALUES (null, 'test01', 0, '12345678911', 'admin', 0, NOW());
-```
-
 
 
 #### <span id="passengers">乘客信息表 passengers</span>
@@ -44,7 +40,7 @@ INSERT INTO users VALUES (null, 'test01', 0, '12345678911', 'admin', 0, NOW());
 |  **id**   |     int     |    是    |          |          | 乘客编码 |                                                              |
 |   name    | varchar(20) |          |          |          | 乘客姓名 |                                                              |
 | telephone | varchar(11) |          |          |          | 联系方式 |                                                              |
-|  ID_type  | varchar(15) |          |          |          | 证件类型 | 中华人民共和国居民身份证<br>港澳居民来往内地通行证<br>台湾居民来往大陆通行证 |
+|  ID_type  |   tinyint   |          |          |          | 证件类型 | 0-中华人民共和国居民身份证<br>1-港澳居民来往内地通行证<br>2-台湾居民来往大陆通行证 |
 |   ID_no   | varchar(30) |          |          |          | 证件号码 |                                                              |
 |   type    |   tinyint   |          |          |          | 乘客类型 |            0-成人, 1-学生, <br>2-儿童, 3-残疾军人            |
 
@@ -53,15 +49,11 @@ CREATE TABLE passengers (
 	`id`        INT UNSIGNED AUTO_INCREMENT,
 	`name`      VARCHAR(10) NOT NULL,
 	`telephone` VARCHAR(11) NOT NULL,
-	`ID_type`   VARCHAR(15) NOT NULL,
+	`ID_type`   TINYINT NOT NULL COMMENT '0-中华人民共和国居民身份证, 1-港澳台居民 来往内地通行证, 2-台湾居民来往大陆通行证',
 	`ID_no`     VARCHAR(30) NOT NULL,
 	`type`      TINYINT NOT NULL COMMENT '0-成人, 1-学生, 2-儿童, 3-残疾军人',
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8;
-```
-
-```sql
-INSERT INTO passengers VALUES (NULL, '苏桐渤', '12345678911', '中华人民共和国居民身份证', '1234***********789', '1');
 ```
 
 
@@ -85,10 +77,6 @@ CREATE TABLE provinces(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-```sql
-INSERT INTO provinces VALUES(NULL, '浙江省');
-```
-
 
 
 #### <span id="cities">城市编码表 cities</span>
@@ -110,17 +98,16 @@ CREATE TABLE cities(
 ```
 
 ```sql
-INSERT INTO cities VALUES(NULL, 1, '杭州市'); 
-```
-
-```sql
-SELECT ct.id   AS id, 
-       pv.name AS province, 
-       ct.name AS city
-FROM provinces pv, 
-     cities ct
-WHERE pv.id = ct.province_id
-ORDER BY province;
+CREATE VIEW view_cities 
+AS (
+	SELECT ct.id   AS id, 
+           pv.name AS province, 
+           ct.name AS city
+    FROM provinces pv, 
+         cities ct
+    WHERE pv.id = ct.province_id
+    ORDER BY province
+);
 ```
 
 
@@ -141,10 +128,6 @@ CREATE TABLE stations(
     PRIMARY KEY ( `id` ),
     FOREIGN KEY ( `city_id` ) REFERENCES cities( `id` ) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-```
-
-```sql
-INSERT INTO stations VALUES(null, 1, '杭州东站');
 ```
 
 ```sql
@@ -181,7 +164,7 @@ AS(
 | :-------------------: | :---------: | :------: | :-----------------------: | :------: | :--------: | :----------------------------------------------------------: |
 |        **id**         |     int     |    是    |                           |          |  火车编码  |                                                              |
 |         name          | varchar(10) |          |                           |          |  火车名称  |                          eg: G1818                           |
-|         type          |     int     |          |                           |          |  火车类型  | 0-普通旅客列车<br>1-普通动车组列车<br>2-高速动车组列车<br>3-其他 |
+|         type          |   tinyint   |          |                           |          |  火车类型  | 0-普通旅客列车<br>1-普通动车组列车<br>2-高速动车组列车<br>3-其他 |
 |  *departure_station*  |     int     |          | [火车站编码表](#stations) |          | 起始站编码 |                   首程起始站<br>返程目的站                   |
 | *destination_station* |     int     |          | [火车站编码表](#stations) |          | 目的站编码 |                   首程目的站<br>返程起始站                   |
 |    departure_time     |    time     |          |                           |          |  出发时间  |                                                              |
@@ -201,10 +184,6 @@ CREATE TABLE trains (
 	FOREIGN KEY ( `departure_station` ) REFERENCES stations ( `id` ),
 	FOREIGN KEY ( `destination_station` ) REFERENCES stations ( `id` )
 ) ENGINE = InnoDB CHARSET = utf8;
-```
-
-```sql
-INSERT INTO trains VALUES (null, 'G7659', 1, 1, 5, '06:33:00', '00:18:00');
 ```
 
 ```sql
@@ -252,10 +231,6 @@ CREATE TABLE runnings (
 ```
 
 ```sql
-INSERT runnings VALUES (NULL, 1, '2021-12-21', NULL, NULL, 0);
-```
-
-```sql
 CREATE VIEW view_runnings
 AS (
     SELECT runnings.id                                                                            AS id,
@@ -273,10 +248,6 @@ AS (
            runnings
     WHERE  trains.id = runnings.train_id
 );
-```
-
-```sql
-SELECT * FROM view_runnings WHERE departure_datetime LIKE '%12-21%';
 ```
 
 
@@ -299,10 +270,6 @@ CREATE TABLE price (
 	PRIMARY KEY ( `id` ),
 	FOREIGN KEY ( `train_id` ) REFERENCES trains ( `id` )
 ) ENGINE = InnoDB CHARSET = utf8;
-```
-
-```sql
-INSERT price VALUES (null, 1, '无座', 19.5);
 ```
 
 ```sql
@@ -452,16 +419,6 @@ END //
 delimiter ;
 ```
 
-```sql
-CALL add_cabin_and_seat(3, 5, 1, 2, 6, 2);
-CALL add_cabin_and_seat(3, 6, 3, 5, 8, 2);
-CALL add_cabin_and_seat(3, 7, 6, 12, 10, 3);
-
-#	train-火车编号，type-车厢/座位类型，
-#	no_start-起始车厢，no_end-结束车厢，
-#	rows-行，cols-列
-```
-
 
 
 #### <span id="seats">座位信息表 seats</span>
@@ -484,32 +441,19 @@ CREATE TABLE seats (
 ```
 
 ```sql
-INSERT INTO seats (
-	SELECT null, runnings.id, seat.id 
-    FROM   runnings, cabins, seat_template seat 
-    WHERE  cabins.id = seat.cabin_id 
-       AND runnings.train_id = cabins.train_id
-       AND runnings.id = 2
-);
-```
-
-```sql
 CREATE VIEW view_seats
 AS (
-	SELECT seats.id                   AS id,
-           trains.id                  AS train_id, 
-    	   trains.name                AS name,
-           trains.type                AS train_type,
-           trains.departure_station   AS departure_station,
-           trains.destination_station AS destination_station,
-           runnings.id                AS running_id,
+	SELECT seats.id                                                                               AS id,
+           runnings.id                                                                            AS running_id,
+    	   trains.name                                                                            AS name,
+           trains.type                                                                            AS train_type,
+           trains.departure_station                                                               AS departure_station,
+           trains.destination_station                                                             AS destination_station,
            Concat(runnings.departure_date, ' ', trains.departure_time)                            AS departure_datetime,
            Addtime(Concat(runnings.departure_date, ' ', trains.departure_time), trains.last_time) AS arrive_datetime, 
-    	   cabins.id                  AS cabin_id, 
-    	   cabins.number              AS cabin_number, 
-    	   seat.position              AS seat_position,
-    	   price.type                 AS seat_type, 
-           price.price                AS price
+    	   Concat(cabins.number, '车厢 ', seat.position)                                           AS cabin_number,
+    	   price.type                                                                             AS seat_type, 
+           price.price                                                                            AS price
     FROM   view_trains trains, runnings, cabins, price, seat_template seat, seats
     WHERE  trains.id = cabins.train_id 
        AND runnings.train_id = trains.id
@@ -517,15 +461,6 @@ AS (
        AND cabins.id = seat.cabin_id
        AND seats.seat_template_id = seat.id
 );
-```
-
-```sql
-SELECT COUNT(*)
-FROM  view_seats
-WHERE departure_station LIKE '%杭州%'
-  AND destination_station LIKE '%潮汕%'
-  AND departure_datetime LIKE '%12-21%'
-  AND seat_type = '一等座';
 ```
 
 
@@ -557,10 +492,6 @@ CREATE TABLE orders (
 ```
 
 ```sql
-INSERT INTO orders VALUES (null, 1, NOW(), 0, 0);
-```
-
-```sql
 CREATE VIEW view_orders
 AS (
 	SELECT orders.id AS id,
@@ -576,32 +507,104 @@ AS (
 
 
 
-#### <span id="order_details">订单详细 order_details</span>
+#### <span id="details">订单详细 details</span>
 
-|       字段名称       | 字段类型 | 是否主键 |          是否外键          | 是否为空 |     字段含义     |           备注           |
-| :------------------: | :------: | :------: | :------------------------: | :------: | :--------------: | :----------------------: |
-|        **id**        |   int    |    是    |                            |          |   订单详细编码   |                          |
-|      *order_id*      |   int    |    是    |   [订单信息表](#orders)    |          |     订单编码     |                          |
-|    *passenger_id*    |   int    |          | [乘客信息表](#passengers)  |          |     乘客编码     |                          |
-|      *seat_id*       |   int    |          |    [座位信息表](#seats)    |          |     座位编码     |                          |
-| *previous_detail_id* |   int    |          | [订单详细](#order_details) |    是    | 改签前的订单详细 | 空值表示普通订单，非改签 |
-|        cancel        |   int    |          |                            |          |     是否取消     |                          |
+|    字段名称    | 字段类型 | 是否主键 |         是否外键          | 是否为空 |   字段含义   |                          备注                          |
+| :------------: | :------: | :------: | :-----------------------: | :------: | :----------: | :----------------------------------------------------: |
+|     **id**     |   int    |    是    |                           |          | 订单详细编码 |                                                        |
+|   *order_id*   |   int    |    是    |   [订单信息表](#orders)   |          |   订单编码   |                                                        |
+| *passenger_id* |   int    |          | [乘客信息表](#passengers) |          |   乘客编码   |                                                        |
+|   *seat_id*    |   int    |          |   [座位信息表](#seats)    |          |   座位编码   |                                                        |
+|     change     |   int    |          |   [订单详细](#details)    |    是    | 订单详细编码 | 为空时表示没有改签<br>不为空时值表示改签后订单详细编码 |
+|     refund     | tinyint  |          |                           |          |   是否退票   |                         1-退票                         |
+
+```sql
+CREATE TABLE details (
+	`id`           INT UNSIGNED AUTO_INCREMENT,
+    `order_id`     INT UNSIGNED NOT NULL,
+    `passenger_id` INT UNSIGNED NOT NULL,
+    `seat_id`      INT UNSIGNED NOT NULL,
+    `change`       INT UNSIGNED,
+    `refund`       TINYINT NOT NULL,
+	PRIMARY KEY ( `id` ),
+	FOREIGN KEY ( `order_id` ) REFERENCES orders ( `id` ),
+	FOREIGN KEY ( `passenger_id` ) REFERENCES passengers ( `id` ),
+	FOREIGN KEY ( `seat_id` ) REFERENCES seats ( `id` ),
+	FOREIGN KEY ( `change` ) REFERENCES details ( `id` )
+) ENGINE = InnoDB CHARSET = utf8;
+```
+
+```sql
+CREATE VIEW view_details
+AS (
+	SELECT details.id                                                                             AS id,
+    	   orders.id                                                                              AS order_id,
+		   passengers.id                                                                          AS passenger_id,
+		   passengers.name                                                                        AS passenger_name,
+    	   trains.name                                                                            AS train,
+           trains.type                                                                            AS train_type,
+           trains.departure_station                                                               AS departure_station,
+           trains.destination_station                                                             AS destination_station,
+           Concat(runnings.departure_date, ' ', trains.departure_time)                            AS departure_datetime,
+           Addtime(Concat(runnings.departure_date, ' ', trains.departure_time), trains.last_time) AS arrive_datetime, 
+    	   Concat(cabins.number, '车厢 ', seat.position)                                           AS cabin_number,
+    	   price.type                                                                             AS seat_type, 
+           price.price                                                                            AS price
+    FROM   view_trains trains, 
+    	   seat_template seat, 
+    	   passengers,
+    	   runnings, 
+    	   details,
+    	   cabins, 
+    	   orders,
+    	   price, 
+    	   seats
+    WHERE  trains.id = cabins.train_id 
+       AND runnings.train_id = trains.id
+       AND cabins.type = price.id
+       AND cabins.id = seat.cabin_id
+       AND seats.seat_template_id = seat.id
+       AND details.seat_id = seats.id
+       AND details.passenger_id = passengers.id
+       AND details.order_id = orders.id
+);
+```
 
 
 
-# 添加流程
+# 操作流程
+
+#### 添加用户和乘客
+
+- `users` 用户信息表添加用户 `(null, ‘用户名’, 用户类型, '联系方式', '用户密码', 用户状态, 创建时间)`
+
+```sql
+INSERT INTO users VALUES (null, 'test01', 0, '12345678911', 'admin', 0, NOW());
+```
+- `passengers` 乘客信息表添加乘客 `(null, '姓名', '联系方式', 证件类型, '证件号码', 乘客类型)`
+```sql
+INSERT INTO passengers VALUES (NULL, '苏桐渤', '12345678911', 0, '1234***********789', '1');
+```
 
 #### 添加火车
 
 - `provinces` 省份编码表添加对应省份 `(null, '省份')`
-- `cities` 城市编码表添加对应城市 `(null, 省份编码, '城市')`
-- `stations` 火车站编码表添加车站 `(null, 城市编码, '车站')`
 
 ```sql
 INSERT INTO provinces VALUES(NULL, '浙江省');
-INSERT INTO cities VALUES(NULL, 1, '杭州市'); 
-INSERT INTO stations VALUES(null, 1, '杭州东站');
 ```
+
+- `cities` 城市编码表添加对应城市 `(null, 省份编码, '城市')`
+
+```sql
+INSERT INTO cities VALUES(NULL, 1, '杭州市'); 
+```
+
+- `stations` 火车站编码表添加车站 `(null, 城市编码, '车站')`
+
+```sql
+INSERT INTO stations VALUES(null, 1, '杭州东站');
+`````
 
 - `trains` 火车信息表添加火车 `(null, '火车', 火车类型编码, 起始站编码, 目的站编码, '发车时间', '运行时长')`
 
@@ -649,14 +652,36 @@ INSERT INTO seats (
 
 #### 查询余票
 
-- `view_seats` 座位信息视图，起始站+目的站+日期+座位类型
+- `view_runnings` 查询当日运行的相关火车
+
+```sql
+SELECT * 
+FROM view_runnings 
+WHERE departure_datetime LIKE '%12-21%'
+  AND departure_station LIKE '%杭州%'
+  AND destination_station LIKE '%潮汕%';
+```
+
+- `view_seats` 查询车次的余票情况
 
 ```sql
 SELECT COUNT(*)
 FROM  view_seats
-WHERE departure_station LIKE '%杭州%'
-  AND destination_station LIKE '%潮汕%'
-  AND departure_datetime LIKE '%12-21%'
+WHERE running_id = 3
   AND seat_type = '一等座';
+```
+
+#### 添加订单
+
+- `orders` 订单信息表添加新的订单 `(null, 用户编码, 时间, 0, 0)`
+
+```sql
+INSERT INTO orders VALUES (null, 1, NOW(), 0, 0);
+```
+
+- `details` 订单向西添加相应车票 `(null, 订单编码, 乘客编码, 座位编码, null, 0)`
+
+```sql
+INSERT INTO details VALUES (null, 1, 1, 288, null, 0);
 ```
 
