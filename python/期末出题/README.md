@@ -222,3 +222,113 @@ for item in input().split():
         print(item)
 ```
 
+
+
+#### 7. 面向对象
+
+- 类型：类
+- 考点：类的定义和初始化、\__str__
+
+题目：
+
+> 输入一个学生的基本信息，要求输出这个学生的介绍。主函数已提供，请完成类的部分。
+
+input:
+
+> 张三 23 男
+
+output:
+
+> 张三同学的年龄是23，性别是男
+
+```python
+class Student:
+    def __init__(self, name, age, sex):
+        self.__name = name
+        self.__age = age
+        self.__sex = sex
+
+    def __str__(self):
+        return self.__name + "同学的年龄是" + self.__age + "，性别是" + self.__sex
+```
+
+> (题目提供)
+>
+> ```sql
+> def main():
+>     info = []
+>     info = input().split()
+>     A = Student(info[0], info[1], info[2])
+>     print(A)
+> 
+> 
+> main()
+> ```
+
+
+
+#### 8. 类的继承
+
+- 类型：类
+- 考点：类的继承
+
+题目：
+
+> 要求定义一个父类`Parent` 和一个继承它的派生类 `Child`。
+>
+> - Parent 提供有参构造方法，对 `name` 和 `job` 进行初始化  
+> - Child 提供有参构造方法， 要求调用父类的构造方法
+> - 修改 Parent 和 Child 的返回值，使使输出如样例所示
+>
+> 输入两行，每行是一个人的姓名的职业。主函数部分已提供，要求完成类的定义部分。
+
+input:
+
+> 张三 律师
+> 赵四 护士
+
+output:
+
+> Parent(name:张三, job:律师)
+> Child(name:赵四, job:护士)
+> Parent的父类是 <class 'object'>
+> Child的父类是  <class '\__main__.Parent'>
+
+```python
+class Parent:
+    def __init__(self, name, job):
+        self._name = name
+        self._job = job
+
+    def __str__(self):
+        return "Parent(name:" + self._name + ", job:" + self._job + ")"
+
+
+class Child(Parent):
+
+    def __init__(self, name, job):
+        super().__init__(name, job)
+
+    def __str__(self):
+        return "Child(name:" + self._name + ", job:" + self._job + ")"
+```
+
+> （题目提供）
+>
+> ```python
+> def main():
+>     a = input().split()
+>     b = input().split()
+> 
+>     parent = Parent(a[0], a[1])
+>     child = Child(b[0], b[1])
+> 
+>     print(parent)
+>     print(child)
+> 
+>     print("Parent的父类是", Parent.__base__)
+>     print("Child的父类是 ", Child.__base__)
+> 
+> 
+> main()
+> ```
