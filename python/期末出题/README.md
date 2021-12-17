@@ -45,10 +45,6 @@ output:
 > 2.92
 
 ```python
-a = float(input())
-print("保留一位小数: %.1f" % a)
-print("保留两位小数: %.2f" % a)
-print("保留三位小数: %.3f" % a)sum = 0
 cnt = 0
 
 for a in input().split():
@@ -332,3 +328,114 @@ class Child(Parent):
 > 
 > main()
 > ```
+
+
+
+#### 9. 异常
+
+- 类型：异常
+- 考点：自定义异常
+
+题目：
+
+> 成绩录入时总会犯一些粗心的错误，希望你能定义一个 `Score` 类来记录分数，同时定义一个异常类 `ScoreException` 标识录入分数时可能出现的一些错误。
+>
+> Score类包括：
+>
+> - 私有数据域 score，存放分数
+> - 构造方法，初始化分数，检测到错误时则抛出异常
+>     - 当分数小于0时，抛出 ScoreException，输出 `Negative exception`
+>     - 当分数大于100时，抛出 ScoreException，输出 `Beyond exception`
+>
+> ScoreException包括：
+>
+> - 私有数据域 message，存放异常信息
+> - 构造方法，设置异常信息
+>
+> 主函数已提供，要求完成类的定义和异常的定义
+
+input1:
+
+> -1
+
+output1:
+
+> Negative exception
+
+input2:
+
+> 99
+
+output2:
+
+> 该学生的分数是：99
+
+```python
+class ScoreException(Exception):
+    def __init__(self, message):
+        super().__init__()
+        self.__message = message
+
+    def __str__(self):
+        return self.__message
+
+
+class Score:
+    def __init__(self, score):
+        if score < 0:
+            raise ScoreException("Negative exception")
+        elif score > 100:
+            raise ScoreException("Beyond exception")
+        self.__score = score
+
+    def __str__(self):
+        return "该学生的分数是：" + str(self.__score)
+```
+
+> （题目提供）
+>
+> ```python
+> def main():
+>     try:
+>         score = Score(int(input()))
+>         print(score)
+>     except ScoreException as ex:
+>         print(ex)
+> 
+> 
+> main()
+> ```
+
+#### 10. 文件读取
+
+- 类型：文件
+- 考点：文件的读取
+
+题目：
+
+> 现在有一个`input.txt` 的文件，里面含有多行字符串。要求你读取该文件，并判断文件中有多少行字符串包含字符串 `banana`
+>
+> - 如果含有 `banana`，则直接输出一共有多少行包含
+> - 如果文件中从未出现过 `banana`，则输出 `wit`
+
+input:
+
+> 文件 input.txt
+
+output:
+
+> 略
+
+```python
+with open("input.txt", "r") as file:
+    cnt = 0;
+    lines = file.readlines()
+    for line in lines:
+        if "banana" in line:
+            cnt += 1
+    if cnt == 0:
+        print("without banana!")
+    else:
+        print(cnt)
+```
+
