@@ -134,15 +134,15 @@ CREATE TABLE stations(
 CREATE VIEW view_stations
 AS(
 	SELECT st.id   AS id,
-           pv.name AS povince,
+           pv.name AS province,
            ct.name AS city,
            st.name AS station
     FROM provinces pv,
-         cities ct,
-         stations st
+         cities    ct,
+         stations  st
     WHERE pv.id = ct.province_id
       AND ct.id = st.city_id
-    ORDER  BY province, city
+    ORDER  BY pv.name, ct.name
 );
 ```
 
@@ -189,16 +189,16 @@ CREATE TABLE trains (
 ```sql
 CREATE VIEW view_trains
 AS (
-    SELECT trains.id             AS id,
-           trains.name           AS name,
-           trains.type           AS type,
-           dep.name              AS departure_station,
-           des.name              AS destination_station,
-           trains.departure_time AS departure_time,
-           trains.last_time      AS last_time
+    SELECT trains.id                                             AS id,
+           trains.name                                           AS name,
+           trains.type                                           AS type,
+           Concat(dep.province, '/', dep.city, '/', dep.station) AS origin,
+           Concat(des.province, '/', des.city, '/', des.station) AS destination,
+           trains.departure_time                                 AS departure_time,
+           trains.last_time                                      AS last_time
     FROM trains,
-         stations des,
-         stations dep
+         view_stations des,
+         view_stations dep
     WHERE trains.departure_station = dep.id
       AND trains.destination_station = des.id
 );
@@ -237,8 +237,8 @@ AS (
            trains.id                                                                              AS train_id,
            trains.name                                                                            AS name,
            trains.type                                                                            AS type,
-           trains.departure_station                                                               AS departure_station,
-           trains.destination_station                                                             AS destination_station,
+           trains.origin                                                                          AS origin,
+           trains.destination                                                                     AS destination,
            Concat(runnings.departure_date, ' ', trains.departure_time)                            AS departure_datetime,
            Addtime(Concat(runnings.departure_date, ' ', trains.departure_time), trains.last_time) AS arrive_datetime,
            runnings.actual_departure_datetime                                                     AS actual_departure_datetime,
@@ -270,25 +270,6 @@ CREATE TABLE price (
 	PRIMARY KEY ( `id` ),
 	FOREIGN KEY ( `train_id` ) REFERENCES trains ( `id` )
 ) ENGINE = InnoDB CHARSET = utf8;
-```
-
-```sql
-CREATE VIEW view_price
-AS (
-    SELECT price.id                   AS id,
-    	   trains.id                  AS train_id,
-           trains.name                AS name,
-           trains.type                AS type,
-           trains.departure_station   AS departure_station,
-           trains.destination_station AS destination_station,
-    	   trains.departure_time      AS departure_time,
-    	   trains.last_time           AS last_time,
-    	   price.type                 AS seat_type, 
-    	   price.price                AS price
-	FROM   view_trains trains, price
-	WHERE  trains.id = price.train_id
-    ORDER BY trains.id, price.id
-);
 ```
 
 
@@ -324,13 +305,7 @@ CREATE TABLE cabins (
 CREATE VIEW view_cabins
 AS (
     SELECT cabins.id                  AS id, 
-           trains.id                  AS train_id, 
-    	   trains.name                AS name,
-           trains.type                AS train_type,
-           trains.departure_station   AS departure_station,
-           trains.destination_station AS destination_station,
-           trains.departure_time      AS departure_time,
-    	   trains.last_time           AS last_time,
+           trains.id                  AS train_id,  
     	   cabins.number              AS cabin_number, 
     	   price.type                 AS cabin_type, 
            price.price                AS price
@@ -364,13 +339,7 @@ CREATE TABLE seat_template (
 CREATE VIEW view_seat_template
 AS (
     SELECT seat.id                    AS id,
-           trains.id                  AS train_id, 
-    	   trains.name                AS name,
-           trains.type                AS train_type,
-           trains.departure_station   AS departure_station,
-           trains.destination_station AS destination_station,
-           trains.departure_time      AS departure_time,
-    	   trains.last_time           AS last_time,
+           trains.id                  AS train_id,
     	   cabins.id                  AS cabin_id, 
     	   cabins.number              AS cabin_number, 
     	   seat.position              AS position,
@@ -423,43 +392,44 @@ delimiter ;
 
 #### <span id="seats">座位信息表 seats</span>
 
-|      字段名称      | 字段类型 | 是否主键 |          是否外键          | 是否为空 |   字段含义   | 备注 |
-| :----------------: | :------: | :------: | :------------------------: | :------: | :----------: | :--: |
-|       **id**       |   int    |    是    |                            |          |   座位编码   |      |
-|   *runnings_id*    |   int    |          |  [火车运行表](#runnings)   |          |   火车编码   |      |
-| *seat_template_id* |   int    |          | [座位模板](#seat_template) |          | 座位模板编码 |      |
+|   字段名称    |  字段类型  | 是否主键 |        是否外键         | 是否为空 | 字段含义 |   备注    |
+| :-----------: | :--------: | :------: | :---------------------: | :------: | :------: | :-------: |
+|    **id**     |    int     |    是    |                         |          | 座位编码 |           |
+| *runnings_id* |    int     |          | [火车运行表](#runnings) |          | 火车编码 |           |
+|  *cabin_id*   |    int     |          |  [车厢信息表](#cabins)  |          | 车厢编码 |           |
+|   position    | varchar(5) |          |                         |          |  座位号  | eg: 16排A |
 
 ```sql
 CREATE TABLE seats (
-	`id`               INT UNSIGNED AUTO_INCREMENT,
-    `runnings_id` 	   INT UNSIGNED NOT NULL,
-    `seat_template_id` INT UNSIGNED NOT NULL,
+	`id`         INT UNSIGNED AUTO_INCREMENT,
+    `running_id` INT UNSIGNED NOT NULL,
+    `cabin_id`   INT UNSIGNED NOT NULL,
+    `position`   VARCHAR(5) NOT NULL,
 	PRIMARY KEY ( `id` ),
-	FOREIGN KEY ( `runnings_id` ) REFERENCES runnings ( `id` ),
-    FOREIGN KEY ( `seat_template_id` ) REFERENCES seat_template ( `id` )
+	FOREIGN KEY ( `running_id` ) REFERENCES runnings ( `id` ),
+    FOREIGN KEY ( `cabin_id` ) REFERENCES cabins ( `id` )
 ) ENGINE = InnoDB CHARSET = utf8;
 ```
 
 ```sql
 CREATE VIEW view_seats
 AS (
-	SELECT seats.id                                                                               AS id,
-           runnings.id                                                                            AS running_id,
-    	   trains.name                                                                            AS name,
-           trains.type                                                                            AS train_type,
-           trains.departure_station                                                               AS departure_station,
-           trains.destination_station                                                             AS destination_station,
-           Concat(runnings.departure_date, ' ', trains.departure_time)                            AS departure_datetime,
-           Addtime(Concat(runnings.departure_date, ' ', trains.departure_time), trains.last_time) AS arrive_datetime, 
-    	   Concat(cabins.number, '车厢 ', seat.position)                                           AS cabin_number,
-    	   price.type                                                                             AS seat_type, 
-           price.price                                                                            AS price
-    FROM   view_trains trains, runnings, cabins, price, seat_template seat, seats
-    WHERE  trains.id = cabins.train_id 
-       AND runnings.train_id = trains.id
-       AND cabins.type = price.id
-       AND cabins.id = seat.cabin_id
-       AND seats.seat_template_id = seat.id
+	SELECT seats.id                                      AS id,
+           runnings.id                                   AS running_id,
+    	   runnings.name                                 AS name,
+           runnings.type                                 AS type,
+           runnings.origin                               AS origin,
+           runnings.destination                          AS destination,
+           runnings.departure_datetime                   AS departure_datetime,
+           runnings.arrive_datetime                      AS arrive_datetime,  
+    	   Concat(cabins.number, '车厢 ', seats.position) AS seat_position,  
+    	   price.type                                    AS seat_type, 
+           price.price                                   AS price
+    FROM   view_runnings runnings,
+           cabins, price, seats
+    WHERE  cabins.type = price.id
+       AND cabins.id = seats.cabin_id
+       AND seats.running_id = runnings.id
 );
 ```
 
@@ -537,36 +507,40 @@ CREATE TABLE details (
 ```sql
 CREATE VIEW view_details
 AS (
-	SELECT details.id                                                                             AS id,
-    	   orders.id                                                                              AS order_id,
-		   passengers.id                                                                          AS passenger_id,
-		   passengers.name                                                                        AS passenger_name,
-    	   trains.name                                                                            AS train,
-           trains.type                                                                            AS train_type,
-           trains.departure_station                                                               AS departure_station,
-           trains.destination_station                                                             AS destination_station,
-           Concat(runnings.departure_date, ' ', trains.departure_time)                            AS departure_datetime,
-           Addtime(Concat(runnings.departure_date, ' ', trains.departure_time), trains.last_time) AS arrive_datetime, 
-    	   Concat(cabins.number, '车厢 ', seat.position)                                           AS cabin_number,
-    	   price.type                                                                             AS seat_type, 
-           price.price                                                                            AS price
-    FROM   view_trains trains, 
-    	   seat_template seat, 
-    	   passengers,
-    	   runnings, 
-    	   details,
-    	   cabins, 
-    	   orders,
-    	   price, 
-    	   seats
-    WHERE  trains.id = cabins.train_id 
-       AND runnings.train_id = trains.id
-       AND cabins.type = price.id
-       AND cabins.id = seat.cabin_id
-       AND seats.seat_template_id = seat.id
-       AND details.seat_id = seats.id
-       AND details.passenger_id = passengers.id
-       AND details.order_id = orders.id
+    SELECT details.id AS id,
+           orders.id AS order_id,
+           Concat(details.passenger_id, '/', passengers.name) AS passenger, 
+           seats.running_id AS running_id,
+           seats.name AS train,
+           seats.origin AS origin,
+           seats.destination AS destination,
+           seats.departure_datetime AS departure_time,
+           seats.arrive_datetime AS arrive_time,
+           seats.seat_position AS seat_position,
+           seats.seat_type AS seat_type,
+           seats.price AS price,
+           orders.cancel AS order_cancel,
+           details.change AS detail_change,
+           details.refund AS detail_refund
+    FROM  orders,
+          details,
+          passengers,
+          view_seats seats
+    WHERE orders.id = details.order_id
+      AND details.passenger_id = passengers.id
+      AND details.seat_id = seats.id
+);
+```
+
+```sql
+CREATE VIEW view_valid_details
+AS (
+	SELECT details.*
+    FROM   orders, details
+   	WHERE  orders.id = details.order_id
+       AND orders.cancel = 0
+       AND details.change IS NULL
+       AND details.refund = 0
 );
 ```
 
@@ -609,7 +583,7 @@ INSERT INTO stations VALUES(null, 1, '杭州东站');
 - `trains` 火车信息表添加火车 `(null, '火车', 火车类型编码, 起始站编码, 目的站编码, '发车时间', '运行时长')`
 
 ```sql
-INSERT INTO trains VALUES (null, 'D3111', 1, 1, 6, '07:30:00', '08:22:00');
+INSERT INTO trains VALUES (null, 'D3111', 1, 1, 6, '07:30:00', '00:19:00');
 ```
 
 #### 添加固定车厢和座位
@@ -617,17 +591,18 @@ INSERT INTO trains VALUES (null, 'D3111', 1, 1, 6, '07:30:00', '08:22:00');
 - `price` 火车价位表添加对应的座位类型及价格 `(null, 火车编码, '座位类型', 价格)`
 
 ```sql
-INSERT INTO price VALUES (null, 5, '一等座', 687);
-INSERT INTO price VALUES (null, 5, '二等座', 430);
-INSERT INTO price VALUES (null, 5, '无座', 430);
+INSERT INTO price VALUES (null, 10, '软卧', 112.5);
+INSERT INTO price VALUES (null, 10, '硬卧', 74.5);
+INSERT INTO price VALUES (null, 10, '硬座', 28.5); 
 ```
 
 - `cabins` `seat_template` 添加固定的车厢和座位模板
 - 存储过程 `add_cabin_and_seat(火车编码, 车厢/座位类型, 起始车厢, 结束车厢, 行数, 列数)`
 
 ```sql
-CALL add_cabin_and_seat(5, 9, 1, 3, 8, 4);
-CALL add_cabin_and_seat(5, 10, 4, 10, 10, 5); 
+CALL add_cabin_and_seat(10, 26, 1, 1, 1, 1);
+CALL add_cabin_and_seat(10, 27, 2, 3, 2, 2); 
+CALL add_cabin_and_seat(10, 28, 4, 5, 3, 3); 
 ```
 
 #### 添加运行班次和相应座位
@@ -635,14 +610,23 @@ CALL add_cabin_and_seat(5, 10, 4, 10, 10, 5);
 - `tunnings` 火车运行表添加火车的某次运行 `(null, 火车编码, '发车日期', null, null, 0)`
 
 ```sql
-INSERT runnings VALUES (NULL, 5, '2021-12-21', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 1, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 2, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 3, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 4, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 5, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 6, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 7, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 8, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 9, '2021-12-22', NULL, NULL, 0);
+INSERT runnings VALUES (NULL, 10, '2021-12-22', NULL, NULL, 0);
 ```
 
 - `seats` 座位信息表添加一次运行的所有座位，选择对应的运行编码
 
 ```sql
 INSERT INTO seats (
-	SELECT null, runnings.id, seat.id 
+	SELECT null, runnings.id, seat.cabin_id, seat.position
     FROM   runnings, cabins, seat_template seat 
     WHERE  cabins.id = seat.cabin_id 
        AND runnings.train_id = cabins.train_id
@@ -658,17 +642,18 @@ INSERT INTO seats (
 SELECT * 
 FROM view_runnings 
 WHERE departure_datetime LIKE '%12-21%'
-  AND departure_station LIKE '%杭州%'
-  AND destination_station LIKE '%潮汕%';
+  AND origin LIKE '%杭州%'
+  AND destination LIKE '%潮汕%';
 ```
 
 - `view_seats` 查询车次的余票情况
 
 ```sql
 SELECT COUNT(*)
-FROM  view_seats
-WHERE running_id = 3
-  AND seat_type = '一等座';
+FROM view_seats
+WHERE running_id = 6
+  AND seat_type = '二等座'
+  AND id NOT IN (SELECT seat_id FROM view_valid_detail);
 ```
 
 #### 添加订单
@@ -682,6 +667,6 @@ INSERT INTO orders VALUES (null, 1, NOW(), 0, 0);
 - `details` 订单向西添加相应车票 `(null, 订单编码, 乘客编码, 座位编码, null, 0)`
 
 ```sql
-INSERT INTO details VALUES (null, 1, 1, 288, null, 0);
+INSERT INTO details VALUES (null, 1, 1, 69, null, 0);
 ```
 
