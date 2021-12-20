@@ -181,14 +181,99 @@
 
 - `<jsp:include>`动作元素
 
+    - 把指定文件插入正在生成的页面
     - 语法格式 `<jsp:include page="相对 URL 地址" flush="true" />`
-    - 
+
+- `<jsp:forward>` 动作元素
+
+    - 把请求转到另外的页面
+    - `<jsp:forward page="相对 URL 地址" />`
+
+- `<jsp:useBean>`动作元素
+
+    - 用来加载一个将在JSP页面中使用的JavaBean。
+
+    - `<jsp:useBean id="name" class="package.class" />`
+
+    - | 属性     | 描述                                                        |
+        | :------- | :---------------------------------------------------------- |
+        | class    | 指定Bean的完整包名。                                        |
+        | type     | 指定将引用该对象变量的类型。                                |
+        | beanName | 通过 java.beans.Beans 的 instantiate() 方法指定Bean的名字。 |
+
+    - `<jsp:setProperty>`动作元素
+
+        - 用来设置已经实例化的Bean对象的属性
+
+        - ```java
+            <jsp:useBean id="myName" ... />
+            ...
+            <jsp:setProperty name="myName" property="someProperty" .../>
+            ```
+
+        - ```java
+            <jsp:useBean id="myName" ... >
+            ...
+               <jsp:setProperty name="myName" property="someProperty" .../>
+            </jsp:useBean>
+            ```
+
+        - | 属性     | 描述                                                         |
+            | :------- | :----------------------------------------------------------- |
+            | name     | name属性是必需的。它表示要设置属性的是哪个Bean。             |
+            | property | property属性是必需的。它表示要设置哪个属性。有一个特殊用法：如果property的值是"*"，表示所有名字和Bean属性名字匹配的请求参数都将被传递给相应的属性set方法。 |
+            | value    | value 属性是可选的。该属性用来指定Bean属性的值。字符串数据会在目标类中通过标准的valueOf方法自动转换成数字、boolean、Boolean、 byte、Byte、char、Character。例如，boolean和Boolean类型的属性值（比如"true"）通过 Boolean.valueOf转换，int和Integer类型的属性值（比如"42"）通过Integer.valueOf转换。 　　value和param不能同时使用，但可以使用其中任意一个。 |
+            | param    | param 是可选的。它指定用哪个请求参数作为Bean属性的值。如果当前请求没有参数，则什么事情也不做，系统不会把null传递给Bean属性的set方法。因此，你可以让Bean自己提供默认属性值，只有当请求参数明确指定了新值时才修改默认属性值。 |
+
+    - `<jsp:getProperty>`动作元素
+
+        - 提取指定Bean属性的值，转换成字符串，然后输出
+
+        - ```java
+            <jsp:useBean id="myName" ... />
+            ...
+            <jsp:getProperty name="myName" property="someProperty" .../>
+            ```
+
+        - | 属性     | 描述                                   |
+            | :------- | :------------------------------------- |
+            | name     | 要检索的Bean属性名称。Bean必须已定义。 |
+            | property | 表示要提取Bean属性的值                 |
+
+
+
+
+---
+
+### Include指令 和 Include动作
+
+
+
+同：
+
+- 最终执行结果相同，都想将别的文件内容包含到当前文件中来
+
+异：
+
+- include指令，静态包含：
+    - `<%@include file="文件的URL">`
+    - 在转换成java文件的时候将包含文件的内容“复制”到主体文件，然后作为整体编译。
+    - 不同文件中不允许存在相同的变量，因为要合到一个文件中一起编译。
+- include动作，动态包含：
+    - `<jsp:include page="文件的URL"/>`
+    - 对每个jsp文件分别转换、分别编译。
+    - 不同文件中允许存在相同的变量，反正是分开编译。
 
 
 
 
 
-- jsp动作
+
+
+
+
+
+
 - 内置对象
     - request
     - cookie - 客户端的文本文件，存储名值对
