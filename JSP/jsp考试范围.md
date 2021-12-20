@@ -1,23 +1,193 @@
-- jsp和servlet是javaee开发框架中的内容
-- tomcat
-    - 可以修改端口号（在哪里
-    - 目录webapps，简单部署直接将文件拖入
-    - 默认端口8080，web应用默认端口80
-- html
-    - 表单以及基本元素的定义和使用
-- js
-    - dom模型
-    - 必须嵌在html页面中才可执行
-    - ajax，异步发送请求，局部内容的更新，响应速度的提升
-- jsp
-    - `200 成功` 每个属性值以及对应的含义
-    - jsp执行过程
-    - jsp 实质上就是一个servlet
-    - js可以嵌入java脚本
+# 概述
 
-- jsp指令-作用、属性
-    - include
-    - taglib
+----
+
+### JavaEE是一种开发框架/架构
+
+- jsp和servlet是javaee开发框架中的内容
+
+
+
+---
+
+### Tomcat
+
+- 可以修改端口号
+    - tomcat安装目录/conf
+    - server.xml
+    - 修改
+    - 重启
+- 目录webapps，简单部署直接将文件拖入
+- 默认端口8080，web应用默认端口80
+- ![image-20211220082030192](jsp考试范围.assets/image-20211220082030192.png)
+
+
+
+----
+
+### JSP
+
+- 执行过程/原理
+    - 客户端发出Request请求
+    - JSP Container 将 JSP 转译成 Servlet 的源代码
+    - 将Servlet源代码经过编译后，并加载到内存执行
+    - 把结果 Resonse 至客户端
+- JSP和Servlet的关系
+    - JSP 文件在容器中会转成Servlet执行
+    - JSP是对Servlet的一种高级封装，本质还是Servlet
+
+
+
+---
+
+### HTML
+
+- 表单以及基本元素的定义和使用
+
+    - 文本域 `<input type="text">`
+    - 密码字段 `<input type="password">`
+    - 单选按钮 `<input type="radio" name="sex" value="male">Male`
+
+    - 复选框 `<input type="checkbox" name="vehicle" value="Car">I have a car`
+
+    - 提交按钮 `<input type="submit" value="Submit">`
+
+    - 下拉列表
+
+        - ```html
+            <select name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+            ```
+
+    - 文本框 
+
+        - ```html
+            <textarea rows="10" cols="30">
+            我是一个文本框。
+            </textarea>
+            ```
+
+        
+
+----
+
+### JavaScript
+
+- DOM模型
+    - DOM是Javascript操作网页的接口，全称叫文档对象模型（Document Object Model）。作用是将网页转化为一个Javascript对象，从而用Javascript脚本进行各种操作（比如增删元素等）。
+    - `document.getElementById()`
+    - `document.getElementsByName()`
+    - `document.getElementsByTagName()`
+- 必须嵌在html页面中才可执行
+- ajax
+    - 异步发送请求
+    - 局部内容的更新
+    - 响应速度的提升
+
+- XMLHttpRequest
+    - 用于在后台与服务器交换数据。
+    - 在不重新加载页面的情况下更新网页
+    - 在页面已加载后从服务器请求数据
+    - 在页面已加载后从服务器接收数据
+    - 在后台向服务器发送数据
+
+
+
+# 基本语法
+
+---
+
+### Java脚本 和 Js脚本
+
+- JS脚本中可以嵌入Java脚本
+
+![image-20211220085516366](jsp考试范围.assets/image-20211220085516366.png)
+
+
+
+---
+
+### 响应状态码
+
+- 200，表示成功返回响应
+- 400，服务器认为客户端出现了错误，但不能明确判断为以下哪种错误时使用此错误码。
+- 403，服务器理解请求的含义，但没有权限执行此请求
+- 404，服务器理解请求的含义，但没有权限执行此请求
+- 500，服务器内部错误
+
+![image-20211220090304653](jsp考试范围.assets/image-20211220090304653.png)
+
+
+
+---
+
+### JSP指令
+
+| **指令**           | **描述**                                                |
+| :----------------- | :------------------------------------------------------ |
+| <%@ page ... %>    | 定义网页依赖属性，比如脚本语言、error页面、缓存需求等等 |
+| <%@ include ... %> | 包含其他文件                                            |
+| <%@ taglib ... %>  | 引入标签库的定义                                        |
+
+- Page 指令
+
+    - Page指令为容器提供当前页面的使用说明。一个JSP页面可以包含多个page指令。
+
+    - Page指令的语法格式 `<%@ page attribute="value" %>`
+
+    - 等价的XML格式 `<jsp:directive.page attribute="value" />`
+
+- Include 指令
+    - JSP可以通过include指令来包含其他文件。被包含的文件可以是JSP文件、HTML文件或文本文件。包含的文件就好像是该JSP文件的一部分，会被同时编译执行。
+    - Include指令的语法格式 `<%@ include file="文件相对 url 地址" %>`
+    - 等价的XML语法 `<jsp:directive.include file="文件相对 url 地址" />`
+- Taglib 指令
+    - Taglib指令引入一个自定义标签集合的定义，包括库路径、自定义标签。
+    - Taglib指令的语法 `<%@ taglib uri="uri" prefix="prefixOfTag" %>`
+    - 等价的XML语法 `<jsp:directive.taglib uri="uri" prefix="prefixOfTag" />`
+
+
+
+---
+
+### JSP动作
+
+| 语法            | 描述                                            |
+| :-------------- | :---------------------------------------------- |
+| jsp:include     | 在页面被请求的时候引入一个文件。                |
+| jsp:useBean     | 寻找或者实例化一个JavaBean。                    |
+| jsp:setProperty | 设置JavaBean的属性。                            |
+| jsp:getProperty | 输出某个JavaBean的属性。                        |
+| jsp:forward     | 把请求转到一个新的页面。                        |
+| jsp:plugin      | 根据浏览器类型为Java插件生成OBJECT或EMBED标记。 |
+| jsp:element     | 定义动态XML元素                                 |
+| jsp:attribute   | 设置动态定义的XML元素属性。                     |
+| jsp:body        | 设置动态定义的XML元素内容。                     |
+| jsp:text        | 在JSP页面和文档中使用写入文本的模板             |
+
+- 常见属性
+
+    - id属性：
+
+        id属性是动作元素的唯一标识，可以在JSP页面中引用。动作元素创建的id值可以通过PageContext来调用。
+
+    - scope属性：
+
+        该属性用于识别动作元素的生命周期。 id属性和scope属性有直接关系，scope属性定义了相关联id对象的寿命。 scope属性有四个可能的值： (a) page, (b)request, (c)session, 和 (d) application。
+
+- `<jsp:include>`动作元素
+
+    - 语法格式 `<jsp:include page="相对 URL 地址" flush="true" />`
+    - 
+
+
+
+
+
 - jsp动作
 - 内置对象
     - request
@@ -25,7 +195,6 @@
     - session - 会话
     - application
     - response （请求转发和页面重定向的区别）
-
 - servlet
     - 定义、继承
     - 基本的配置方式（注解、xml文件）
