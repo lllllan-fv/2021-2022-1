@@ -165,8 +165,8 @@ AS(
 |        **id**         |     int     |    是    |                           |          |  火车编码  |                                                              |
 |         name          | varchar(10) |          |                           |          |  火车名称  |                          eg: G1818                           |
 |         type          |   tinyint   |          |                           |          |  火车类型  | 0-普通旅客列车<br>1-普通动车组列车<br>2-高速动车组列车<br>3-其他 |
-|  *departure_station*  |     int     |          | [火车站编码表](#stations) |          | 起始站编码 |                   首程起始站<br>返程目的站                   |
-| *destination_station* |     int     |          | [火车站编码表](#stations) |          | 目的站编码 |                   首程目的站<br>返程起始站                   |
+|  *departure_station*  |     int     |          | [火车站编码表](#stations) |          | 起始站编码 |                                                              |
+| *destination_station* |     int     |          | [火车站编码表](#stations) |          | 目的站编码 |                                                              |
 |    departure_time     |    time     |          |                           |          |  出发时间  |                                                              |
 |       last_time       |    time     |          |                           |          |  运行时长  |                                                              |
 
@@ -485,7 +485,7 @@ AS (
 |   *order_id*   |   int    |    是    |   [订单信息表](#orders)   |          |   订单编码   |                                                        |
 | *passenger_id* |   int    |          | [乘客信息表](#passengers) |          |   乘客编码   |                                                        |
 |   *seat_id*    |   int    |          |   [座位信息表](#seats)    |          |   座位编码   |                                                        |
-|     change     |   int    |          |   [订单详细](#details)    |    是    | 订单详细编码 | 为空时表示没有改签<br>不为空时值表示改签后订单详细编码 |
+|     change     |   int    |          |                           |    是    |              | 为空时表示没有改签<br>不为空时值表示改签后订单详细编码 |
 |     refund     | tinyint  |          |                           |          |   是否退票   |                         1-退票                         |
 
 ```sql
