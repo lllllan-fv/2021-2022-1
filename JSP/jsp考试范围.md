@@ -347,13 +347,19 @@
 
 ### session
 
-- 获取 session 创建时间 `new Date(session.getCreationTime())`
-- 获取最后访问页面时间 `new Date(seesion.getLastAccessedTime())`
-- 添加属性 `session.setAttribute("属性名", "属性值");`
-- 获取属性 `String value = session.getAttribute("属性名");`
-- 删除属性 `session.removeAttribute("属性名");`
-- 删除整个会话 `session.invalidate();`
-- 设置会话有效期 `session.setMaxInactiveInterval(60);`
+| 方法                                         | 说明                                                         |
+| -------------------------------------------- | ------------------------------------------------------------ |
+| void setAttribute(String name, Object value) | 将参数名和参数值存放在 session 对象中                        |
+| Object getAttribute(String name)             | 通过 name 返回获取相应的 value 值，如果 name 没有相应的 value 值，则返回 null |
+| void removeAttribute(String name)            | 删除指定的 name 参数                                         |
+| Enumeration getAttributeNames()              | 获取 session 对象中存储的所有参数                            |
+| long getCreationTime()                       | 返回 session 对象创建的时间                                  |
+| String getId()                               | 获取 session 对象的 ID 值                                    |
+| boolean isNew()                              | 用于检查 session 对象是不是新对象，如果客户端禁用了 cookie ，则 session.isNew() 始终返回 true |
+| void invalidate()                            | 终止 session，即指定 session 对象失效                        |
+| void setMaxInactiveInterval()                | 设置 session 对象的有效时间，单位：秒                        |
+| int getMaxInactiveInterval()                 | 获取 session 对象的有效时间，单位：秒                        |
+| long getLastAccessedTime()                   | 获取上次访问 session 对象的时间                              |
 
 
 
@@ -361,13 +367,51 @@
 
 ### application
 
+| 方法                                   | 说明                                                         |
+| -------------------------------------- | ------------------------------------------------------------ |
+| getAttribute( String arg)              | 获取 application 对象中含有关键字的对象                      |
+| getAttributeNames()                    | 获取 application 对象的所有参数名字                          |
+| getMajorVersion()                      | 获取服务器支持 Servlet 的主版本号                            |
+| getMinorVersion()                      | 获取服务器支持 Servlet 的从版本号                            |
+| removeAttribute(java.lang.String name) | 根据名字删除 application 对象的参数                          |
+| setAttribute(String key,Object obj)    | 将参数 Object 指定的对象 obj 添加到 application 对象中，并 为添加的对象指定一个索引关键字 |
 
 
 
+----
+
+### 属性管理
+
+1. 属性范围
+
+|             | 范围                                                         |
+| ----------- | ------------------------------------------------------------ |
+| pageContext | 当前页，一个属性只能在一个页面中取得，跳转到其他页面无法取得 |
+| request     | 一个页面中设置的属性在经过了服务器跳转后的页面可以继续取得   |
+| session     | 一个用户设置的内容，只要是与此用户相关的页面都可以访问       |
+| application | 在整个服务器上设置的属性，所有人都可以访问                   |
+
+2. 属性操作方法
+
+| 方法                                               | 描述     |
+| -------------------------------------------------- | -------- |
+| public void setAttribute(String name,Object value) | 设置属性 |
+| public object getAttribute(String name)            | 取得属性 |
+| public void removeAttribute(String name)           | 删除属性 |
 
 
 
+---
 
+### JSP和Servlet中内置对象的获取方式
+
+|             |                    JSP                     |                        Servlet                         |
+| :---------: | :----------------------------------------: | :----------------------------------------------------: |
+|   request   |                 可直接使用                 |                       可直接使用                       |
+|  response   |                 可直接使用                 |                       可直接使用                       |
+|   session   |                 可直接使用                 |      `HttpSssion session = request.getSession();`      |
+|   cookie    | `Cookie[] cookies = request.getCookies();` |       `Cookie[] cookies = request.getCookies();`       |
+| application |                 可直接使用                 | `ServletContext application=this.getServletContext();` |
 
 
 
@@ -394,3 +438,4 @@
 - 数据库访问 JDBC
     - java databases connectivity
     - 核心代码
+
