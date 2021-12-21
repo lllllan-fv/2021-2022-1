@@ -266,6 +266,103 @@
 
 
 
+# 内置对象
+
+---
+
+### request 对象的使用
+
+- 设置字符编码
+
+    - ```java
+        request.setCharacterEncoding("utf-8");
+
+
+- 获取参数，返回的是String,  用于读取提交的表单中的值
+
+    - 单值参数的获取 `request.getParameter("")`
+    - 多值参数的获取 `request.getParameterValues("")`
+
+- 获取属性，返回的是Object，需进行转换,可用setAttribute设置成任意对象
+
+    - `request.getAttribute("")`
+    - `request.setAttribute("") = ;`
+
+- 读取 Cookie 
+
+    - 获取cookie数组：`cookies = request.getCookies()`
+
+    - 遍历数组：
+
+        - ```java
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();   // 参数名
+                String value = cookie.getValue(); // 参数值
+            }
+            ```
+
+
+
+---
+
+### response 对象
+
+- 添加 Cookie
+    - ```java
+        Cookie cookie = new Cookie("参数名", "参数值");
+        cookie.setMaxAge(60);       // 设置60秒的过期时间
+        response.addCookie(cookie); // 将cookie添加到response中
+        ```
+
+- 读取 Cookie ，参考 request 部分
+
+- 删除 Cookie
+
+    - 通过 request 获取cookie后对其过期时间设置为0
+
+    - ```java
+        cookie.setMaxAge(0);        // 设置cookie已经过期
+        response.addCookie(cookie); // 重新添加到response中
+        ```
+
+- 设置响应头
+
+    - 设置响应内容的类型 `response.setContentType("text/html;charset=utf-8");`
+    - 设置响应的编码集 `response.setCharacterEncoding("utf-8")`
+
+- 重定向 `response.sendRedirect("http://www.baidu.com")`
+
+- 重定向和转发的区别：
+
+    - |          |             重定向             |                             转发                             |
+        | :------: | :----------------------------: | :----------------------------------------------------------: |
+        |   代码   |  `response.sendRedirect("")`   | `RequestDispatcher Dis = request.getRequestDispatcher("");`<br>`Dis.forward(request, response);` |
+        |   效果   |        都会打开目标网页        |                       都会打开目标网页                       |
+        |  地址栏  | 地址栏内容会改成目标网页的网址 |                      地址栏内容不会改变                      |
+        | 数据共享 |    不能共享request中的内容     |                   可以共享request中的内容                    |
+
+        
+
+---
+
+### session
+
+- 获取 session 创建时间 `new Date(session.getCreationTime())`
+- 获取最后访问页面时间 `new Date(seesion.getLastAccessedTime())`
+- 添加属性 `session.setAttribute("属性名", "属性值");`
+- 获取属性 `String value = session.getAttribute("属性名");`
+- 删除属性 `session.removeAttribute("属性名");`
+- 删除整个会话 `session.invalidate();`
+- 设置会话有效期 `session.setMaxInactiveInterval(60);`
+
+
+
+---
+
+### application
+
+
+
 
 
 
