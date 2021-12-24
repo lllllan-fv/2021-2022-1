@@ -415,27 +415,294 @@
 
 
 
-- 内置对象
-    - request
-    - cookie - 客户端的文本文件，存储名值对
-    - session - 会话
-    - application
-    - response （请求转发和页面重定向的区别）
-- servlet
-    - 定义、继承
-    - 基本的配置方式（注解、xml文件）
-    - 生命周期方法
-    - 内置对象的获取
-- javabean
-    - 定义规则
-    - jsp:useBean
-- MVC设计模式 model、view、control
-- el 表达式
-- jstl 自定义标签库
-- 常用组件
-    - 文件下载
-    - 发送邮件
-- 数据库访问 JDBC
-    - java databases connectivity
-    - 核心代码
 
+
+# Servlet
+
+---
+
+### Servlet 的定义方法
+
+- 继承 `HttpServlet`
+- 重写 `doGet` `doPost` 方法，抛出 `ServletException` `IOException` 异常
+
+```java
+@WebServlet("/MyServlet") // 路径配置
+public class 类名 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("---------doGet-------"); 
+    }
+ 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("---------doPost-------"); 
+    }    
+}
+```
+
+
+
+---
+
+### Servlet 的生命周期方法
+
+- Servlet 初始化后调用 `init()` 方法
+- Servlet 调用 `service()` 方法来处理客户端的请求
+- Servlet 销毁前调用 `destroy()` 方法
+
+![image-20211224143438342](jsp考试范围.assets/image-20211224143438342.png)
+
+
+
+---
+
+### Servlet 配置
+
+两种方式：
+
+- 使用注解：
+
+```java
+@WebServlet("/MyServlet") // 路径配置
+public class 类名 extends HttpServlet { }
+```
+
+- 配置 `web.xml`，（反正也记不住，不写了）
+
+
+
+---
+
+### Servlet 中各种对象的获取
+
+- out对象，即输出流
+
+```java
+PrintWriter out = response.getWriter();
+```
+
+- session对象
+
+```java
+HttpSssion session = request.getSession();
+```
+
+- 请求转发
+
+ ```java
+ RequestDispatcher dispatcher = request.getRequestDispatcher("/ResultServlet"); // 目标路径或文件
+ dispatcher.forward(request,response);
+ ```
+
+
+
+
+
+# JavaBean
+
+---
+
+### `<jsp:useBean>`
+
+```java
+<jsp:useBean id="name" class="package.javabean.class" scope="page" />
+// id 定义唯一表示，随便取个名就是了
+// class 定义的 JavaBean 的类
+// scope 作用域
+```
+
+
+
+### `<jsp:getProperty>`
+
+```java
+<jsp:getProperty name="name" property="属性名" />
+```
+
+
+
+### `<jsp:setProperty>`
+
+```java
+<jsp:setProperty name="name" property="属性名" value="属性值"/>
+```
+
+
+
+----
+
+### JavaBean 定义规则和使用
+
+- JavaBean 类必须是一个公共类 - `public`
+-  类中必须有一个无参构造函数
+- 类中的变量都必须是私有变量 - `private`
+- 为每一个属性提供 `get` `set` 方法
+
+```java
+public class Student {
+    private int age;
+    
+    public Student() { }
+    
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+```
+
+
+
+---
+
+### MVC 设计模式及优点
+
+MVC设计模式：一种软件架构模式，把软甲系统分为：模型（Model）、试图（View）、控制器（Controller）三个基本部分。实现了显示模块与功能模块的分离，提高了程序的可维护性、可移植性、可扩展性、可重用性，降低了程序的开发难度。
+
+优点：
+
+- 低耦合：视图层和业务层分离，允许更改视图层代码而不用重新编译模型和控制器代码。
+- 高重用性和可使用性：允许使用不同的试图来访问同一个服务端的代码
+- 较低的生命周期成本：开发和维护的技术含量降低
+- 快速的部署：不同模块的开发人员可以专注于自己负责的模块
+- 可维护性：分离视图层和业务逻辑层使得应用更易于维护和修改
+
+
+
+
+
+# 其他
+
+---
+
+### EL表达式
+
+- 基本语法
+
+ ```html
+ ${EL表达式}
+ ```
+
+- 算术运算
+
+| EL算术运算符 | 说明 |  范例  | 结果 |
+| :----------: | :--: | :----: | :--: |
+|      +       |  加  | ${5+2} |  7   |
+|      -       |  减  | ${5-2} |  3   |
+|      *       |  乘  | ${5*2} |  10  |
+|   / 或 div   |  除  | ${5/2} |  2   |
+|   % 或 mod   | 求余 | ${5%2} |  1   |
+
+- 比较运算
+
+| EL比较运算符 |   说明   |                       范例                        |    结果     |
+| :----------: | :------: | :-----------------------------------------------: | :---------: |
+|   == 或 eq   |   等于   | ${6==6} 或 ${6 eq 6} ${"A"="a"} 或 ${"A" eq "a"}  | true false  |
+|   != 或 ne   |  不等于  | ${6!=6} 或 ${6 ne 6} ${“A"!=“a”} 或 ${“A” ne “a”} | false true  |
+|   < 或 lt    |   小于   |  ${3<8} 或 ${3 lt 8} ${"A"<"a"} 或 ${"A" lt "a"}  |  true true  |
+|   > 或 gt    |   大于   |  ${3>8} 或 ${3 gt 8} ${"A">"a"} 或 ${"A" gt "a"}  | false false |
+|   <= 或 le   | 小于等于 | ${3<=8} 或 ${3 le 8} ${"A"<="a"} 或 ${"A" le "a"} |  true true  |
+|   >= 或 ge   | 大于等于 | ${3>=8} 或 ${3 ge 8} ${"A">="a"} 或 ${"A" ge "a"} | false false |
+
+- 逻辑运算
+
+| EL逻辑运算符 | 说明 |             范例              | 结果  |
+| :----------: | :--: | :---------------------------: | :---: |
+|  && 或 and   |  与  | ${2>1&&3<4 } 或 ${2>1and3<4 } | true  |
+|  \|\| 或 or  |  或  | ${2<1\|\|3>4} 或 ${2<1or3>4}  | false |
+|   ! 或 not   |  非  |   ${!(2>4)} 或 ${not (2>4)}   | true  |
+
+- 其他反正也记不住
+
+
+
+---
+
+### 自定义标签库
+
+哈哈不管了
+
+
+
+---
+
+### JSTL
+
+- c:out
+
+```html
+<c:out value="Hello World"></c:out>
+```
+
+- c:if
+
+```html
+<c:set var="salary" scope="session" value="${2000 * 2}"/>
+<c:if test="${salary > 2000}">
+   <p>我的工资为: <c:out value="${salary}"/><p>
+</c:if>
+```
+
+- c:foreach
+
+```html
+<c:forEach var="i" begin="1" end="5" step="1">
+   Item <c:out value="${i}"/><p>
+</c:forEach>
+```
+
+- c:fortokens，通过置顶分隔符将字符串分割
+
+```html
+<c:forTokens items="google,runoob,taobao" delims="," var="name">
+   <c:out value="${name}"/><p>
+</c:forTokens>
+```
+
+
+
+---
+
+### 常用组件
+
+不知道
+
+
+
+---
+
+### JDBC
+
+- 加载驱动
+
+```java
+//加载MySql驱动
+Class.forName("com.mysql.jdbc.Driver")
+```
+
+- 获得数据库连接
+
+```java
+Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/imooc", "root", "root");
+```
+
+- 操作数据库
+
+```java
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT user_name, age FROM imooc_goddess");
+//如果有数据，rs.next()返回true
+while(rs.next()){ }
+```
+
+
+
+---
+
+### Spring框架、IoC
+
+更不懂了
